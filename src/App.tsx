@@ -3,6 +3,11 @@ import {
   Home,
   Login,
   Signup,
+  OnlineMap,
+  OfflineMap,
+  Board,
+  QnaBoard,
+  MyPage,
   NotFound,
 } from "./pages";
 import {
@@ -19,6 +24,11 @@ function App() {
             <Route path="/" element={<Home />} />
             <Route path="/login" element={<Login />} />
             <Route path="/signup" element={<Signup />} />
+            <Route path="/onlinemap" element={<OnlineMap />} />
+            <Route path="/offlinemap" element={<OfflineMap />} />
+            <Route path="/mypage" element={<MyPage />} />
+            <Route path="/board" element={<Board />} />
+            <Route path="/qnaboard" element={<QnaBoard />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
     </div>
