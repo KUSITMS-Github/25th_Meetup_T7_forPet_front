@@ -1,7 +1,12 @@
-
+import { Editor } from "../components"
 const Board = () => {
+    
     return (
-        <div>Board</div>
+        <div>
+            Board
+            <Editor />
+
+        </div>
     );
 };
 
