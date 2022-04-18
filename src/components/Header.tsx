@@ -7,6 +7,9 @@ const Header = () => {
             <div className="header-links">
                 <>
                     <div className="header-right">
+                        <Link to="/">
+                            <button className="header-btn">Home</button>
+                        </Link>
                         <Link to="/onlinemap">
                             <button className="header-btn">Online Map</button>
                         </Link>
@@ -20,7 +23,12 @@ const Header = () => {
                         </Link>
                         <Link to="/board">
                             <button className="header-btn">
-                                Board(테스트용)
+                                Board
+                            </button>
+                        </Link>
+                        <Link to="/write">
+                            <button className="header-btn">
+                                글쓰기-Editor
                             </button>
                         </Link>
                     </div>

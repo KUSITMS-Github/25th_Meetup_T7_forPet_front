@@ -1,7 +1,13 @@
+import { useParams } from "react-router-dom";
 
 const PostDetail = () => {
+    const params = useParams();
+
     return (
-        <div>PostDetail</div>
+        <div>
+            post id = {params.id}인 글 불러오기
+            
+        </div>
     );
 };
 

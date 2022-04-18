@@ -8,6 +8,8 @@ import {
   Board,
   QnaBoard,
   MyPage,
+  PostDetail,
+  PostWrite,
   NotFound,
 } from "./pages";
 import {
@@ -29,6 +31,8 @@ function App() {
             <Route path="/mypage" element={<MyPage />} />
             <Route path="/board" element={<Board />} />
             <Route path="/qnaboard" element={<QnaBoard />} />
+            <Route path="/post/:id" element={<PostDetail />} />
+            <Route path="/write" element={<PostWrite />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
     </div>

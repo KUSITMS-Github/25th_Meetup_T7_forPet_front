@@ -7,4 +7,5 @@ export { default as OfflineMap } from "./OfflineMap";
 export { default as Board } from "./Board";
 export { default as QnaBoard } from "./QnaBoard";
 export { default as PostDetail } from "./PostDetail";
+export { default as PostWrite } from "./PostWrite";
 export { default as NotFound } from "./NotFound";
