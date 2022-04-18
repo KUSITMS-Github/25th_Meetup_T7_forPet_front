@@ -1,10 +1,11 @@
-import { MapTest } from "../components";
+import { MapTest, MyLocation } from "../components";
 
 const Home = () => {
     return (
         <div>
             Home
-            <MapTest />
+            <MyLocation />
+            {/* <MapTest /> */}
         </div>
     );
 };
