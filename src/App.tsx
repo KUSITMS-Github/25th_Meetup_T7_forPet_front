@@ -6,10 +6,9 @@ import {
   OnlineMap,
   OfflineMap,
   Board,
-  QnaBoard,
+  ForpetPedia,
   MyPage,
   PostDetail,
-  PostWrite,
   NotFound,
 } from "./pages";
 import {
@@ -30,9 +29,8 @@ function App() {
             <Route path="/offlinemap" element={<OfflineMap />} />
             <Route path="/mypage" element={<MyPage />} />
             <Route path="/board" element={<Board />} />
-            <Route path="/qnaboard" element={<QnaBoard />} />
+            <Route path="/forpetPedia" element={<ForpetPedia />} />
             <Route path="/post/:id" element={<PostDetail />} />
-            <Route path="/write" element={<PostWrite />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
     </div>
