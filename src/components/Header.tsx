@@ -1,41 +1,57 @@
+import styled from '@emotion/styled';
 import { Link } from "react-router-dom";
 
 const Header = () => {
 
     return (
-        <header className="App-header">
-            <div className="header-links">
-                <>
-                    <div className="header-right">
-                        <Link to="/">
-                            <button className="header-btn">Home</button>
-                        </Link>
-                        <Link to="/onlinemap">
-                            <button className="header-btn">Online Map</button>
-                        </Link>
-                        <Link to="/offlinemap">
-                            <button className="header-btn">Offline Map</button>
-                        </Link>
-                        <Link to="/mypage">
-                            <button className="header-btn">
-                                My page
-                            </button>
-                        </Link>
-                        <Link to="/board">
-                            <button className="header-btn">
-                                Board
-                            </button>
-                        </Link>
-                        <Link to="/write">
-                            <button className="header-btn">
-                                글쓰기-Editor
-                            </button>
-                        </Link>
-                    </div>
-                </>
+        <HeaderStyle>
+            <div className="header-left">
+                <Link to="/">
+                    <HeaderButton className="header-btn">Forpet(Logo)</HeaderButton>
+                </Link>
             </div>
-        </header>
+            <div className="header-right">
+                <Link to="/offlinemap">
+                    <HeaderButton className="header-btn">Forpet MAP</HeaderButton>
+                </Link>
+                <Link to="/board">
+                    <HeaderButton className="header-btn">우리동네 커뮤니티</HeaderButton>
+                </Link>
+                <Link to="/forpetPedia">
+                    <HeaderButton className="header-btn">퍼펫트 백과</HeaderButton>
+                </Link>
+                <Link to="/login">
+                    <HeaderButton className="header-btn">
+                        로그인
+                    </HeaderButton>
+                </Link>
+{/*             로그인 여부에 따라 렌더링
+                <Link to="/mypage">
+                    <button className="header-btn">
+                        마이페이지
+                    </button>
+                </Link> */}
+            </div>
+        </HeaderStyle>
     );
 };
 
 export default Header;
+
+const HeaderStyle = styled.header`
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin: 20px 0;
+    padding: 0 50px;
+`;
+
+const HeaderButton = styled.button`
+    border: none;
+    outline: 0;
+    margin: 0 5px;
+    background-color: transparent;
+    &:hover {
+        color: green;
+    }
+`;
