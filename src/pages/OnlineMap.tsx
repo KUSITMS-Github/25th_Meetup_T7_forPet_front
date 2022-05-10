@@ -1,7 +1,10 @@
+import { motion } from "framer-motion"
 
 const OnlineMap = () => {
     return (
-        <div>OnlineMap</div>
+        <div>OnlineMap
+            <motion.div className="box" />
+        </div>
     );
 };
 
