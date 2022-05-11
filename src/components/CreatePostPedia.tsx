@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import axios from 'axios';
 import styled from '@emotion/styled';
 import { Colors } from '../styles/ui';
 
@@ -11,6 +12,29 @@ const CreatePostPedia = () => {
         console.log(myQuestion);
     }
 
+    const [file, setFile] = useState<File>();
+    const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        console.log(e.target.files![0]);
+        setFile(e.target.files![0]);
+    }
+    
+    const fileSubmitHandler = async (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+        e.preventDefault();
+        const end_url = '/file-upload';
+        const formData = new FormData();
+        formData.append('file', file!)
+        const config = {
+            headers: {
+                'content-type': 'multipart/form-data'
+            }
+        }
+        await axios.post(
+            process.env.REACT_APP_BACK_BASE_URL + end_url,
+            formData,
+            config
+        );
+    }
+    
     return(
         <CreateQustion>
             <div className='title'>질문하개</div>
@@ -31,7 +55,8 @@ const CreatePostPedia = () => {
             >
             </textarea>
             <div className='low-section'>
-                <div>사진</div>
+                <input type="file" multiple onChange={(e) => onChange(e)} />
+                <button type="submit" onClick={(e) => fileSubmitHandler(e)}>파일 업로드</button>
                 <div onClick={createQuestion}>연필</div>
             </div>
         </CreateQustion>
