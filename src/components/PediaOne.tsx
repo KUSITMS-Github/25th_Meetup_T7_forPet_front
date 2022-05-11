@@ -4,7 +4,6 @@ import { Colors } from '../styles/ui';
 
 
 const PediaOne = (post: any) => {
-    // console.log(post.post)
     const onePost = post.post;
     const [myAnswer, setMyAnswer] = useState<string>();
 
@@ -78,7 +77,7 @@ export default PediaOne;
 const OnePost = styled.header`
     display: flex;
     flex-direction: column;
-    width: 900px;
+    width: 900px; // 추후조정
     margin: 10px auto;
     padding: 20px;
     background-color: ${Colors.green1};
@@ -100,6 +99,7 @@ const OnePost = styled.header`
     .writer-sec {
         display: flex;
         flex-direction: row;
+        align-items: center;
     }
     
     .writer-sec-name {

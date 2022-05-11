@@ -2,7 +2,7 @@ import React, { useState, useEffect, useContext } from 'react';
 import { useNavigate } from "react-router-dom";
 import styled from '@emotion/styled';
 
-import { PediaOne } from '../components';
+import { PediaOne, CreatePostPedia } from '../components';
 
 
 const ForpetPedia = () => {
@@ -62,6 +62,8 @@ const ForpetPedia = () => {
     
     const initialFaqKeyword = ["임시보호", "필수품", "유기견"];
     
+    const [doQuestion, setDoQestion] = useState<boolean>(false); // 질문하기 버튼 클릭 시 질문 폼 렌더링
+
     const [pediaList, setPediaList] = useState(initialPediaList);
     const [faqKeyword, setFaqKeyword] = useState(initialFaqKeyword);
 
@@ -71,12 +73,17 @@ const ForpetPedia = () => {
         
     }
 
+    
+
     return (
         <>
             <UpperSection>
                 <div className='upper-group'>
                     <input className='searchbar'/>
-                    <button className='question-button'>질문하기</button>
+                    <button 
+                        className='question-button'
+                        onClick={() => setDoQestion(!doQuestion)}
+                    >질문하기</button>
                 </div>
                 <div className='keywords'>자주 묻는 키워드
                 {
@@ -92,6 +99,8 @@ const ForpetPedia = () => {
                 </div>
             </UpperSection>
 
+            {doQuestion && <CreatePostPedia />}
+            
             {
                 pediaList &&
                     pediaList.map(p => (
@@ -106,8 +115,6 @@ const ForpetPedia = () => {
 };
 
 export default ForpetPedia;
-
-
 
 const UpperSection = styled.header`
     display: flex;
