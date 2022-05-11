@@ -82,6 +82,10 @@ const OnePost = styled.header`
     padding: 20px;
     background-color: ${Colors.green1};
 
+    textarea {
+        resize: none;
+    }
+
     .input-comment {
         display: flex;
         flex-direction: row;

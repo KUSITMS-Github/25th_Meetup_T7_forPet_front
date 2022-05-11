@@ -13,7 +13,7 @@ const CreatePostPedia = () => {
 
     return(
         <CreateQustion>
-            <div>질문하개</div>
+            <div className='title'>질문하개</div>
             <hr
                 style={{
                     color: `${Colors.gray1}`,
@@ -22,6 +22,7 @@ const CreatePostPedia = () => {
                 }}
             />
             <textarea
+                rows={10}
                 placeholder='궁금한 것들을 질문해보세요!&#13;예비 반려인과 반려인이 완벽한 답을 줄거에요'
                 onChange={(
                     e: React.ChangeEvent<HTMLTextAreaElement>,
@@ -48,10 +49,17 @@ const CreateQustion = styled.header`
     padding: 20px;
     background-color: ${Colors.green1};
 
+    .title {
+        text-align: left;
+    }
 
     .low-section {
         display: flex;
         flex-direction: row;
         justify-content: space-between;
+    }
+
+    textarea {
+        resize: none;
     }
 `

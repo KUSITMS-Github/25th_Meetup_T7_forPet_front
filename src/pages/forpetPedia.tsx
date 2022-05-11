@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import styled from '@emotion/styled';
 
 import { PediaOne, CreatePostPedia } from '../components';
+import { getApi } from '../api';
 
 
 const ForpetPedia = () => {
@@ -62,24 +63,53 @@ const ForpetPedia = () => {
     
     const initialFaqKeyword = ["임시보호", "필수품", "유기견"];
     
-    const [doQuestion, setDoQestion] = useState<boolean>(false); // 질문하기 버튼 클릭 시 질문 폼 렌더링
+    const [doQuestion, setDoQestion] = useState<boolean>(false);  // 질문하기 버튼 클릭 시 질문 폼 렌더링
+    const [searchWord, setSearchWord] = useState<string>();  // 검색 시 검색결과 렌더링
+    const [searchWordRe, setSearchWordRe] = useState<string>();
 
     const [pediaList, setPediaList] = useState(initialPediaList);
     const [faqKeyword, setFaqKeyword] = useState(initialFaqKeyword);
 
-    const clickKeyword = (keyword: string) => {
-        // keyword로 검색 api 불러오기
+    const clickKeyword = (keyword: string) => {  // keyword로 검색 api 불러오기
         // console.log(keyword);
-        
+        setSearchWord(keyword);
+        setSearchWordRe(keyword)
     }
 
-    
+    const enterSearchInput = async (e: any) => {
+        if (e.key === "Enter") {  // 엔터키 클릭 시 검색 api 호출
+            console.log(e.target.value);
+            setSearchWordRe(e.target.value);
+            // await getApi(
+            //     {},
+            //     `/search/${e.target.value}` // api 주소 추후 변경
+            // )
+            // .then(({ status, data }) => {
+            // // console.log("search 결과", status, data);
+            // if (data) {
+            //     setPediaList(data);
+            // } else {
+            //     setPediaList([]);
+            // }
+            // })
+            // .catch((e) => {
+            // console.log(e);
+            // });
+        }
+    }
 
     return (
         <>
             <UpperSection>
                 <div className='upper-group'>
-                    <input className='searchbar'/>
+                    <input 
+                        className='searchbar'
+                        onChange={(
+                            e: React.ChangeEvent<HTMLInputElement>,
+                        ): void => setSearchWord(e.target.value)}
+                        onKeyPress={enterSearchInput}
+                        value={searchWord}
+                    />
                     <button 
                         className='question-button'
                         onClick={() => setDoQestion(!doQuestion)}
@@ -97,7 +127,12 @@ const ForpetPedia = () => {
                         ))
                 }
                 </div>
+                {
+                    searchWordRe && 
+                        <div className='search-result'>'{searchWordRe}' 검색 결과</div>
+                }
             </UpperSection>
+            
 
             {doQuestion && <CreatePostPedia />}
             
@@ -116,9 +151,12 @@ const ForpetPedia = () => {
 
 export default ForpetPedia;
 
+
 const UpperSection = styled.header`
     display: flex;
     flex-direction: column;
+    margin: auto;
+    width: 60vw;
 
     .upper-group {
         display: flex;
@@ -144,12 +182,16 @@ const UpperSection = styled.header`
     .keywords {
         display: flex;
         flex-direction: row;
-        justify-content: center;
     }
 
     .keyword {
         margin: 0 5px;
         cursor: pointer;
+    }
+
+    .search-result {
+        font-size: 24px;
+        text-align: left;
     }
 `;
 
