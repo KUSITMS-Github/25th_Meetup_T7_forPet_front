@@ -60,15 +60,21 @@ const ForpetPedia = () => {
                 "answerCnt": 3,
             },
         ];
-    
+
     const initialFaqKeyword = ["임시보호", "필수품", "유기견"];
-    
+
     const [doQuestion, setDoQestion] = useState<boolean>(false);  // 질문하기 버튼 클릭 시 질문 폼 렌더링
     const [searchWord, setSearchWord] = useState<string>();  // 검색 시 검색결과 렌더링
     const [searchWordRe, setSearchWordRe] = useState<string>();
 
+    const [sortVar, setSortVar] = useState<string>('date');  // 최신순: date, 추천순: good
     const [pediaList, setPediaList] = useState(initialPediaList);
     const [faqKeyword, setFaqKeyword] = useState(initialFaqKeyword);
+
+    useEffect(() => {  // pediaList 불러오기 getApi
+        // sortVar : date, good 보내기
+
+    }, [sortVar])
 
     const clickKeyword = (keyword: string) => {  // keyword로 검색 api 불러오기
         // console.log(keyword);
@@ -100,9 +106,9 @@ const ForpetPedia = () => {
 
     return (
         <>
-            <UpperSection>
+            <Wrapper>
                 <div className='upper-group'>
-                    <input 
+                    <input
                         className='searchbar'
                         onChange={(
                             e: React.ChangeEvent<HTMLInputElement>,
@@ -110,41 +116,61 @@ const ForpetPedia = () => {
                         onKeyPress={enterSearchInput}
                         value={searchWord}
                     />
-                    <button 
+                    <button
                         className='question-button'
                         onClick={() => setDoQestion(!doQuestion)}
                     >질문하기</button>
                 </div>
                 <div className='keywords'>자주 묻는 키워드
-                {
-                    faqKeyword &&
+                    {
+                        faqKeyword &&
                         faqKeyword.map((e, i) => (
-                            <div 
+                            <div
                                 key={i}
                                 className='keyword'
                                 onClick={() => clickKeyword(e)}
                             >#{e}</div>
                         ))
-                }
+                    }
                 </div>
                 {
-                    searchWordRe && 
-                        <div className='search-result'>'{searchWordRe}' 검색 결과</div>
+                    searchWordRe &&
+                    <div className='search-result'>'{searchWordRe}' 검색 결과</div>
                 }
-            </UpperSection>
-            
 
-            {doQuestion && <CreatePostPedia />}
-            
-            {
-                pediaList &&
+                {doQuestion && <CreatePostPedia />}
+
+                <div className='sort'>
+                    <div
+                        onClick={() => setSortVar('date')}
+                        style={{
+                            fontWeight: sortVar === 'date' ?
+                                'bold' : 'normal'
+                        }}
+                    >
+                        최신순&nbsp;&nbsp;
+                    </div>
+                    <div
+                        onClick={() => setSortVar('good')}
+                        style={{
+                            fontWeight: sortVar === 'good' ?
+                                'bold' : 'normal'
+                        }}
+                    >
+                        추천순
+                    </div>
+                </div>
+
+                {
+                    pediaList &&
                     pediaList.map(p => (
                         <PediaOne
                             key={p._id}
                             post={p}
                         />
                     ))
-            }
+                }
+            </Wrapper>
         </>
     );
 };
@@ -152,7 +178,7 @@ const ForpetPedia = () => {
 export default ForpetPedia;
 
 
-const UpperSection = styled.header`
+const Wrapper = styled.header`
     display: flex;
     flex-direction: column;
     margin: auto;
@@ -193,5 +219,10 @@ const UpperSection = styled.header`
         font-size: 24px;
         text-align: left;
     }
-`;
 
+    .sort {
+        display: flex;
+        flex-direction: row;
+        margin-left: auto;
+    }
+`
