@@ -5,6 +5,6 @@ export { default as MyPage } from "./MyPage";
 export { default as OnlineMap } from "./OnlineMap";
 export { default as OfflineMap } from "./OfflineMap";
 export { default as Board } from "./Board";
-export { default as ForpetPedia } from "./forpetPedia";
+export { default as ForpetPedia } from "./ForpetPedia";
 export { default as PostDetail } from "./PostDetail";
 export { default as NotFound } from "./NotFound";
