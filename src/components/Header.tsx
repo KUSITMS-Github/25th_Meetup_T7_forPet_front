@@ -11,7 +11,7 @@ const Header = () => {
                 </Link>
             </div>
             <div className="header-right">
-                <Link to="/offlinemap">
+                <Link to="/maps">
                     <HeaderButton className="header-btn">Forpet MAP</HeaderButton>
                 </Link>
                 <Link to="/board">
@@ -42,7 +42,8 @@ const HeaderStyle = styled.header`
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    margin: 20px 0;
+    height: 40px;
+    margin: 20px 0 10px;
     padding: 0 50px;
 `;
 

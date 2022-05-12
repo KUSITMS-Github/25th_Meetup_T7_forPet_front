@@ -242,7 +242,7 @@ const ForpetPedia = () => {
 export default ForpetPedia;
 
 
-const Wrapper = styled.header`
+const Wrapper = styled.div`
     display: flex;
     flex-direction: column;
     margin: auto;
