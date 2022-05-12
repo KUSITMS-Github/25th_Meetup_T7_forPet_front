@@ -8,21 +8,24 @@ const CreatePostPedia = () => {
 
     const [myQuestion, setMyQuestion] = useState<string>();
 
-    const createQuestion = () => {
-        console.log(myQuestion);
-    }
-
     const [file, setFile] = useState<File>();
     const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         console.log(e.target.files![0]);
         setFile(e.target.files![0]);
     }
-    
-    const fileSubmitHandler = async (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+
+    const fileSubmitHandler = async (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
         e.preventDefault();
-        const end_url = '/file-upload';
+        let contents = [{
+            title: 'title',
+            content: 'content'
+        }]
+        const end_url = '/qnaBoard';
         const formData = new FormData();
-        formData.append('file', file!)
+        formData.append('data',
+            new Blob([JSON.stringify(contents)], { type: "application/json" })
+        );
+        formData.append('file', file!);
         const config = {
             headers: {
                 'content-type': 'multipart/form-data'
@@ -32,10 +35,18 @@ const CreatePostPedia = () => {
             process.env.REACT_APP_BACK_BASE_URL + end_url,
             formData,
             config
-        );
+        )
+            .then(({ status, data }) => {
+                if (status === 200 || status === 201) {
+                    window.location.reload();
+                }
+            })
+            .catch((e) => {
+                console.log(e);
+            })
     }
-    
-    return(
+
+    return (
         <CreateQustion>
             <div className='title'>질문하개</div>
             <hr
@@ -56,11 +67,12 @@ const CreatePostPedia = () => {
             </textarea>
             <div className='low-section'>
                 <input type="file" multiple onChange={(e) => onChange(e)} />
-                <button type="submit" onClick={(e) => fileSubmitHandler(e)}>파일 업로드</button>
-                <div onClick={createQuestion}>연필</div>
+                {/* <button type="submit" onClick={(e) => fileSubmitHandler(e)}>파일 업로드</button> */}
+                <div onClick={(e) => fileSubmitHandler(e)}>연필</div>
             </div>
         </CreateQustion>
     )
+
 }
 
 export default CreatePostPedia;

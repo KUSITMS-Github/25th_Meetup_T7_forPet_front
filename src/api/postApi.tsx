@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const postApi = async (data: any, end_url: string, token: string) => {
+const postApi = async (data: any, end_url: string) => {
     const config = {
         headers: {
             "Content-type": "application/json",

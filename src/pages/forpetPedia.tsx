@@ -14,7 +14,7 @@ const ForpetPedia = () => {
         {
             "qnaBoardId": 2,
             "nickName": "김유동",
-         "tag" : "예비반려인",
+            "tag" : "예비반려인",
             "title": "titletitle",
             "content": "contentcontent",
             "createDate": "2022-05-11T17:19:20.617981",
@@ -28,7 +28,7 @@ const ForpetPedia = () => {
         {
             "qnaBoardId": 3,
             "nickName": "김유동",
-         "tag" : "예비반려인",
+            "tag" : "예비반려인",
             "title": "titletitle",
             "content": "contentcontent",
             "createDate": "2022-05-11T18:27:23.124736",
@@ -43,7 +43,7 @@ const ForpetPedia = () => {
         {
             "qnaBoardId": 4,
             "nickName": "김유동",
-         "tag" : "예비반려인",
+            "tag" : "예비반려인",
             "title": "titletitle",
             "content": "contentcontent",
             "createDate": "2022-05-11T18:28:36.742053",

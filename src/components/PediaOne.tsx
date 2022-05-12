@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useContext } from 'react';
 import styled from '@emotion/styled';
 import { Colors } from '../styles/ui';
+import { postApi } from '../api';
 
 
 const PediaOne = (post: any) => {
@@ -10,10 +11,28 @@ const PediaOne = (post: any) => {
     const writeAnswer = () => {
         // 연필 클릭 시 답변 입력 - postapi
         console.log(myAnswer);
-        console.log(onePost._id); // id랑 같이 넘기기
+        console.log(onePost.qnaBoardId); // id랑 같이 넘기기
+        const createComment = async () => {
+            await postApi(
+                {
+                    comment: myAnswer
+                },
+                `/qnaBoard/${onePost.qnaBoardId}/comment`
+            )
+                .then(({ status, data }) => {
+                    if (status === 200) {
+                        // console.log("댓글 작성 post api", status);
+                        window.location.reload(); // 새로고침
+                    }
+                })
+                .catch((e) => {
+                    console.log(e);
+                });
+        }
+        createComment();
     }
 
-    
+
     return (
         <OnePost>
             <Question>
@@ -63,11 +82,11 @@ const PediaOne = (post: any) => {
                     ): void => setMyAnswer(e.target.value)}
                     value={myAnswer}
                 ></textarea>
-                <div 
+                <div
                     className="pencil-img"
                     onClick={writeAnswer}>연필</div>
             </div>
-            
+
         </OnePost>
     );
 }

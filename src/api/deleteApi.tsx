@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const deleteApi = async (params: any, end_url: string, token: string) => {
+const deleteApi = async (params: any, end_url: string) => {
     const config = {
         data: params,
         headers: {
