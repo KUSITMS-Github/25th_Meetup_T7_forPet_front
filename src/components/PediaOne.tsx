@@ -21,20 +21,20 @@ const PediaOne = (post: any) => {
                     <div className='writer-sec'>
                         <div>이미지</div>
                         <div className='writer-sec-name'>
-                            <div className='writer'>{onePost.qwriter}</div>
-                            <div>{onePost.qtag}</div>
+                            <div className='writer'>{onePost.nickName}</div>
+                            <div>{onePost.tag}</div>
                         </div>
                     </div>
-                    <div>{onePost.date}</div>
+                    <div>{onePost.createDate}</div>
                 </div>
                 <div className='q-contents'>
                     <div className='q-title'>{onePost.title}</div>
-                    <div className='q-question'>{onePost.question}</div>
+                    <div className='q-question'>{onePost.content}</div>
                 </div>
                 <div className='cnts'>
-                    <div className='cnt'>좋아요수 {onePost.goodCnt}</div>
-                    <div className='cnt'>스크랩수 {onePost.scrapCnt}</div>
-                    <div className='cnt'>댓글수 {onePost.answerCnt}</div>
+                    <div className='cnt'>좋아요수 {onePost.likes}</div>
+                    <div className='cnt'>스크랩수 {onePost.bookmark}</div>
+                    <div className='cnt'>댓글수 {onePost.comments}</div>
                 </div>
             </Question>
             <hr
