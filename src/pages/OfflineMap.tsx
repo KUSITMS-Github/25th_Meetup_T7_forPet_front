@@ -107,7 +107,7 @@ const OfflineMap = () => {
             position: new naver.maps.LatLng(currentPosition[0], currentPosition[1]),
             map: map,
             icon: {
-              content: ['<span>현재 나의 위치</span>'].join(""),
+              content: [`<span>현재 나의 위치</span>`].join(""),
               anchor: new naver.maps.Point(50, 60)
             },
           });

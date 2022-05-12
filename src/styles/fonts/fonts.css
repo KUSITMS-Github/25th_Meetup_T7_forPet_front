@@ -39,3 +39,10 @@
     src: url("./NotoSansKR-Thin.woff") format("woff"),
     url("./NotoSansKR-Thin.otf") format("opentype");
 }
+
+@font-face {
+    font-family: "Baloo";
+    font-weight: 400;
+    src: url("./Baloo-Regular.woff") format("woff"),
+    url("./Baloo-Regular.otf") format("opentype");
+}
