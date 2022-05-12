@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import styled from '@emotion/styled';
 import { Colors } from '../styles/ui';
-import OfflineMapInfo from "../components/OfflineMapInfo";
+import OfflineList from "../components/OfflineList";
 
 const OfflineMap = () => {
 
@@ -144,7 +144,7 @@ const OfflineMap = () => {
 
     return (
         <Offline>
-            <OfflineMapInfo />
+            <OfflineList  />
             <div id="map" style={mapStyle}></div>
         </Offline>
     );

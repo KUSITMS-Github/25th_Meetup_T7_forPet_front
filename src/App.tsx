@@ -16,6 +16,7 @@ import {
 } from "./components"
 
 import './App.css';
+import './styles/fonts/fonts.css';
 
 function App() {
   return (
