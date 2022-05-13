@@ -103,7 +103,7 @@ const ForpetPedia = () => {
             if (sortVar === 'latest') {
                 await getApi(
                     {},
-                    `/qnaBoard/orderByLatest?page=${page}`
+                    `/qnaBoard/orderByLatest?page=${page-1}`
                 )
                 .then(({ status, data }) => {
                     if (status === 200) {
@@ -117,7 +117,7 @@ const ForpetPedia = () => {
             } else {
                 await getApi(
                     {},
-                    `/qnaBoard/orderByLikes?page=${page}`
+                    `/qnaBoard/orderByLikes?page=${page-1}`
                 )
                 .then(({ status, data }) => {
                     if (status === 200) {
@@ -145,7 +145,7 @@ const ForpetPedia = () => {
             setSearchWordRe(e.target.value);
             await getApi(
                 {},
-                `/qnaBoard/search?keyword=${e.target.value}&orderby=${sortVar}`
+                `/qnaBoard/search?keyword=${e.target.value}&orderby=${sortVar}&page=${page-1}`
             )
             .then(({ status, data }) => {
             // console.log("search 결과", status, data);

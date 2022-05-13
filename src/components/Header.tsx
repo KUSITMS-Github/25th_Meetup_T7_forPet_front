@@ -1,4 +1,5 @@
 import styled from '@emotion/styled';
+import { Colors } from '../styles/ui';
 import { Link } from "react-router-dom";
 
 const Header = () => {
@@ -45,6 +46,7 @@ const HeaderStyle = styled.header`
     height: 40px;
     margin: 20px 0 10px;
     padding: 0 50px;
+    background-color: ${Colors.white};
 `;
 
 const HeaderButton = styled.button`

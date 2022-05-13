@@ -5,3 +5,4 @@ export { default as Editor } from "./Editor";
 export { default as PediaOne } from "./PediaOne";
 export { default as CreatePostPedia } from "./CreatePostPedia";
 export { default as Pagination } from "./Pagination";
+export { default as OnlineMapList } from "./OnlineMapList";

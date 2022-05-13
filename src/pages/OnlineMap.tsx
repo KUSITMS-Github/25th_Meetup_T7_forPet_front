@@ -2,42 +2,281 @@ import react, { useEffect, useState } from 'react';
 import styled from '@emotion/styled';
 import { Colors } from '../styles/ui';
 import { motion, AnimatePresence } from "framer-motion";
+import { OnlineMapList } from '../components';
 
-import MapImg from '../assets/MapTest.svg';
-import { Motion } from 'react-motion';
+import { ReactComponent as Tree1 } from '../assets/onlineMap/Map-tree1.svg';
+import { ReactComponent as Tree2 } from '../assets/onlineMap/Map-tree2.svg';
+import MapInitial from '../assets/onlineMap/Map-initial.svg';
+import { ReactComponent as MapOnlyInitial } from '../assets/onlineMap/Map-only-initial.svg';
+import MapHealth from '../assets/onlineMap/Map-health.svg';
+import MapYoung from '../assets/onlineMap/Map-young.svg';
+import MapShop from '../assets/onlineMap/Map-shop.svg';
+import MapSpecial from '../assets/onlineMap/Map-special.svg';
+import MapKnowledge from '../assets/onlineMap/Map-knowledge.svg';
+import MapAdopt from '../assets/onlineMap/Map-adopt.svg';
+import MapVolunteer from '../assets/onlineMap/Map-volunteer.svg';
+
 
 const OnlineMap = () => {
-    const unit = 100;
-    const [dir, setDir] = useState(true);
+    const [moveUnit, setMoveUnit] = useState(0);
+    const [mapImgSrc, setMapImgSrc] = useState(MapInitial);  // 지도 이미지 변환
+    const pick = 'special';
+    {/* health, young, shop, special, knowledge, volunteer, adopt */ }
+    const [town, setTown] = useState(''); // 반려인 마을, 예비 반려인 마을
 
+    const clickTown = (t: string) => {
+        setTown(t);
+        if (t === '봉사하개' || t === '입양하개') {
+            setMoveUnit(-200);
+        } else {
+            setMoveUnit(200);
+        }
+    }
 
     const mapVariants = {
-        entry: ({
-            x: 0
+        start: ({
+            x: 0,
         }),
-        center:{
-            x: dir ? (-1 * unit): (unit)
-        },
-        exit: ({
-            x: 0
+        end: ({
+            x: town ? moveUnit : 0,
         }),
-
     }
 
     return (
-        <div>
-            <button onClick={() => setDir(!dir)}>방향전환</button>
+        <PageWrapper>
+            <MapUpper>
+                <div style={{ fontSize: '30px' }}>forPet map</div>
+                <div style={{ fontSize: '20px', color: Colors.gray1 }}>| 온라인</div>
+                <div>{town}</div>
+            </MapUpper>
             <AnimatePresence>
-                    <motion.img
-                        variants={mapVariants}
-                        src={MapImg}
-                        initial="entry"
-                        animate="center"
-                        exit="exit"
-                    />
+                {/* <MapMotion
+                    variants={mapVariants}
+                    src={mapImgSrc}
+                    initial='start'
+                    animate='end'
+                /> */}
+                <div className="map-parents">
+                    {!town && <MapOnlyInitial className='map-only-initial' />}
+                    {
+                        (town === '건강하개') && 
+                        <MapMotion
+                            variants={mapVariants}
+                            src={MapHealth}
+                            initial='start'
+                            animate='end'
+                        />
+                    }
+                    {
+                        (town === '영양있개') && 
+                        <MapMotion
+                            variants={mapVariants}
+                            src={MapYoung}
+                            initial='start'
+                            animate='end'
+                        />
+                    }
+                    {
+                        (town === '지식쌓개') && 
+                        <MapMotion
+                            variants={mapVariants}
+                            src={MapKnowledge}
+                            initial='start'
+                            animate='end'
+                        />
+                    }
+                    {
+                        (town === '쇼핑하개') && 
+                        <MapMotion
+                            variants={mapVariants}
+                            src={MapShop}
+                            initial='start'
+                            animate='end'
+                        />
+                    }
+                    {
+                        (town === '특별하개') && 
+                        <MapMotion
+                            variants={mapVariants}
+                            src={MapSpecial}
+                            initial='start'
+                            animate='end'
+                        />
+                    }
+                    {
+                        (town === '입양하개') && 
+                        <MapMotion
+                            variants={mapVariants}
+                            src={MapVolunteer}
+                            initial='start'
+                            animate='end'
+                        />
+                    }
+                    {
+                        (town === '봉사하개') && 
+                        <MapMotion
+                            variants={mapVariants}
+                            src={MapAdopt}
+                            initial='start'
+                            animate='end'
+                        />
+                    }
+                    <NameTag id='health'
+                        whileHover={{ scale: 1.2 }}
+                        animate={{ x: town ? moveUnit : 0}}
+                        onClick={() => clickTown('건강하개')}>
+                        건강하개
+                    </NameTag>
+                    <NameTag id='young'
+                        whileHover={{ scale: 1.2 }}
+                        animate={{ x: town ? moveUnit : 0}}
+                        onClick={() => clickTown('영양있개')}>
+                        영양있개
+                    </NameTag>
+                    <NameTag id='special'
+                        whileHover={{ scale: 1.2 }}
+                        animate={{ x: town ? moveUnit : 0}}
+                        onClick={() => clickTown('특별하개')}>
+                        특별하개
+                    </NameTag>
+                    <NameTag id='shop'
+                        whileHover={{ scale: 1.2 }}
+                        animate={{ x: town ? moveUnit : 0}}
+                        onClick={() => clickTown('쇼핑하개')}>
+                        쇼핑하개
+                    </NameTag>
+                    <NameTag id='knowledge'
+                        whileHover={{ scale: 1.2 }}
+                        animate={{ x: town ? moveUnit : 0}}
+                        onClick={() => clickTown('지식쌓개')}>
+                        지식쌓개
+                    </NameTag>
+                    <NameTag id='adopt'
+                        whileHover={{ scale: 1.2 }}
+                        animate={{ x: town ? moveUnit : 0}}
+                        onClick={() => clickTown('입양하개')}>
+                        입양하개
+                    </NameTag>
+                    <NameTag id='volunteer'
+                        whileHover={{ scale: 1.2 }}
+                        animate={{ x: town ? moveUnit : 0}}
+                        onClick={() => clickTown('봉사하개')}>
+                        봉사하개
+                    </NameTag>
+                </div>
+                <Trees>
+                    {!town && <Tree1 className='tree1'/>}
+                    {!town && <Tree2 className='tree2'/>}
+                </Trees>
             </AnimatePresence>
-        </div>
+        </PageWrapper>
     );
 };
 
 export default OnlineMap;
+
+const PageWrapper = styled.div`
+    background-color: ${Colors.green1};
+    height: calc(100vh);
+    // overflow: hidden;
+    
+    button {
+        position: fixed;
+        top: 5%;
+        left: 5%;
+    }
+
+    .map-parents {
+        position: absolute;
+        transform: translate(-50%, -50%);
+        top: 60%;
+        left: 50%;
+    }
+
+    .map-only-initial {
+        width: 90vw;
+    }
+
+    #health {
+        top: 72%;
+        left: 20%;
+    }
+
+    #young {
+        top: 40%;
+        left: 38%;
+    }
+
+    #special {
+        top: 85%;
+        left: 53%;
+    }
+
+    #shop {
+        top: 64%;
+        left: 46%;
+    }
+
+    #knowledge {
+        top: 86%;
+        left: 35%;
+    }
+
+    #volunteer {
+        background-color: ${Colors.white};
+        color: ${Colors.black};
+        top: 86%;
+        right: 22%;
+    }
+
+    #adopt {
+        background-color: ${Colors.white};
+        color: ${Colors.black};
+        top: 44%;
+        left: 62%;
+    }
+`
+
+const MapUpper = styled.div`
+    display: flex;
+    flex-direction: row;
+    text-align: left;
+    align-items: end;
+    padding: 30px 0 30px 50px;
+`
+
+const NameTag = styled(motion.div)`
+    background-color: ${Colors.black};
+    color: #fff;
+    width: 90px;
+    height: 30px;
+    font-weight: bold;
+    box-shadow: 15px -6px 0px #444444;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    
+    position: absolute;
+    transform: translate(-50%, -50%);
+    border-radius: 15px;
+`
+
+const MapMotion = styled(motion.img)`
+    width: 63vw;
+`
+
+const Trees = styled.div`
+    .tree1 {
+        width: 15vw;
+        position: absolute;
+        bottom: 1%;
+        left: 3%;
+    }
+    .tree2 {
+        width: 15vw;
+        position: absolute;
+        bottom: 1%;
+        right: 3%;
+    }
+`
