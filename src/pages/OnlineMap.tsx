@@ -6,7 +6,6 @@ import { OnlineMapList } from '../components';
 
 import { ReactComponent as Tree1 } from '../assets/onlineMap/Map-tree1.svg';
 import { ReactComponent as Tree2 } from '../assets/onlineMap/Map-tree2.svg';
-import MapInitial from '../assets/onlineMap/Map-initial.svg';
 import { ReactComponent as MapOnlyInitial } from '../assets/onlineMap/Map-only-initial.svg';
 import MapHealth from '../assets/onlineMap/Map-health.svg';
 import MapYoung from '../assets/onlineMap/Map-young.svg';
@@ -16,18 +15,16 @@ import MapKnowledge from '../assets/onlineMap/Map-knowledge.svg';
 import MapAdopt from '../assets/onlineMap/Map-adopt.svg';
 import MapVolunteer from '../assets/onlineMap/Map-volunteer.svg';
 
+{/* health, young, shop, special, knowledge, volunteer, adopt */ }
 
 const OnlineMap = () => {
     const [moveUnit, setMoveUnit] = useState(0);
-    const [mapImgSrc, setMapImgSrc] = useState(MapInitial);  // 지도 이미지 변환
-    const pick = 'special';
-    {/* health, young, shop, special, knowledge, volunteer, adopt */ }
     const [town, setTown] = useState(''); // 반려인 마을, 예비 반려인 마을
 
     const clickTown = (t: string) => {
         setTown(t);
         if (t === '봉사하개' || t === '입양하개') {
-            setMoveUnit(-200);
+            setMoveUnit(-100);
         } else {
             setMoveUnit(200);
         }
@@ -49,13 +46,8 @@ const OnlineMap = () => {
                 <div style={{ fontSize: '20px', color: Colors.gray1 }}>| 온라인</div>
                 <div>{town}</div>
             </MapUpper>
+            {town && <OnlineMapList pick={town}/>}
             <AnimatePresence>
-                {/* <MapMotion
-                    variants={mapVariants}
-                    src={mapImgSrc}
-                    initial='start'
-                    animate='end'
-                /> */}
                 <div className="map-parents">
                     {!town && <MapOnlyInitial className='map-only-initial' />}
                     {
@@ -177,19 +169,12 @@ export default OnlineMap;
 
 const PageWrapper = styled.div`
     background-color: ${Colors.green1};
-    height: calc(100vh);
-    // overflow: hidden;
-    
-    button {
-        position: fixed;
-        top: 5%;
-        left: 5%;
-    }
+    height: 100vh;
 
     .map-parents {
         position: absolute;
         transform: translate(-50%, -50%);
-        top: 60%;
+        top: 70%;
         left: 50%;
     }
 

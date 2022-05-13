@@ -128,7 +128,7 @@ let serviceList = {
 };
 
 
-const OneComp = ({ service }: any) => {
+const OneComp = ({ service }: string | any) => {
     return (
         <OneWrapper
             href={'https://cafe.naver.com/kusitms'}  // {service.link}
@@ -155,39 +155,32 @@ const OnlineMapList = ({ pick }: any | string) => {
     }
 
     useEffect(() => {
+        setCategory(pick);
         switch (pick) {
-            case 'health':
+            case '건강하개':
                 setPickService(serviceList['health']);
-                setCategory('건강하개');
                 break;
-            case 'young':
+            case '영양있개':
                 setPickService(serviceList['young']);
-                setCategory('영양있개');
                 break;
-            case 'shop':
+            case '쇼핑하개':
                 setPickService(serviceList['shop']);
-                setCategory('쇼핑하개');
                 break;
-            case 'special':
+            case '특별하개':
                 setPickService(serviceList['special']);
-                setCategory('특별하개');
                 break;
-            case 'knowledge':
+            case '지식쌓개':
                 setPickService(serviceList['knowledge']);
-                setCategory('지식쌓개');
                 break;
-            case 'volunteer':
+            case '봉사하개':
                 setPickService(serviceList['volunteer']);
                 console.log(pickService)
-                setCategory('봉사하개');
                 break;
-            case 'adopt':
+            case '입양하개':
                 setPickService(serviceList['adopt']);
-                setCategory('입양하개');
                 break;
             default:
                 setPickService(serviceList['health']);
-                setCategory('건강하개');
                 break;
         }
     }, [pick])
@@ -195,17 +188,27 @@ const OnlineMapList = ({ pick }: any | string) => {
 
     return (
         <BoxWrapper>
-            <div className='category'>{category}</div>
-            {
-                pickService &&
-                pickService.map((s: any, i: number) => (
-                    <OneComp
-                        key={i}
-                        service={s}
-                    />
-                ))
-            }
-        </BoxWrapper>
+            <div className={
+                (pick === '봉사하개' || pick === '입양하개') ?
+                    'right-box' : 'left-box'
+            }>
+                <div className={
+                    (pick === '봉사하개' || pick === '입양하개') ?
+                        'category-right' : 'category-left'
+                }
+                    style={{ fontWeight: 'bold' }}
+                >{category}</div>
+                {
+                    pickService &&
+                    pickService.map((s: any, i: number) => (
+                        <OneComp
+                            key={i}
+                            service={s}
+                        />
+                    ))
+                }
+            </div>
+        </BoxWrapper >
     )
 
 }
@@ -213,23 +216,51 @@ const OnlineMapList = ({ pick }: any | string) => {
 export default OnlineMapList;
 
 const BoxWrapper = styled.div`
-    background-color: ${Colors.white};
-    width: 400px;
-    margin-left: 50px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.25);
-    border-radius: 15px;
+    .right-box {
+        background-color: ${Colors.white};
+        width: 400px;
+        margin-left: 50px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.25);
+        border-radius: 15px;
 
-    // position: fixed;
+        position: absolute;
+        right: 10%;
+        z-index: 100;
+    }
 
-    .category {
+    .left-box {
+        background-color: ${Colors.white};
+        width: 400px;
+        margin-left: 50px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.25);
+        border-radius: 15px;
+
+        position: absolute;
+        z-index: 100;
+    }
+
+    .category-left {
         width: 100px;
         border-radius: 27px;
         padding: 8px 0;
         background-color: ${Colors.black};
-        color: ${Colors.white};
+        color: ${Colors.yellow1};
+        
+        position: relative;
+        top: -10px;
+    }
+    .category-right {
+        width: 100px;
+        border-radius: 27px;
+        padding: 8px 0;
+        background-color: ${Colors.black};
+        color: ${Colors.green4};
         
         position: relative;
         top: -10px;
