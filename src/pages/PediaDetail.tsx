@@ -61,7 +61,7 @@ const dump2 = [
 
 const PediaDetail = () => {
     const [question, setQuestion] = useState(dumpdata);  // 질문
-    const [comments, setComments] = useState(dump2);  // 댓글
+    const [comments, setComments] = useState([]);  // 댓글
     const [myAnswer, setMyAnswer] = useState<string>();  // 내가 쓴 댓글
     const params = useParams();
     let postId = params.id;
@@ -77,14 +77,15 @@ const PediaDetail = () => {
     // }
 
     useEffect(() => {
+        // 글 불러오기
         const getQuestion = async () => {
             await getApi(
-                {}, `/board/${postId}` // 추후 수정
+                {}, `/qnaBoard/${postId}`
             )
                 .then(({ status, data }) => {
+                    console.log(`GET 글 내용`, status, data);
                     if (status === 200) {
-                        // console.log(`GET 글 내용`, status, data);
-                        setQuestion(data.data);
+                        setQuestion(data.body.data);
                     }
                 })
                 .catch((e) => {
@@ -92,14 +93,16 @@ const PediaDetail = () => {
                 });
         }
 
+        // 댓글 불러오기
         const getComments = async () => {
             await getApi(
-                {}, `/board/${postId}` // 추후 수정
+                {}, `/qnaBoard/${postId}/comment`
             )
                 .then(({ status, data }) => {
+                    console.log('댓글불러옴', data);
                     if (status === 200) {
                         // console.log(`GET 댓글내용`, status, data);
-                        setComments(data.data);
+                        setComments(data.body.data);
                     }
                 })
                 .catch((e) => {
@@ -117,11 +120,12 @@ const PediaDetail = () => {
         const createComment = async () => {
             await postApi(
                 {
-                    comment: myAnswer
+                    // comment: myAnswer
                 },
-                `/qnaBoard/${postId}/comment`
+                `/qnaBoard/${postId}/comment?comment=${myAnswer}`
             )
                 .then(({ status, data }) => {
+                    console.log('댓글입력:', status, data);
                     if (status === 200) {
                         // console.log("댓글 작성 post api", status);
                         window.location.reload(); // 새로고침
@@ -141,12 +145,12 @@ const PediaDetail = () => {
             `/qnaBoard/${postId}/${cnt}`
         )
             .then(({ status, data }) => {
+                console.log("POST 좋아요/북마크 누름", status, data);
                 if (status === 200) {
-                    // console.log("POST 좋아요/북마크 누름", status, data);
                     if (cnt === 'like') {
-                        setQuestion({ ...question, likes: data });
+                        setQuestion({ ...question, likes: data.body.data });
                     } else {
-                        setQuestion({ ...question, bookmark: data });
+                        setQuestion({ ...question, bookmark: data.body.data.cnt });
                     }
                 }
             })

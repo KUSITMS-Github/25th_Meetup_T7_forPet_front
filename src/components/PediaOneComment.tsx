@@ -11,9 +11,9 @@ const PediaOneComment = ({ comment }: any) => {
             `/qnaBoard/comment/${commentId}/like`
         )
             .then(({ status, data }) => {
+                console.log("POST 댓글좋아요 누름", status, data);
                 if (status === 200) {
-                    // console.log("POST 댓글좋아요 누름", status, data);
-                    window.location.reload();
+                    // window.location.reload();
                 }
             })
             .catch((e) => {

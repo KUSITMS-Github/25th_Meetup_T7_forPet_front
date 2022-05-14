@@ -2,9 +2,6 @@ import React, { useState, useEffect, useContext } from 'react';
 import { useNavigate } from "react-router-dom";
 
 
-import { Editor } from "../components"
-
-
 const Board = () => {
     const navigate = useNavigate();
 

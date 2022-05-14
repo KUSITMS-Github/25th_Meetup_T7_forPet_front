@@ -7,10 +7,10 @@ const putApi = async (data: any, end_url: string) => {
         headers: {
             "Content-type": "application/json",
             Accept: "application/json",
-            "Authorization": ''
+            // "Authorization": ''
         },
     };
-    config.headers["Authorization"] = `Bearer ${token}`;
+    // config.headers["Authorization"] = `Bearer ${token}`;
     
     return await axios.put(process.env.REACT_APP_BACK_BASE_URL + end_url, data, config);
 };
