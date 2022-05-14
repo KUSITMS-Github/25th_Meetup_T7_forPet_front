@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import styled from '@emotion/styled';
 import { Colors } from '../styles/ui';
-import OfflineList from "../components/OfflineList";
+import OfflineList from '../components/OfflineMapList';
 
 const OfflineMap = () => {
 
