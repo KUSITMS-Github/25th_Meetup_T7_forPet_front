@@ -66,6 +66,7 @@ const PediaOne = (post: any) => {
     ];
 
     const [comments, setComments] = useState(commentInitial);  // 댓글 
+    // const [comments, setComments] = useState();
 
     // 댓글 불러오기 GET API
     useEffect(() => {

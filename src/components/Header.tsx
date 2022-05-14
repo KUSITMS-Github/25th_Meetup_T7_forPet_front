@@ -15,7 +15,7 @@ const Header = () => {
                 <Link to="/maps">
                     <HeaderButton className="header-btn">Forpet MAP</HeaderButton>
                 </Link>
-                <Link to="/board">
+                <Link to="/menu">
                     <HeaderButton className="header-btn">우리동네 커뮤니티</HeaderButton>
                 </Link>
                 <Link to="/forpetPedia">
