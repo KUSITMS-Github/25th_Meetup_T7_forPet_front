@@ -3,6 +3,8 @@ import styled from '@emotion/styled';
 import { Colors } from '../styles/ui';
 import OfflineList from '../components/OfflineMapList';
 
+import Marker from "../assets/offlineMap/marker.png";
+
 const OfflineMap = () => {
 
     //TODO: API 대체
@@ -76,7 +78,7 @@ const OfflineMap = () => {
           const map = new naver.maps.Map("map", {
               //TODO: 초기 위치 결정
             center: new naver.maps.LatLng(currentPosition[0], currentPosition[1]),
-            //center: new naver.maps.LatLng(37.497928, 127.027583), //초기 위치 강남역
+            // center: new naver.maps.LatLng(37.497928, 127.027583), //초기 위치 강남역
             logoControl: true,
             logoControlOptions: {
                 position: naver.maps.Position.LEFT_BOTTOM
@@ -99,7 +101,7 @@ const OfflineMap = () => {
             position: new naver.maps.LatLng(currentPosition[0], currentPosition[1]),
             map: map,
             icon: {
-              url: "/offlineMap/marker.png"
+              url: Marker
             },
           });
     
@@ -118,7 +120,7 @@ const OfflineMap = () => {
                 position: new naver.maps.LatLng(Number(place.latitude), Number(place.longitude)),
                 map: map,
                 icon: {
-                  url: "/offlineMap/marker.png",
+                  url: Marker
                 },
               });
               
@@ -138,8 +140,8 @@ const OfflineMap = () => {
     //지도 크기 설정
     //TODO: 지도 height 지정
     const mapStyle = {
-        width: "61%",
-        height: "690px",
+        width: "73%",
+        height: "calc(100vh - 70px)",
     };
 
     return (
