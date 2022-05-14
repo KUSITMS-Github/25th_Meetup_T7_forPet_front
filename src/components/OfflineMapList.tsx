@@ -99,8 +99,7 @@ const OfflineMapList = () => {
                         ): void => setsearchPlace(e.target.value)}
                         onKeyPress={enterSearchPlace}
                         value={searchPlace}
-                />
-                <span className='seach-location'>서울시 서초동</span>    
+                />   
             </Section>
 
             {/*주변*/}
@@ -124,8 +123,8 @@ const ListBox = styled.div`
     align-items: left;
     justify-content: flex-start;
 
-    width: 39%;
-    height: 668px;
+    width: 27%;
+    height: calc(100vh - 89px);
     padding: 17px 3.5% 0px 3.5%;
     background-color: ${Colors.green1};
 
@@ -176,7 +175,7 @@ const Section = styled.div`
     .title{
         font-family: 'NotoSans';
         font-weight: 700;
-        font-size: 24px;
+        font-size: 17px;
         color: ${Colors.black};
     }
 
@@ -193,22 +192,6 @@ const Section = styled.div`
 
         font-family: 'NotoSans';
         font-weight: 400;
-        font-size: 24px;
-    }
-
-    .seach-location{
-        width: 40%;
-        margin-top: 16px;
-        padding: 7px 19px;
-        box-sizing: border-box;
-        border: 3px solid #4F6D47;
-        box-sizing: border-box;
-        border-radius: 25.5px;
-
-        background: #FFFFFF;
-
-        font-family: 'NotoSans';
-        font-weight: 400;
-        font-size: 24px;
+        font-size: 17px;
     }
 `;
