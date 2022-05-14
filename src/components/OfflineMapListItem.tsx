@@ -13,26 +13,26 @@ interface Props {
   }
 
 const OfflineMapListItem = ({ item }: Props) => {
+
     const [bookmark, setBookmark] = useState<boolean>(false);
     const [modal, setModal] = useState<boolean>(false);
 
     const toggleBookmark = () => setBookmark(bookmark => !bookmark);
 
+    //TODO: 모달 중첩 문제 처리
     const onClickToggleModal = useCallback(() => {
         setModal(!modal);
         }, [modal]);
 
-
-
     return(
-        <ItemBox onClick={onClickToggleModal}>
+        <ItemBox>
 
             {/*장소 이미지*/}
-            <img src={Item1} alt=''/>
+            <img src={Item1} alt='' onClick={onClickToggleModal}/>
 
             {/*장소 이름, 카테고리*/}
             <Section>
-                <div className="text">
+                <div className="text" onClick={onClickToggleModal}>
                 <span style={{fontSize: '17px'}}>{item.name}</span>
                 <span style={{fontSize: '11px', marginLeft: '8px', color: '${Colors.gray2}'}}>{item.category}</span>
                 </div>
@@ -44,7 +44,7 @@ const OfflineMapListItem = ({ item }: Props) => {
             </Section>
 
             {/*장소 리뷰 정보*/}
-            <Section style={{marginLeft:'10px'}}>
+            <Section style={{marginLeft:'10px'}} onClick={onClickToggleModal}>
                 <StarAvg />
                 <span style={{fontSize: '14px', marginLeft: '8px'}}>{item.starAvg}/</span>
                 <span style={{fontSize: '11px'}}>&nbsp;리뷰 {item.reviewCnt}</span>
