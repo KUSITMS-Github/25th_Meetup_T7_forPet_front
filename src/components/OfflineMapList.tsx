@@ -84,13 +84,13 @@ const OfflineMapList = () => {
         <ListBox>
             {/*제목*/}
             <Title>
-                <div className='main-title'>forPet map</div>
-                <div className='sub-titile'>&nbsp;|오프라인</div>
+                <span className='main-title'>forPet map</span>
+                <span className='sub-titile'>&nbsp;|오프라인</span>
             </Title>
 
             {/*검색*/}
             <Section>
-                <div className='title'>검색</div>
+                <span className='title'>검색</span>
                 <input
                     className='searchbar'
                     placeholder='내 주변 반려견 장소'
@@ -100,12 +100,12 @@ const OfflineMapList = () => {
                         onKeyPress={enterSearchPlace}
                         value={searchPlace}
                 />
-                <div className='seach-location'>서울시 서초동</div>    
+                <span className='seach-location'>서울시 서초동</span>    
             </Section>
 
             {/*주변*/}
             <Section>
-                <div className='title'>주변</div>
+                <span className='title'>주변</span>
 
                 {offline_list.map((item, index) => (
                     <OfflineMapListItem key={index} item={item} />
@@ -125,8 +125,22 @@ const ListBox = styled.div`
     justify-content: flex-start;
 
     width: 39%;
+    height: 668px;
     padding: 17px 3.5% 0px 3.5%;
     background-color: ${Colors.green1};
+
+    overflow-x: hidden;
+    overflow-y: scroll;
+    &::-webkit-scrollbar {
+        width: 8px;
+        height: 8px;
+        border-radius: 6px;
+        background: rgba(255, 255, 255, 0.4);
+    }
+    &::-webkit-scrollbar-thumb {
+        background: rgba(0, 0, 0, 0.3);
+        border-radius: 6px;
+    }
 `;
 
 const Title = styled.div`
