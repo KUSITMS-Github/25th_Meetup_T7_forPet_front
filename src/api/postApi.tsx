@@ -1,16 +1,16 @@
 import axios from "axios";
 
 const postApi = async (data: any, end_url: string) => {
-    const token = 'eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxIiwiaWF0IjoxNjUyNTQ1Njc1LCJleHAiOjE2NTI1NDc0NzV9.7rJFsP_8kSrML36lpaDkb7TJbSgTo1wF4aHFkBZ8naU'
+    // const token = 'eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxIiwiaWF0IjoxNjUyNTQ1Njc1LCJleHAiOjE2NTI1NDc0NzV9.7rJFsP_8kSrML36lpaDkb7TJbSgTo1wF4aHFkBZ8naU'
 
     const config = {
         headers: {
             "Content-type": "application/json",
             Accept: "application/json",
-            "Authorization": ''
+            // "Authorization": ''
         },
     };
-    config.headers["Authorization"] = `Bearer ${token}`;
+    // config.headers["Authorization"] = `Bearer ${token}`;
 
     
     return await axios.post(

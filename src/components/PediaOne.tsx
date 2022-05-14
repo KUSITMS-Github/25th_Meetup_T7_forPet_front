@@ -65,7 +65,7 @@ const PediaOne = (post: any) => {
         }
     ];
 
-    const [comments, setComments] = useState(commentInitial);  // 댓글 
+    const [comments, setComments] = useState([]);  // 댓글 
     // const [comments, setComments] = useState();
 
     // 댓글 불러오기 GET API
@@ -76,8 +76,8 @@ const PediaOne = (post: any) => {
                 `/qnaBoard/${onePost.qnaBoardId}/comment`
             )
             .then(({ status, data }) => {
+                console.log(`GET 댓글 불러오기`, status, data.data);
                 if (status === 200) {
-                    // console.log(`GET 댓글 불러오기`, data.data);
                     setComments(data.data);
                 }
             })

@@ -1,9 +1,9 @@
 import styled from '@emotion/styled';
-import { Colors } from '../styles/ui';
+import { Colors } from '../../styles/ui';
 import { Link } from "react-router-dom";
-import { BoardHeader } from '../components';
+import { BoardHeader } from '../../components';
 
-const BoardMenu = () => {
+const BoardBoast = () => {
     return(
         <>
         <BoardHeader />
@@ -11,4 +11,4 @@ const BoardMenu = () => {
     )
 }
 
-export default BoardMenu
+export default BoardBoast

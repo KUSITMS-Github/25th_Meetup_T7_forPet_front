@@ -16,16 +16,16 @@ const CreatePostPedia = () => {
 
     const fileSubmitHandler = async (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
         e.preventDefault();
-        let contents = [{
+        let contents = {
             title: 'title',
-            content: 'content'
-        }]
+            content: myQuestion
+        }
         const end_url = '/qnaBoard';
         const formData = new FormData();
-        formData.append('data',
+        formData.append('qnaBoardRequestDto',
             new Blob([JSON.stringify(contents)], { type: "application/json" })
         );
-        formData.append('file', file!);
+        formData.append('imageList', file!);
         const config = {
             headers: {
                 'content-type': 'multipart/form-data'
@@ -37,8 +37,9 @@ const CreatePostPedia = () => {
             config
         )
             .then(({ status, data }) => {
+                console.log(status, data);
                 if (status === 200 || status === 201) {
-                    window.location.reload();
+                    // window.location.reload();
                 }
             })
             .catch((e) => {
