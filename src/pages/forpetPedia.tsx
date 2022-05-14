@@ -8,7 +8,7 @@ import { getApi, setHeader } from '../api';
 const ForpetPedia = () => {
 
     useEffect(() => {
-        const token = 'eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxIiwiaWF0IjoxNjUyNTUzODg1LCJleHAiOjE2NTI1NTU2ODV9.IAXAnltXD9mgsMkKFDVLpwty_dX08xeBasLcZoOhowY'
+        const token = 'eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxIiwiaWF0IjoxNjUyNTU2NjM3LCJleHAiOjE2NTI1NTg0Mzd9.EGaws_zq8I4dpozkPp2bTlbYCMBtSWYNVjb0uYrGUqo'
         setHeader(token);
     }, [])
 
