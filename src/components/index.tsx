@@ -7,3 +7,4 @@ export { default as PediaOneComment } from "./PediaOneComment";
 export { default as CreatePostPedia } from "./CreatePostPedia";
 export { default as Pagination } from "./Pagination";
 export { default as OnlineMapList } from "./OnlineMapList";
+export { default as BoardHeader } from "./BoardHeader";

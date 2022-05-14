@@ -7,6 +7,7 @@ import {
   OnlineMap,
   OfflineMap,
   Board,
+  BoardMenu,
   ForpetPedia,
   PediaDetail,
   MyPage,
@@ -33,6 +34,7 @@ function App() {
             <Route path="/offlinemap" element={<OfflineMap />} />
             <Route path="/mypage" element={<MyPage />} />
             <Route path="/board" element={<Board />} />
+            <Route path="/menu" element={<BoardMenu />} />
             <Route path="/forpetPedia" element={<ForpetPedia />} />
             <Route path="/pedia/:id" element={<PediaDetail />} />
             <Route path="/post/:id" element={<PostDetail />} />
