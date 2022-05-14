@@ -77,7 +77,7 @@ const CreatePostPedia = () => {
 
 export default CreatePostPedia;
 
-const CreateQustion = styled.header`
+const CreateQustion = styled.div`
 
     display: flex;
     flex-direction: column;

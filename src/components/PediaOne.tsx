@@ -93,7 +93,7 @@ const PediaOne = (post: any) => {
 
 export default PediaOne;
 
-const OnePost = styled.header`
+const OnePost = styled.div`
     display: flex;
     flex-direction: column;
     width: 900px; // 추후조정
@@ -134,7 +134,7 @@ const OnePost = styled.header`
         font-weight: bold;
     }
 `
-const Question = styled.header`
+const Question = styled.div`
 
     .q-upper {
         display: flex;
@@ -161,7 +161,7 @@ const Question = styled.header`
         margin: 0 5px;
     }
 `
-const Answer = styled.header`
+const Answer = styled.div`
     text-align: left;
 
     .answer {

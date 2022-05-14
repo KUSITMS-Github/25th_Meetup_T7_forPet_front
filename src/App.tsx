@@ -3,6 +3,7 @@ import {
   Home,
   Login,
   Signup,
+  ChooseMaps,
   OnlineMap,
   OfflineMap,
   Board,
@@ -26,6 +27,7 @@ function App() {
             <Route path="/" element={<Home />} />
             <Route path="/login" element={<Login />} />
             <Route path="/signup" element={<Signup />} />
+            <Route path="/maps" element={<ChooseMaps />} />
             <Route path="/onlinemap" element={<OnlineMap />} />
             <Route path="/offlinemap" element={<OfflineMap />} />
             <Route path="/mypage" element={<MyPage />} />
