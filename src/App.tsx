@@ -8,6 +8,7 @@ import {
   OfflineMap,
   Board,
   ForpetPedia,
+  PediaDetail,
   MyPage,
   PostDetail,
   NotFound,
@@ -33,6 +34,7 @@ function App() {
             <Route path="/mypage" element={<MyPage />} />
             <Route path="/board" element={<Board />} />
             <Route path="/forpetPedia" element={<ForpetPedia />} />
+            <Route path="/pedia/:id" element={<PediaDetail />} />
             <Route path="/post/:id" element={<PostDetail />} />
             <Route path="*" element={<NotFound />} />
           </Routes>

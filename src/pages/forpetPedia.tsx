@@ -1,5 +1,4 @@
 import React, { useState, useEffect, useContext } from 'react';
-import { useNavigate } from "react-router-dom";
 import styled from '@emotion/styled';
 import Pagination from "../components/Pagination";
 import { PediaOne, CreatePostPedia } from '../components';
@@ -7,7 +6,7 @@ import { getApi } from '../api';
 
 
 const ForpetPedia = () => {
-    const navigate = useNavigate();
+    
 
     const initialPediaList =  // 임시 데이터
     [
@@ -97,8 +96,8 @@ const ForpetPedia = () => {
         setPage((nextPage) => nextPage + 1);
     };
 
-    useEffect(() => {  // pediaList 불러오기 getApi
-        // [TODO] sortVar : lastest, likes 보내기
+    // pediaList 불러오기 getApi
+    useEffect(() => {  
         const getPediaList = async () => {
             if (sortVar === 'latest') {
                 await getApi(
@@ -139,6 +138,7 @@ const ForpetPedia = () => {
         setSearchWordRe(keyword);
     }
 
+    // 검색 API
     const enterSearchInput = async (e: any) => {
         if (e.key === "Enter") {  // 엔터키 클릭 시 검색 api 호출
             console.log(e.target.value);
