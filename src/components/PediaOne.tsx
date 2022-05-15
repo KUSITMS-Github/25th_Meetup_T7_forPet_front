@@ -133,13 +133,26 @@ const PediaOne = (post: any) => {
         navigate(`/pedia/${onePost.qnaBoardId}`);
     };
 
+    useEffect(() => {
+        console.log('image', onePost.imageUrlList);
+
+    }, [])
+
 
     return (
         <OnePost>
             <Question>
                 <div className='q-upper'>
                     <div className='writer-sec'>
-                        <div>이미지</div>
+                        <div>
+                            {
+                                onePost.imageUrlList &&
+                                onePost.imageUrlList.map((img: string, i: number) => (
+                                    <img src={img} className='image-resize'></img>
+                                ))
+                            }
+                            
+                            </div>
                         <div className='writer-sec-name'>
                             <div className='writer'>{onePost.nickName}</div>
                             <div>{onePost.tag}</div>
@@ -260,6 +273,11 @@ const Question = styled.div`
 
     .cnt {
         margin: 0 5px;
+    }
+
+    .image-resize {
+        width: 100px;
+        height: 100px;
     }
 `
 const Answer = styled.div`

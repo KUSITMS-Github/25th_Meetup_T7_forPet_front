@@ -7,7 +7,7 @@ import { setHeader } from "../api";
 
 
 const Login = () => {
-
+    
     const loginHandler = async (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
         e.preventDefault();
         const config = {
@@ -16,7 +16,6 @@ const Login = () => {
                 Accept: "application/json",
             }
         }
-        const localURL = 'http://localhost:3000/oauth2/redirect'
         const redirectURL = 'http://172.30.1.9:8080/oauth2/redirect'
         await axios.get(
             process.env.REACT_APP_BACK_BASE_URL + `/oauth2/authorize/kakao?redirect_uri=`+ redirectURL,
@@ -37,6 +36,9 @@ const Login = () => {
         <>
         <div>Login page</div>
         <button onClick={(e) => loginHandler(e)}>로그인하기</button>
+        <a href='http://172.30.1.9:8080/oauth2/authorize/kakao?redirect_uri=http://localhost:3000/oauth2/redirect' >
+            카카카카카
+        </a>
         </>
     );
 };

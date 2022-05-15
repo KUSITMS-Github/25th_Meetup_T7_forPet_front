@@ -11,6 +11,7 @@ import {
   PediaDetail,
   MyPage,
   PostDetail,
+  OauthHandler,
   NotFound,
 } from "./pages";
 import {
@@ -52,6 +53,7 @@ function App() {
             <Route path="/forpetPedia" element={<ForpetPedia />} />
             <Route path="/pedia/:id" element={<PediaDetail />} />
             <Route path="/post/:id" element={<PostDetail />} />
+            <Route path="/oauth2/redirect" element={<OauthHandler />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
     </div>
