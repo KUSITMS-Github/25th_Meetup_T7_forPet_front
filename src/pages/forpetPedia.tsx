@@ -7,10 +7,11 @@ import { getApi, setHeader } from '../api';
 
 const ForpetPedia = () => {
 
-    useEffect(() => {
-        const token = 'eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxIiwiaWF0IjoxNjUyNTY1MzcxLCJleHAiOjE2NTI1NjcxNzF9.3BWqx2knn5QvB5UKAlspL1AP9zMaCWuHaTgOPJLC-7Q'
-        setHeader(token);
-    }, [])
+    // 임시 토큰 넣어줌
+    // useEffect(() => {
+    //     const token = 'eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxIiwiaWF0IjoxNjUyNTY1MzcxLCJleHAiOjE2NTI1NjcxNzF9.3BWqx2knn5QvB5UKAlspL1AP9zMaCWuHaTgOPJLC-7Q'
+    //     setHeader(token);
+    // }, [])
 
 
     const initialPediaList =  // 임시 데이터
@@ -94,7 +95,7 @@ const ForpetPedia = () => {
                 )
                     .then(({ status, data }) => {
                         console.log(status, data);
-                        
+
                         if (status === 200) {
                             console.log(`GET /orderByLatest?page=${page}`, data.body.data.data);
                             setPediaList(data.body.data.data);

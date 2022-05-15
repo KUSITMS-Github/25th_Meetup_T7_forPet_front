@@ -9,7 +9,7 @@ const CreatePostPedia = () => {
     const [myQuestion, setMyQuestion] = useState<string>();
 
     const [file, setFile] = useState<File>();
-    const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const onFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         console.log(e.target.files![0]);
         setFile(e.target.files![0]);
     }
@@ -67,7 +67,7 @@ const CreatePostPedia = () => {
             >
             </textarea>
             <div className='low-section'>
-                <input type="file" multiple onChange={(e) => onChange(e)} />
+                <input type="file" multiple onChange={(e) => onFileChange(e)} />
                 {/* <button type="submit" onClick={(e) => fileSubmitHandler(e)}>파일 업로드</button> */}
                 <div onClick={(e) => fileSubmitHandler(e)}>연필</div>
             </div>

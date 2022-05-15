@@ -10,7 +10,6 @@ import {
   ForpetPedia,
   PediaDetail,
   MyPage,
-  PostDetail,
   OauthHandler,
   NotFound,
 } from "./pages";
@@ -22,6 +21,7 @@ import {
   BoardMeet,
   BoardBoast,
   BoardShare,
+  PostDetail,
 } from "./pages/Community"
 import {
   Header,
