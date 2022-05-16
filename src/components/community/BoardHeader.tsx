@@ -48,6 +48,7 @@ const Wrapper = styled.div`
     .title {
         font-size: 24px;
         font-weight: bold;
+        margin-right: 10px;
     }
 
     .comp {
@@ -61,7 +62,6 @@ const Wrapper = styled.div`
     }
 
     a {
-        background: #f0f0f0;
         border-radius: 4px;
         padding: 6px 10px;
         margin-right: 10px;

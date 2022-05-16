@@ -18,6 +18,7 @@ import {
   BoardBoast,
   BoardShare,
   PostDetail,
+  BoardWrite,
 } from "./pages/community";
 import {
   ForpetPedia,
@@ -48,6 +49,7 @@ function App() {
             <Route path="/meet" element={<BoardMeet />} />
             <Route path="/boast" element={<BoardBoast />} />
             <Route path="/all" element={<BoardAll />} />
+            <Route path="/board/write" element={<BoardWrite />} />
             <Route path="/forpetPedia" element={<ForpetPedia />} />
             <Route path="/pedia/:id" element={<PediaDetail />} />
             <Route path="/post/:id" element={<PostDetail />} />

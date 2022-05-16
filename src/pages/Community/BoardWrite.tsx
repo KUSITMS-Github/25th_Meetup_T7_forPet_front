@@ -120,7 +120,7 @@ const BoardWrite = () => {
 export default BoardWrite;
 
 const Wrapper = styled.div`
-    background-color: ${Colors.green1};
+    background-color: ${Colors.white};
     margin: 0 5vw;
     padding: 10px;
 

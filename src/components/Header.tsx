@@ -44,8 +44,7 @@ const HeaderStyle = styled.header`
     flex-direction: row;
     justify-content: space-between;
     height: 40px;
-    margin: 20px 0 10px;
-    padding: 0 50px;
+    padding: 20px 50px 10px 50px;
     background-color: ${Colors.white};
 `;
 

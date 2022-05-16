@@ -247,7 +247,7 @@ const Wrapper = styled.div`
     width: 900px; // 추후조정
     margin: 10px auto;
     padding: 20px;
-    background-color: ${Colors.green1};
+    background-color: ${Colors.white};
 
     textarea {
         resize: none;

@@ -16,7 +16,10 @@ const Pagination: React.FC<Props> = ({
     handleNextPage,
 }) => {
     return (
-        <div className="pagination-button-wrapper">
+        <div 
+        className="pagination-button-wrapper"
+        style={{marginBottom: '20px'}}
+        >
             <button
                 className="pagination-button"
                 onClick={() => handlePrevPage(currentPage)}

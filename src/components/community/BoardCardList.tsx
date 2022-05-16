@@ -167,6 +167,7 @@ const BoardCardList = ({ board, search }: propsType) => {
 
     return (
         <Wrapper>
+            <ListWrapper>
             <CardView>
             {
                 boardList &&
@@ -185,6 +186,7 @@ const BoardCardList = ({ board, search }: propsType) => {
                 ))
             }
             </CardView>
+            </ListWrapper>
             <Pagination
                 totalPages={totalPages}
                 currentPage={page}
@@ -200,6 +202,13 @@ export default BoardCardList;
 const Wrapper = styled.div`
     display: flex;
     flex-direction: column;
+`
+
+const ListWrapper = styled.div`
+    margin: 20px 80px;
+    background-color: ${Colors.white};
+    box-shadow: 0px 4px 33px rgba(0, 0, 0, 0.1);
+    border-radius: 15px;
 `
 
 const CardView = styled.div`

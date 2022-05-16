@@ -139,7 +139,8 @@ const Wrapper = styled.div`
 `
 
 const PostWrapper = styled.div`
-    background-color: ${Colors.green1};
+    background-color: ${Colors.white};
+    margin: 20px 0;
 `
 
 const Post = styled.div`
