@@ -43,7 +43,7 @@ const Wrapper = styled.div`
     display: flex;
     flex-direction: row;
     align-items: center;
-    margin: 0 50px;
+    margin: 20px 80px 0 80px;
 
     .title {
         font-size: 24px;

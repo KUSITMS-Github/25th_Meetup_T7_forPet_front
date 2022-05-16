@@ -3,6 +3,8 @@ import axios from 'axios';
 import styled from '@emotion/styled';
 import { Colors } from '../../styles/ui';
 import { stringify } from 'querystring';
+import { BoardHeader } from '../../components/community';
+import { useNavigate } from 'react-router-dom';
 
 
 const BoardWrite = () => {
@@ -11,6 +13,7 @@ const BoardWrite = () => {
         title: '',
         content: '',
     });
+    const navigate = useNavigate();
 
     interface Contents {
         title: string,
@@ -29,7 +32,7 @@ const BoardWrite = () => {
         setFile(e.target.files![0]);
     }
 
-    const fileSubmitHandler = async (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
+    const fileSubmitHandler = async (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
         e.preventDefault();
         const end_url = '/community';
         const formData = new FormData();
@@ -58,8 +61,12 @@ const BoardWrite = () => {
             })
     }
 
+
     return (
+        <>
+        <BoardHeader />
         <Wrapper>
+            <Upper>
             <Radios>
                 <label>
                     <input
@@ -86,6 +93,14 @@ const BoardWrite = () => {
                     />자랑
                 </label>
             </Radios>
+            </Upper>
+            <hr
+                style={{
+                    color: `${Colors.gray1}`,
+                    height: 1,
+                    width: '100%'
+                }}
+            />
             <textarea
                 rows={1}
                 placeholder='제목'
@@ -94,8 +109,15 @@ const BoardWrite = () => {
                 ): void => setContents({ ...contents, title: e.target.value })}
                 value={contents.title}
             ></textarea>
+            <hr
+                style={{
+                    color: `${Colors.gray1}`,
+                    height: '1px',
+                    width: '100%'
+                }}
+            />
             <textarea
-                rows={10}
+                rows={20}
                 placeholder='모두가 즐거운 커뮤니티를 위해 커뮤니티 규칙을 지켜주시개 &#13;&#13;
                 다음과 같은 행위를 금지합니다.
                 - 홍보 및 사업성 판매 행위
@@ -110,23 +132,42 @@ const BoardWrite = () => {
             </textarea>
             <div className='low-section'>
                 <input type="file" multiple onChange={(e) => onFileChange(e)} />
-                {/* <button type="submit" onClick={(e) => fileSubmitHandler(e)}>파일 업로드</button> */}
-                <div onClick={(e) => fileSubmitHandler(e)}>연필</div>
             </div>
+            
         </Wrapper>
+        <Buttons>
+            <button onClick={ () => {
+                navigate(-1);
+            }}
+            style={{backgroundColor: '#CBD2CA', color: '#676767', fontSize: '20px'}}>취소</button>
+            <button 
+            onClick={(e) => fileSubmitHandler(e)}
+            style={{backgroundColor: '#B9CDB4', color: '#64805E', fontSize: '20px'}}>등록</button>
+        </Buttons>
+        </>
     )
 }
 
 export default BoardWrite;
 
+const Upper = styled.div`
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+`
+
 const Wrapper = styled.div`
     background-color: ${Colors.white};
-    margin: 0 5vw;
+    margin: 20px 80px;
     padding: 10px;
+    box-shadow: 0px 4px 33px rgba(0, 0, 0, 0.1);
+    border-radius: 15px;
 
     textarea {
         width: 100%;
         resize: none;
+        border: none;
+        font-size: 16px;
     }
 
     .low-section {
@@ -140,4 +181,19 @@ const Radios = styled.div`
     display: flex;
     flex-direction: row;
     margin-right: auto;
+`
+
+const Buttons = styled.div`
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin: 0 80px 30px 80px;
+
+    button {
+        width: 49%;
+        height: 50px;
+        box-shadow: 0px 4px 11px rgba(0, 0, 0, 0.25);
+        border: none;
+        border-radius: 3px;
+    }
 `
