@@ -3,6 +3,7 @@ import { Colors } from '../../styles/ui';
 import { postApi } from '../../api';
 
 const PediaOneComment = ({ comment }: any) => {
+    console.log(comment)
     // 댓글좋아요 Post API
     const clickCommentCnt = async (commentId: number) => {
         console.log(commentId);

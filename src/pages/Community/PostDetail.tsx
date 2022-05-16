@@ -2,7 +2,7 @@ import React, { useEffect, useState, useCallback } from 'react';
 import styled from '@emotion/styled';
 import { Colors } from '../../styles/ui';
 import { useParams, Link } from "react-router-dom";
-import { getApi } from '../../api';
+import { getApi, postApi } from '../../api';
 import { ImageModal } from '../../components/community';
 
 const dump = {
@@ -77,6 +77,21 @@ const PostDetail = () => {
         setModal(!modal);
     }, [modal]);
 
+    const clickCntHandler = async (what: string) => {
+        await postApi(
+            {},
+            `/community/${postData.postId}/${what}`
+        )
+        .then(({ status, data }) => {
+            console.log("POST 좋아요 누름", status, data);
+            if (status === 200) {
+                // window.location.reload();  // 새로 고침하여 좋아요 수 갱신
+            }
+        })
+        .catch((e) => {
+            console.log(e);
+        });
+    }
 
     return (
         <Wrapper>
@@ -111,8 +126,13 @@ const PostDetail = () => {
                     }
                     </ImageSection>
                     <div className='cnts'>
-                        <div className='cnt'>좋아요 수{postData.thumbsUpCnt}</div>
-                        <div className='cnt'>스크랩 수</div>
+                        <div className='cnt'
+                            onClick={() => clickCntHandler('like')}>
+                            좋아요 수{postData.thumbsUpCnt}
+                        </div>
+                        <div className='cnt'>
+                            스크랩 수
+                        </div>
                     </div>
                 </Post>
 
@@ -141,6 +161,8 @@ const Wrapper = styled.div`
 const PostWrapper = styled.div`
     background-color: ${Colors.white};
     margin: 20px 0;
+    box-shadow: 0px 4px 33px rgba(0, 0, 0, 0.1);
+    border-radius: 15px;
 `
 
 const Post = styled.div`
