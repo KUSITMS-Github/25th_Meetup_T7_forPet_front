@@ -93,6 +93,8 @@ const BoardList = ({ board, search }: propsType) => {
     const navigate = useNavigate();
     const [boardList, setBoardList] = useState(initialBoardList);
 
+    const [korCategory, setKorCategory] = useState<string>('');
+
     const [page, setPage] = useState(1);
     const [totalPages, setTotalPages] = useState(10);
 
@@ -110,7 +112,7 @@ const BoardList = ({ board, search }: propsType) => {
         const getBoardList = async () => {
             await getApi(
                 {},
-                `/community/list?category=${board}?page=${page - 1}?size=${10}`  // 추후 수정 size는 뭐지. 
+                `/community/list?page=${page - 1}?size=${10}?category=${board}`
             )
                 .then(({ status, data }) => {
                     console.log(status, data);
@@ -130,7 +132,7 @@ const BoardList = ({ board, search }: propsType) => {
         const getSearchList = async () => {
             await getApi(
                 {},
-                `/community/search/page=${page - 1}/size=${10}/keywork=${search}`
+                `/community/search/page=${page - 1}/size=${15}/keywork=${search}`
             )
                 .then(({ status, data }) => {
                     console.log(status, data);
@@ -159,14 +161,47 @@ const BoardList = ({ board, search }: propsType) => {
                             key={b.post_id}
                             onClick={() => clickHandler(b.post_id)}
                         >
-                            {
-                                board === 'all' &&
-                                <div>{b.category}</div>
-                            }
-                            <div className='user'>{b.writer.user_id}</div>
-                            <div className='title'>{b.title}</div>
-                            <div className='like-cnt'>좋아요수 {b.thumbs_up_cnt}</div>
-                            <div className='comt-cnt'>댓글수</div>
+                            <div className='left-section'>
+                                {
+                                    board === 'all' &&
+                                    <div className='category'>{b.category === 'popular' ? (
+                                        '인기'
+                                    ) : (
+                                        b.category === 'sharing' ? (
+                                            '나눔'
+                                        ) : (
+                                            b.category === 'meeting' ? (
+                                                '모임'
+                                            ) : (
+                                                '자랑'
+                                            )
+                                        )
+                                    )}</div>
+                                }
+                                <div style={{textAlign: 'left'}}>
+                                    <div style={{fontSize: '20px'}}>{b.title}</div>
+                                    <div style={{fontSize: '16px', color: Colors.gray2}}>{b.writer.user_id}</div>
+                                </div>
+                            </div>
+                            <div className='right-section'>
+                                {
+                                    b.image_url_list && 
+                                    <img
+                                        style={{width: '80px', height: '60px'}}
+                                        src={b.image_url_list[0]}
+                                    />
+                                }
+                                <div className='cnt'
+                                    style={{backgroundColor: '#F5F5F5'}}>
+                                    <div>좋아요</div>
+                                    <div>{b.thumbs_up_cnt}</div>
+                                </div>
+                                <div className='cnt'
+                                style={{backgroundColor: '#E2E2E2'}}>
+                                    <div>댓글</div>
+                                    <div>{b.comment_cnt}</div>
+                                </div>
+                            </div>
                         </BoardListOne>
                     ))
                 }
@@ -198,5 +233,43 @@ const BoardListOne = styled.div`
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    padding: 10px 80px;
+    padding: 10px 20px;
+    
+    .left-section {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+    }
+
+    .right-section {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+    }
+
+    .category {
+        background: #4F6D47;
+        border-radius: 12px;
+        color: ${Colors.white};
+        font-weight: bold;
+        width: 60px;
+        height: 36px;
+        margin-right: 10px;
+
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .cnt {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        border-radius: 9px;
+        width: 70px;
+        height: 70px;
+        margin: 0 5px;
+    }
+
 `

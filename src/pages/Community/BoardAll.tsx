@@ -3,7 +3,7 @@ import styled from '@emotion/styled';
 import { Colors } from '../../styles/ui';
 import { useNavigate } from "react-router-dom";
 import { BoardHeader, BoardList } from '../../components/community';
-
+import SearchIcon from '../../assets/search_icon.png';
 
 const BoardAll = () => {
     const [search, setSearch] = useState<string>('');
@@ -25,12 +25,15 @@ const BoardAll = () => {
         <Wrapper>
             <HeaderSection>
                 <BoardHeader />
-                <input
-                    onChange={(
-                        e: React.ChangeEvent<HTMLInputElement>,
-                    ): void => setSearch(e.target.value)}
-                    onKeyPress={enterSearch}
-                    value={search} />
+                <div className='search-bar'>
+                    <img src={SearchIcon} style={{width: '20px', height: '20px'}} />
+                    <input
+                        onChange={(
+                            e: React.ChangeEvent<HTMLInputElement>,
+                        ): void => setSearch(e.target.value)}
+                        onKeyPress={enterSearch}
+                        value={search} />
+                </div>
             </HeaderSection>
             <div className='write'
                 onClick={writeHandler}>
@@ -61,4 +64,24 @@ const HeaderSection = styled.div`
     flex-direction: row;
     justify-content: space-between;
     margin-right: 40px;
+
+    .search-bar {
+        margin-top: 20px;
+        margin-right: 40px;
+    }
+
+    input {
+        background: ${Colors.white};
+        border: 2px solid  ${Colors.green5};
+        border-radius: 25.5px;
+        width: 250px;
+        height: 40px;
+        padding-left: 36px;
+    }
+
+    img {
+        position: relative;
+        top: 10%;
+        left: 10%;
+    }
 `
