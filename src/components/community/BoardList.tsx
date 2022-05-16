@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, PropsWithChildren } from 'react';
 import styled from '@emotion/styled';
 import { Colors } from '../../styles/ui';
 import { getApi } from '../../api';
@@ -28,7 +28,13 @@ const initialBoardList = [
     }
 ];
 
-const BoardList = ({ board }: any) => {
+interface propsType {
+    board: string;
+    search: string;
+}
+
+const BoardList = ({ board, search }: propsType) => {
+    
     const navigate = useNavigate();
     const [boardList, setBoardList] = useState(initialBoardList);
 
@@ -44,6 +50,7 @@ const BoardList = ({ board }: any) => {
     };
 
     useEffect(() => {
+        console.log(search);
         // 커뮤니티 글 불러오기 게시판 - all, meet
         const getBoardList = async () => {
             await getApi(
@@ -60,9 +67,28 @@ const BoardList = ({ board }: any) => {
                     console.log(e);
                 });
         }
-
         getBoardList();
     }, [page])
+
+    useEffect(() => {
+        // 검색 api
+        const getSearchList = async () => {
+            await getApi(
+                {},
+                `/community/search/page=${page-1}/size=${10}/keywork=${search}`
+            )
+                .then(({ status, data }) => {
+                    console.log(status, data);
+                    if (status === 200) {
+                        setBoardList(data.body.data.data);
+                    }
+                })
+                .catch((e) => {
+                    console.log(e);
+                });
+            getSearchList();
+        }
+    }, [search])
 
     const clickHandler = (postId: number) => {
         navigate(`/post/${postId}`);  // 글 상세창으로 이동

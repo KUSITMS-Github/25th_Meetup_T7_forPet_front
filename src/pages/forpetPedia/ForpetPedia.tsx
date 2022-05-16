@@ -27,7 +27,7 @@ const ForpetPedia = () => {
                 "bookmark": 2,
                 "comments": 1,
                 "imageUrlList": [
-                    "https://kusitms-forpet.s3.ap-northeast-2.amazonaws.com/5107068e-51f5-4836-81a8-d3ba3f572660.jpg"
+                    // "https://kusitms-forpet.s3.ap-northeast-2.amazonaws.com/5107068e-51f5-4836-81a8-d3ba3f572660.jpg"
                 ]
             },
             {
@@ -41,8 +41,8 @@ const ForpetPedia = () => {
                 "bookmark": 0,
                 "comments": 0,
                 "imageUrlList": [
-                    "https://kusitms-forpet.s3.ap-northeast-2.amazonaws.com/f5916a54-70e9-43cf-ba80-3fc3d91218bd.jpeg",
-                    "https://kusitms-forpet.s3.ap-northeast-2.amazonaws.com/df30acfd-2697-4c50-9614-b0f4c1a7e67f.jpg"
+                    // "https://kusitms-forpet.s3.ap-northeast-2.amazonaws.com/f5916a54-70e9-43cf-ba80-3fc3d91218bd.jpeg",
+                    // "https://kusitms-forpet.s3.ap-northeast-2.amazonaws.com/df30acfd-2697-4c50-9614-b0f4c1a7e67f.jpg"
                 ]
             },
             {

@@ -12,9 +12,7 @@ import {
   NotFound,
 } from "./pages";
 import {
-  Board,
   PreBoard,
-  BoardFour,
   BoardAll,
   BoardMeet,
   BoardBoast,
@@ -46,8 +44,6 @@ function App() {
             <Route path="/offlinemap" element={<OfflineMap />} />
             <Route path="/mypage" element={<MyPage />} />
             <Route path="/preboard" element={<PreBoard />} />
-            <Route path="/board" element={<Board />} />
-            <Route path="/menu" element={<BoardFour />} />
             <Route path="/share" element={<BoardShare />} />
             <Route path="/meet" element={<BoardMeet />} />
             <Route path="/boast" element={<BoardBoast />} />

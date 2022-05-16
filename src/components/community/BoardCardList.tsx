@@ -101,7 +101,12 @@ const initialBoardList = [
     },
 ]
 
-const BoardCardList = ({ board }: any) => {
+interface propsType {
+    board: string;
+    search: string;
+}
+
+const BoardCardList = ({ board, search }: propsType) => {
     const navigate = useNavigate();
     const [boardList, setBoardList] = useState(initialData);
 
@@ -133,9 +138,28 @@ const BoardCardList = ({ board }: any) => {
                     console.log(e);
                 });
         }
-
         getBoardList();
     }, [page])
+
+    useEffect(() => {
+        // 검색 api
+        const getSearchList = async () => {
+            await getApi(
+                {},
+                `/community/search/page=${page-1}/size=${10}/keywork=${search}`
+            )
+                .then(({ status, data }) => {
+                    console.log(status, data);
+                    if (status === 200) {
+                        setBoardList(data.body.data.data);
+                    }
+                })
+                .catch((e) => {
+                    console.log(e);
+                });
+            getSearchList();
+        }
+    }, [search])
 
     const clickHandler = (postId: number) => {
         navigate(`/post/${postId}`);  // 글 상세창으로 이동
