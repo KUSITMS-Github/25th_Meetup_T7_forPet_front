@@ -6,16 +6,16 @@ const BoardHeader = () => {
     return (
         <Wrapper>
             <div className='title'>우리 동네 커뮤니티</div>
-            <Link to="/all">
+            <Link to="/all" style={{ textDecoration: 'none' }}>
                 <div className='comp'>전체</div>
             </Link>
-            <Link to="/meet">
+            <Link to="/meet" style={{ textDecoration: 'none' }}>
                 <div className='comp'>모임</div>
             </Link>
-            <Link to="/share">
+            <Link to="/share" style={{ textDecoration: 'none' }}>
                 <div className='comp'>나눔</div>
             </Link>
-            <Link to="/boast">
+            <Link to="/boast" style={{ textDecoration: 'none' }}>
                 <div className='comp'>자랑</div>
             </Link>
 
@@ -39,6 +39,7 @@ const Wrapper = styled.div`
 
     .comp {
         margin: 0 5px;
+        color: ${Colors.black};
     }
 
     .location {
