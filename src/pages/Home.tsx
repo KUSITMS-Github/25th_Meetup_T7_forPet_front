@@ -4,7 +4,10 @@ import { ReactComponent as OfflineMap } from '../assets/Home-offlinemap.svg';
 import { ReactComponent as OnlineMap } from '../assets/Home-onlinemap.svg';
 import OnlineMapImg from '../assets/Home-onlinemap.png';
 import { ReactComponent as MapBackground } from '../assets/Home-background.svg';
-import { ReactComponent as LowSection } from '../assets/Home-LowerSection.svg';
+import { ReactComponent as RightBubble } from '../assets/Home-RightBubble.svg';
+import { ReactComponent as LeftBubble } from '../assets/Home-LeftBubble.svg';
+import { ReactComponent as SectionBg } from '../assets/Home-section.svg';
+
 
 const Home = () => {
     return (
@@ -15,11 +18,11 @@ const Home = () => {
                     당신의 반려견을 위한 <br />완벽한 지도
                 </p>
             </HomeBanner>
-            <div style={{height: '800px'}}>
+            <div style={{ height: '800px' }}>
                 <MapBackground style={{ width: '100vw', position: 'relative' }} />
                 <HomeMaps>
                     <div className='home-map'>
-                        <OfflineMap style={{ width: '300px', height: '300px'}} />
+                        <OfflineMap style={{ width: '300px', height: '300px' }} />
                         <div>
                             <p className='title'>오프라인 지도</p>
                             <p className='subtitle'>
@@ -43,16 +46,26 @@ const Home = () => {
                     </div>
                 </HomeMaps>
             </div>
-            <div style={{height: '1000px'}}>
-                <LowSection style={{backgroundColor: Colors.white, width: '100vw', paddingTop: '50px', position: 'relative' }} />
+            <div>
+                <SectionBg style={{ backgroundColor: Colors.white, width: '100vw', paddingTop: '50px', position: 'relative' }} />
                 <LowComment>
                     <div className='commuity'>
-                        <p style={{fontWeight: 'bold', fontSize: '28px'}}>우리 동네 커뮤니티</p>
-                        <p style={{fontSize: '24px'}}>동네 사람들과 같이 산책, 나눔, 강아지 자랑 할 수 있어요!</p>
+                        <p style={{ zIndex: 200, fontWeight: 'bold', fontSize: '28px', top: '10px' }}>
+                            우리 동네 커뮤니티
+                        </p>
+                        <p style={{ zIndex: 200, fontSize: '22px', top: '70px' }}>
+                            동네 사람들과 같이 산책, 나눔, 강아지 자랑 할 수 있어요!
+                        </p>
+                        <LeftBubble className='right-bubble' style={{ zIndex: 100 }} />
                     </div>
                     <div className='forpet'>
-                        <p style={{fontWeight: 'bold', fontSize: '28px'}}>퍼펫트 백과</p>
-                        <p style={{fontSize: '24px'}}>반려인부터 예비 반려인까지 자유롭게 Q&#38;A 를 공유할 수 있어요!</p>
+                        <p style={{ zIndex: 200, fontWeight: 'bold', fontSize: '28px', top: '10px' }}>
+                            퍼펫트 백과
+                        </p>
+                        <p style={{ zIndex: 200, fontSize: '22px', top: '70px' }}>
+                            반려인부터 예비 반려인까지 자유롭게 Q&#38;A 를 공유할 수 있어요!
+                        </p>
+                        <RightBubble className='left-bubble' style={{ zIndex: 100 }} />
                     </div>
                 </LowComment>
             </div>
@@ -96,7 +109,7 @@ const HomeMaps = styled.div`
     }
 
     .subtitle { 
-        font-size: 20px;
+        font-size: 24px;
         text-align: left;
     }
     
@@ -110,21 +123,31 @@ const HomeMaps = styled.div`
 
 const LowComment = styled.div`
     position: absolute;
-    transform: translate(50%, 0);
     top: 1360px;
+
+    .right-bubble {
+        position: absolute;
+        top: 0;
+    }
+
+    .left-bubble {
+        position: absolute;
+        top: 0;
+    }
 
     .commuity {
         position: absolute;
-        left: 36vw;  // 틀어지면 얘랑...
+        left: 36vw;
     }
     
     .forpet {
         position: absolute;
         top: 450px;
-        right: -65vw;  // 얘 조정해서 맞추기...
+        left: 5vw;
     }
 
     p {
+        position: absolute;
         width: 800px;
     }
 `
