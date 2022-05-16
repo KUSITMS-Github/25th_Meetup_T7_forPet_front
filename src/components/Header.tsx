@@ -1,6 +1,7 @@
 import styled from '@emotion/styled';
 import { Colors } from '../styles/ui';
 import { Link } from "react-router-dom";
+import { ReactComponent as HeaderLogo } from "../assets/HeaderLogo.svg";
 
 const Header = () => {
 
@@ -8,7 +9,7 @@ const Header = () => {
         <HeaderStyle>
             <div className="header-left">
                 <Link to="/">
-                    <HeaderButton className="header-btn">Forpet(Logo)</HeaderButton>
+                    <HeaderButton className="header-btn"><HeaderLogo /></HeaderButton>
                 </Link>
             </div>
             <div className="header-right">
@@ -44,9 +45,13 @@ const HeaderStyle = styled.header`
     flex-direction: row;
     justify-content: space-between;
     height: 40px;
-    margin: 20px 0 10px;
-    padding: 0 50px;
+    padding: 20px 50px 10px 50px;
     background-color: ${Colors.white};
+
+    .header-left {
+        display: flex;
+        align-items: center;
+    }
 `;
 
 const HeaderButton = styled.button`
@@ -55,6 +60,8 @@ const HeaderButton = styled.button`
     margin: 0 5px;
     background-color: transparent;
     &:hover {
-        color: green;
+        color: ${Colors.green5};
     }
+    cursor: pointer;
+    font-size: 16px;
 `;

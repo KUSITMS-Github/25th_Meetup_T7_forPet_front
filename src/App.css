@@ -1,4 +1,7 @@
 .App {
   text-align: center;
-  /* background-color: #E7F6E3; */
+}
+
+html {
+  background-color: #E7F6E3;
 }

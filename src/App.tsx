@@ -7,21 +7,23 @@ import {
   ChooseMaps,
   OnlineMap,
   OfflineMap,
-  ForpetPedia,
-  PediaDetail,
   MyPage,
-  PostDetail,
+  OauthHandler,
   NotFound,
 } from "./pages";
 import {
-  Board,
   PreBoard,
-  BoardFour,
   BoardAll,
   BoardMeet,
   BoardBoast,
   BoardShare,
-} from "./pages/Community"
+  PostDetail,
+  BoardWrite,
+} from "./pages/community";
+import {
+  ForpetPedia,
+  PediaDetail,
+} from "./pages/forpetPedia";
 import {
   Header,
 } from "./components"
@@ -43,15 +45,15 @@ function App() {
             <Route path="/offlinemap" element={<OfflineMap />} />
             <Route path="/mypage" element={<MyPage />} />
             <Route path="/preboard" element={<PreBoard />} />
-            <Route path="/board" element={<Board />} />
-            <Route path="/menu" element={<BoardFour />} />
             <Route path="/share" element={<BoardShare />} />
             <Route path="/meet" element={<BoardMeet />} />
             <Route path="/boast" element={<BoardBoast />} />
             <Route path="/all" element={<BoardAll />} />
+            <Route path="/board/write" element={<BoardWrite />} />
             <Route path="/forpetPedia" element={<ForpetPedia />} />
             <Route path="/pedia/:id" element={<PediaDetail />} />
             <Route path="/post/:id" element={<PostDetail />} />
+            <Route path="/oauth2/redirect" element={<OauthHandler />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
     </div>

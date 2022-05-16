@@ -1,6 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import styled from '@emotion/styled';
+import { Colors } from '../styles/ui';
 
 
 interface Props {
@@ -16,17 +17,18 @@ const Pagination: React.FC<Props> = ({
     handleNextPage,
 }) => {
     return (
-        <div className="pagination-button-wrapper">
+        <Wrapper>
             <button
                 className="pagination-button"
                 onClick={() => handlePrevPage(currentPage)}
                 disabled={currentPage === 1}
             >
-                &larr;
+                &lt;
             </button>
 
             <span className="pagination-page-info">
-                Page {currentPage} of {totalPages}
+                {currentPage} 
+                {/* of {totalPages} */}
             </span>
 
             <button
@@ -34,9 +36,9 @@ const Pagination: React.FC<Props> = ({
                 onClick={() => handleNextPage(currentPage)}
                 disabled={currentPage === totalPages}
             >
-            &rarr;
+            &gt;
             </button>
-        </div>
+        </Wrapper> 
     );
 };
 
@@ -48,3 +50,24 @@ Pagination.propTypes = {
 };
 
 export default Pagination;
+
+const Wrapper = styled.div`
+    margin-bottom: 20px;
+
+    button {
+        border: none;
+        font-weight: bold;
+        background-color: ${Colors.green1};
+    }
+
+    .pagination-page-info {
+        margin: 0 5px;
+        padding: 5px 10px;
+        font-weight: bold;
+        background-color: ${Colors.green5};
+        border-radius: 20px;
+        color: ${Colors.white};
+        width: 25px;
+        height: 25px;
+    }
+`
