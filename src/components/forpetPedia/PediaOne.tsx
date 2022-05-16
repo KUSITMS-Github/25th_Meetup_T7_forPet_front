@@ -4,6 +4,9 @@ import { Colors } from '../../styles/ui';
 import { postApi, getApi } from '../../api';
 import { useNavigate } from "react-router-dom";
 import { PediaOneComment } from '../../components/forpetPedia';
+import { ReactComponent as LikeIcon} from '../../assets/Like-icon.svg';
+import { ReactComponent as BookmarkIcon} from '../../assets/Bookmark-icon.svg';
+import { ReactComponent as CommentIcon} from '../../assets/Comment-icon.svg';
 
 
 const PediaOne = (post: any) => {
@@ -88,28 +91,26 @@ const PediaOne = (post: any) => {
         getComments();
     }, [])
 
-    const writeAnswer = () => {
-        // 연필 클릭 시 답변 입력 - postapi
+    // 댓글 입력
+    const writeAnswer = async (e: React.KeyboardEvent<HTMLTextAreaElement>) => {  // 연필 클릭 시 답변 입력 - postapi
         console.log(myAnswer);
-        console.log(onePost.qnaBoardId); // id랑 같이 넘기기
-        const createComment = async () => {
+        if (e.key === 'Enter') {
             await postApi(
                 {
-                    comment: myAnswer
+                    'comment': myAnswer
                 },
                 `/qnaBoard/${onePost.qnaBoardId}/comment`
             )
-                .then(({ status, data }) => {
-                    if (status === 200) {
-                        // console.log("댓글 작성 post api", status);
-                        window.location.reload(); // 새로고침
-                    }
-                })
-                .catch((e) => {
-                    console.log(e);
-                });
+            .then(({ status, data }) => {
+                console.log('댓글입력:', status, data);
+                if (status === 200) {
+                    window.location.reload(); // 새로고침
+                }
+            })
+            .catch((e) => {
+                console.log(e);
+            });
         }
-        createComment();
     }
 
     // 좋아요, 스크랩 Post API
@@ -144,36 +145,63 @@ const PediaOne = (post: any) => {
             <Question>
                 <div className='q-upper'>
                     <div className='writer-sec'>
-                        <div>
-                            {
-                                onePost.imageUrlList &&
-                                onePost.imageUrlList.map((img: string, i: number) => (
-                                    <img src={img} className='image-resize'></img>
-                                ))
-                            }
-                            
+                        <div style={{display: 'flex', flexDirection: 'row', alignItems: 'center', marginBottom: '10px'}}>
+                             {/* 프로필사진 */}
+                            <img src={onePost.imageUrlList[0]}
+                                style={{width: '30px', height: '30px', borderRadius: '20px'}} />
+                            <div style={{display: 'flex', flexDirection: 'column', textAlign: 'left', marginLeft: '5px'}}>
+                                <div style={{fontSize: '14px', color: Colors.green5}}>{onePost.tag}</div>
+                                <div style={{display: 'flex', flexDirection: 'row', alignItems: 'end'}}>
+                                    <div style={{fontSize: '18px', fontWeight: 'bold'}} className='writer'>{onePost.nickName}</div>
+                                    <div style={{fontSize: '12px', color: Colors.gray1, marginLeft: '5px'}}>{onePost.createDate}</div>
+                                </div>
                             </div>
-                        <div className='writer-sec-name'>
-                            <div className='writer'>{onePost.nickName}</div>
-                            <div>{onePost.tag}</div>
                         </div>
                     </div>
-                    <div>{onePost.createDate}</div>
+                    
                 </div>
-                <div className='q-contents' onClick={postClickHandler}>
-                    <div className='q-title'>{onePost.title}</div>
-                    <div className='q-question'>{onePost.content}</div>
+                <div
+                    style={{textAlign: 'left'}}
+                    onClick={postClickHandler}
+                >
+                    <div style={{display: 'flex', flexDirection: 'row'}}>
+                        <div style={{fontWeight: 'bold', fontSize: '28px', color: Colors.green5, marginRight: '5px'}}>Q.</div>
+                        <div style={{display: 'flex', flexDirection: 'column'}}>
+                            <div style={{fontWeight: 'bold', fontSize: '24px', }}>{onePost.title}</div>
+                            <div style={{fontSize: '20px'}}>{onePost.content}</div>
+                            <div>
+                                {
+                                    onePost.imageUrlList &&
+                                    onePost.imageUrlList.map((img: string, i: number) => (
+                                        <img src={img} className='image-resize'></img>
+                                    ))
+                                }
+                            </div>
+                        </div>
+                    </div>
+                    
                 </div>
                 <div className='cnts'>
-                    <div className='cnt' onClick={() => clickLike(onePost.qnaBoardId, 'like')}>좋아요수 {onePost.likes}</div>
-                    <div className='cnt' onClick={() => clickLike(onePost.qnaBoardId, 'bookmark')}>스크랩수 {onePost.bookmark}</div>
-                    <div className='cnt'>댓글수 {onePost.comments}</div>
+                    <div className='cnt' 
+                        onClick={() => clickLike(onePost.qnaBoardId, 'like')}>
+                        <LikeIcon className='icon'/>
+                        {onePost.likes}
+                    </div>
+                    <div className='cnt' 
+                        onClick={() => clickLike(onePost.qnaBoardId, 'bookmark')}>
+                        <BookmarkIcon className='icon'/> 
+                        {onePost.bookmark}
+                    </div>
+                    <div className='cnt'>
+                        <CommentIcon className='icon'/>
+                        {onePost.comments}
+                    </div>
                 </div>
             </Question>
             <hr
                 style={{
-                    color: `${Colors.gray1}`,
-                    height: 1,
+                    color: `${Colors.gray2}`,
+                    height: '1px',
                     width: '100%'
                 }}
             />
@@ -187,19 +215,21 @@ const PediaOne = (post: any) => {
                     />
                 ))
             }
-
-            <div className='input-comment'>
-                <textarea
-                    placeholder='댓글을 입력하시개'
-                    onChange={(
-                        e: React.ChangeEvent<HTMLTextAreaElement>,
-                    ): void => setMyAnswer(e.target.value)}
-                    value={myAnswer}
-                ></textarea>
-                <div
-                    className="pencil-img"
-                    onClick={writeAnswer}>연필</div>
-            </div>
+            <hr
+                style={{
+                    color: `${Colors.gray2}`,
+                    height: '1px',
+                    width: '100%'
+                }}
+            />
+            <textarea
+                placeholder='댓글을 입력하시개'
+                onChange={(
+                    e: React.ChangeEvent<HTMLTextAreaElement>,
+                ): void => setMyAnswer(e.target.value)}
+                value={myAnswer}
+                onKeyPress={(e) => writeAnswer(e)}
+            ></textarea>
 
         </OnePost>
     );
@@ -210,39 +240,23 @@ export default PediaOne;
 const OnePost = styled.div`
     display: flex;
     flex-direction: column;
-    width: 900px; // 추후조정
-    margin: 10px auto;
+    margin: 20px 0;
     padding: 20px;
     background-color: ${Colors.white};
+    box-shadow: 0px 4px 33px rgba(0, 0, 0, 0.1);
+    border-radius: 15px;
 
     textarea {
         resize: none;
-        width: 90%;
-    }
-
-    .input-comment {
-        display: flex;
-        flex-direction: row;
-        justify-content: space-between;
-    }
-
-    .pencil-img {
-        cursor: pointer;
+        width: 100%;
+        border: none;
+        font-size: 16px;
     }
 
     .writer-sec {
         display: flex;
         flex-direction: row;
         align-items: center;
-    }
-    
-    .writer-sec-name {
-        display: flex;
-        flex-direction: column;
-    }
-
-    .writer {
-        font-weight: bold;
     }
 `
 const Question = styled.div`
@@ -253,15 +267,6 @@ const Question = styled.div`
         justify-content: space-between;
     }
 
-    .q-contents {
-        text-align: left;
-    }
-
-    .q-title {
-        font-weight: bold;
-        font-size: 20px;
-    }
-
     .cnts {
         display: flex;
         flex-direction: row;
@@ -270,6 +275,16 @@ const Question = styled.div`
 
     .cnt {
         margin: 0 5px;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+    }
+
+    .icon {
+        width: 20px;
+        height: 20px;
+        margin: 0 5px;
+        cursor: pointer;
     }
 
     .image-resize {

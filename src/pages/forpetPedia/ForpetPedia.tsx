@@ -3,6 +3,9 @@ import styled from '@emotion/styled';
 import Pagination from "../../components/Pagination";
 import { PediaOne, CreatePostPedia } from '../../components/forpetPedia';
 import { getApi, setHeader } from '../../api';
+import { ReactComponent as PediaIcon } from '../../assets/Pedia-icon.svg';
+import { Colors } from '../../styles/colors';
+import SearchIcon from '../../assets/search_icon.png';
 
 
 const ForpetPedia = () => {
@@ -153,80 +156,88 @@ const ForpetPedia = () => {
     }
 
     return (
-        <>
-            <Wrapper>
-                <div className='upper-group'>
-                    <input
-                        className='searchbar'
-                        onChange={(
-                            e: React.ChangeEvent<HTMLInputElement>,
-                        ): void => setSearchWord(e.target.value)}
-                        onKeyPress={enterSearchInput}
-                        value={searchWord}
-                    />
-                    <button
-                        className='question-button'
-                        onClick={() => setDoQestion(!doQuestion)}
-                    >질문하기</button>
-                </div>
-                <div className='keywords'>자주 묻는 키워드
-                    {
-                        faqKeyword &&
-                        faqKeyword.map((e, i) => (
-                            <div
-                                key={i}
-                                className='keyword'
-                                onClick={() => clickKeyword(e)}
-                            >#{e}</div>
-                        ))
-                    }
-                </div>
+        <Wrapper>
+            <div style={{ display: 'flex', flexDirection: 'row', margin: '10px 0', paddingTop: '10px' }}>
+                <PediaIcon />
+                <div style={{ fontSize: '28px', fontWeight: 'bold', marginLeft: '5px' }}>퍼펫트백과</div>
+            </div>
+            <div className='upper-group'>
+                <img className='search-icon' src={SearchIcon} style={{width: '20px', height: '20px'}} />
+                <input
+                    className='searchbar'
+                    onChange={(
+                        e: React.ChangeEvent<HTMLInputElement>,
+                    ): void => setSearchWord(e.target.value)}
+                    onKeyPress={enterSearchInput}
+                    value={searchWord}
+                />
+                <button
+                    className='question-button'
+                    onClick={() => setDoQestion(!doQuestion)}
+
+                >질문하기</button>
+            </div>
+            <div className='keywords' style={{ fontSize: '18px', marginLeft: '20px', marginBottom: '10px'}}>
+                <div style={{fontWeight: 'bold'}}>자주 묻는 키워드</div>
                 {
-                    searchWordRe &&
-                    <div className='search-result'>'{searchWordRe}' 검색 결과</div>
-                }
-
-                {doQuestion && <CreatePostPedia />}
-
-                <div className='sort'>
-                    <div
-                        onClick={() => setSortVar('latest')}
-                        style={{
-                            fontWeight: sortVar === 'latest' ?
-                                'bold' : 'normal'
-                        }}
-                    >
-                        최신순&nbsp;&nbsp;
-                    </div>
-                    <div
-                        onClick={() => setSortVar('likes')}
-                        style={{
-                            fontWeight: sortVar === 'likes' ?
-                                'bold' : 'normal'
-                        }}
-                    >
-                        추천순
-                    </div>
-                </div>
-
-                {
-                    pediaList &&
-                    pediaList.map((p, i) => (
-                        <PediaOne
-                            key={p.qnaBoardId}
-                            post={p}
-                        />
+                    faqKeyword &&
+                    faqKeyword.map((e, i) => (
+                        <div
+                            key={i}
+                            className='keyword'
+                            onClick={() => clickKeyword(e)}
+                            style={{ color: Colors.green3 }}
+                        >#{e}</div>
                     ))
                 }
+            </div>
+            {
+                searchWordRe &&
+                <div className='search-result'>'{searchWordRe}' 검색 결과</div>
+            }
 
-                <Pagination
-                    totalPages={totalPages}
-                    currentPage={page}
-                    handlePrevPage={handlePrevPage}
-                    handleNextPage={handleNextPage}
-                />
-            </Wrapper>
-        </>
+            {doQuestion && <CreatePostPedia />}
+
+            <div className='sort'>
+                <div
+                    onClick={() => setSortVar('latest')}
+                    style={{
+                        cursor: 'pointer',
+                        fontWeight: sortVar === 'latest' ?
+                            'bold' : 'normal'
+                    }}
+                >
+                    최신순&nbsp;&nbsp;
+                </div>
+                <div
+                    onClick={() => setSortVar('likes')}
+                    style={{
+                        cursor: 'pointer',
+                        fontWeight: sortVar === 'likes' ?
+                            'bold' : 'normal'
+                    }}
+                >
+                    추천순
+                </div>
+            </div>
+
+            {
+                pediaList &&
+                pediaList.map((p, i) => (
+                    <PediaOne
+                        key={p.qnaBoardId}
+                        post={p}
+                    />
+                ))
+            }
+
+            <Pagination
+                totalPages={totalPages}
+                currentPage={page}
+                handlePrevPage={handlePrevPage}
+                handleNextPage={handleNextPage}
+            />
+        </Wrapper>
     );
 };
 
@@ -236,28 +247,39 @@ export default ForpetPedia;
 const Wrapper = styled.div`
     display: flex;
     flex-direction: column;
-    margin: auto;
-    width: 60vw;
+    margin: 20px 80px 0 80px;
 
     .upper-group {
         display: flex;
         flex-direction: row;
         justify-content: center;
+        padding: 20px 0;
+    }
+    .search-icon {
+        position: relative;
+        top: 14px;
+        left: 52px;
     }
 
     .searchbar {
-        width: 900px;
+        width: 95%;
         height: 40px;
-        border-radius: 20px;
+        border-radius: 30px;
         margin: 0 20px;
+        padding-left: 40px;
+        font-size: 16px;
     }
 
     .question-button {
         width: 300px;
         height: 40px;
-        border-radius: 20px;
         margin: 0 20px;
-
+        background: #CDDACA;
+        box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.25);
+        border-radius: 30.5px;
+        border: none;
+        font-size: 16px;
+        font-weight: bold;
     }
 
     .keywords {

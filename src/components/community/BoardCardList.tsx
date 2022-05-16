@@ -121,7 +121,7 @@ const BoardCardList = ({ board, search }: propsType) => {
         const getBoardList = async () => {
             await getApi(
                 {},
-                `/community/list?category=${board}?page=${page - 1}?size=${16}`  // 추후 수정 size는 뭐지. 
+                `/community/list?category=${board}?page=${page - 1}?size=${12}`  // 추후 수정 size는 뭐지. 
             )
                 .then(({ status, data }) => {
                     console.log(status, data);
@@ -141,7 +141,7 @@ const BoardCardList = ({ board, search }: propsType) => {
         const getSearchList = async () => {
             await getApi(
                 {},
-                `/community/search/page=${page - 1}/size=${10}/keywork=${search}`
+                `/community/search/page=${page - 1}/size=${12}/keywork=${search}`
             )
                 .then(({ status, data }) => {
                     console.log(status, data);

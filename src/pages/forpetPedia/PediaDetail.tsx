@@ -4,23 +4,30 @@ import styled from '@emotion/styled';
 import { Colors } from '../../styles/ui';
 import { getApi, postApi } from '../../api';
 import { PediaOneComment } from '../../components/forpetPedia';
+import { ReactComponent as LikeIcon} from '../../assets/Like-icon.svg';
+import { ReactComponent as BookmarkIcon} from '../../assets/Bookmark-icon.svg';
+import { ReactComponent as LikeIconFull} from '../../assets/Like-icon-full.svg';
+import { ReactComponent as BookmarkIconFull} from '../../assets/Bookmark-icon-full.svg';
+import { ReactComponent as CommentIcon} from '../../assets/Comment-icon.svg';
 
 const dumpdata = {
-    "qnaBoardId": 2,
+    "qnaBoardId": 5,
+    "toggle": true,  // 북마크 여부
+    "tag": "반려인",
     "nickName": "김유동",
-    "tag": "예비반려인",
-    "title": "titletitle",
-    "content": "contentcontent",
-    "createDate": "2022-05-11T17:19:20.617981",
-    "likes": 3,
-    "bookmark": 2,
-    "comments": 1,
+    "title": "title",
+    "content": "내용내용",
+    "createDate": "5/16 17:02",
+    "likes": 0,
+    "bookmark": 1,
+    "comments": 0,
     "imageUrlList": [
-        "https://kusitms-forpet.s3.ap-northeast-2.amazonaws.com/5107068e-51f5-4836-81a8-d3ba3f572660.jpg"
+        "https://kusitms-forpet.s3.ap-northeast-2.amazonaws.com/c38c6943-b464-4748-9b52-2b7b124580fc.jpeg",
+        "https://kusitms-forpet.s3.ap-northeast-2.amazonaws.com/e0e222a4-ab14-4e82-840c-6613cf2f314e.jpg"
     ]
 }
 
-const dump2 = [
+const dumpComment = [
     {
         "imageUrl": "http://k.kakaocdn.net/dn/dpk9l1/btqmGhA2lKL/Oz0wDuJn1YV2DIn92f6DVK/img_110x110.jpg",
         "nickName": "김유동",
@@ -61,7 +68,8 @@ const dump2 = [
 
 const PediaDetail = () => {
     const [question, setQuestion] = useState(dumpdata);  // 질문
-    const [comments, setComments] = useState([]);  // 댓글
+    // const [comments, setComments] = useState([]);  // 댓글
+    const [comments, setComments] = useState(dumpComment);  // 댓글
     const [myAnswer, setMyAnswer] = useState<string>();  // 내가 쓴 댓글
     const params = useParams();
     let postId = params.id;
@@ -114,28 +122,25 @@ const PediaDetail = () => {
     }, []);
 
     // 댓글 입력
-    const writeAnswer = () => {  // 연필 클릭 시 답변 입력 - postapi
+    const writeAnswer = async (e: React.KeyboardEvent<HTMLTextAreaElement>) => {  // 연필 클릭 시 답변 입력 - postapi
         console.log(myAnswer);
-        console.log(postId); // id랑 같이 넘기기
-        const createComment = async () => {
+        if (e.key === 'Enter') {
             await postApi(
                 {
-                    // comment: myAnswer
+                    'comment': myAnswer
                 },
-                `/qnaBoard/${postId}/comment?comment=${myAnswer}`
+                `/qnaBoard/${postId}/comment`
             )
-                .then(({ status, data }) => {
-                    console.log('댓글입력:', status, data);
-                    if (status === 200) {
-                        // console.log("댓글 작성 post api", status);
-                        window.location.reload(); // 새로고침
-                    }
-                })
-                .catch((e) => {
-                    console.log(e);
-                });
+            .then(({ status, data }) => {
+                console.log('댓글입력:', status, data);
+                if (status === 200) {
+                    window.location.reload(); // 새로고침
+                }
+            })
+            .catch((e) => {
+                console.log(e);
+            });
         }
-        createComment();
     }
 
     // 좋아요, 북마크 Post API
@@ -164,43 +169,60 @@ const PediaDetail = () => {
             <Question>
                 <div className='q-upper'>
                     <div className='writer-sec'>
-                        <div>이미지</div>
-                        <div className='writer-sec-name'>
-                            <div className='writer'>{question.nickName}</div>
-                            <div>{question.tag}</div>
+                        <div style={{display: 'flex', flexDirection: 'row', alignItems: 'center', marginBottom: '10px'}}>
+                            <img src={question.imageUrlList[0]}
+                                style={{width: '30px', height: '30px', borderRadius: '20px'}} />
+                            <div style={{display: 'flex', flexDirection: 'column', textAlign: 'left', marginLeft: '5px'}}>
+                                <div style={{fontSize: '14px', color: Colors.green5}}>{question.tag}</div>
+                                <div style={{display: 'flex', flexDirection: 'row', alignItems: 'end'}}>
+                                    <div style={{fontSize: '18px', fontWeight: 'bold'}} className='writer'>{question.nickName}</div>
+                                    <div style={{fontSize: '12px', color: Colors.gray1, marginLeft: '5px'}}>{question.createDate}</div>
+                                </div>
+                            </div>
                         </div>
                     </div>
-                    <div>{question.createDate}</div>
+                    
                 </div>
-                <hr
-                    style={{
-                        color: `${Colors.gray1}`,
-                        height: 1,
-                        width: '100%'
-                    }}
-                />
-                <div className='q-contents'>
-                    <div className='q-title'>{question.title}</div>
-                    <div className='q-question'>{question.content}</div>
+                <div
+                    style={{textAlign: 'left'}}
+                >
+                    <div style={{display: 'flex', flexDirection: 'row'}}>
+                        <div style={{fontWeight: 'bold', fontSize: '28px', color: Colors.green5, marginRight: '5px'}}>Q.</div>
+                        <div style={{display: 'flex', flexDirection: 'column'}}>
+                            <div style={{fontWeight: 'bold', fontSize: '24px', }}>{question.title}</div>
+                            <div style={{fontSize: '20px'}}>{question.content}</div>
+                            <div>
+                                {
+                                    question.imageUrlList &&
+                                    question.imageUrlList.map((img: string, i: number) => (
+                                        <img src={img} style={{width: '300px', height: '300px'}}></img>
+                                    ))
+                                }
+                            </div>
+                        </div>
+                    </div>
                 </div>
+
                 <div className='cnts'>
-                    <div
-                        className='cnt'
-                        onClick={() => clickCnt('like')}
-                    >좋아요수 {question.likes}
+                    <div className='cnt' 
+                        onClick={() => clickCnt('like')}>
+                        <LikeIcon className='icon'/>
+                        {question.likes}
                     </div>
-                    <div
-                        className='cnt'
-                        onClick={() => clickCnt('bookmark')}
-                    >스크랩수 {question.bookmark}
+                    <div className='cnt' 
+                        onClick={() => clickCnt('bookmark')}>
+                        <BookmarkIcon className='icon'/> 
+                        {question.bookmark}
                     </div>
-                    <div className='cnt'>댓글수 {question.comments}</div>
+                    <div className='cnt'>
+                        <CommentIcon className='icon'/>
+                        {question.comments}
+                    </div>
                 </div>
             </Question>
-
             <hr
                 style={{
-                    color: `${Colors.gray1}`,
+                    color: `${Colors.gray2}`,
                     height: 1,
                     width: '100%'
                 }}
@@ -221,18 +243,14 @@ const PediaDetail = () => {
                     width: '100%'
                 }}
             />
-            <div className='input-comment'>
-                <textarea
-                    placeholder='댓글을 입력하시개'
-                    onChange={(
-                        e: React.ChangeEvent<HTMLTextAreaElement>,
-                    ): void => setMyAnswer(e.target.value)}
-                    value={myAnswer}
-                ></textarea>
-                <div
-                    className="pencil-img"
-                    onClick={writeAnswer}>연필</div>
-            </div>
+            <textarea
+                placeholder='댓글을 입력하시개'
+                onChange={(
+                    e: React.ChangeEvent<HTMLTextAreaElement>,
+                ): void => setMyAnswer(e.target.value)}
+                value={myAnswer}
+                onKeyPress={(e) => writeAnswer(e)}
+            ></textarea>
         </Wrapper>
     )
 }
@@ -241,30 +259,19 @@ export default PediaDetail;
 
 const Wrapper = styled.div`
     padding: 0 20px;
-
     display: flex;
     flex-direction: column;
-    width: 900px; // 추후조정
-    margin: 10px auto;
+    margin: 20px 80px;
     padding: 20px;
     background-color: ${Colors.white};
+    box-shadow: 0px 4px 33px rgba(0, 0, 0, 0.1);
+    border-radius: 15px;
 
     textarea {
         resize: none;
-    }
-
-    .input-comment {
-        display: flex;
-        flex-direction: row;
-        justify-content: space-between;
-    }
-
-    textarea {
-        width: 90%;
-    }
-
-    .pencil-img {
-        cursor: pointer;
+        width: 100%;
+        border: none;
+        font-size: 16px;
     }
 
     .writer-sec {
@@ -282,22 +289,12 @@ const Wrapper = styled.div`
         font-weight: bold;
     }
 `
-
 const Question = styled.div`
 
     .q-upper {
         display: flex;
         flex-direction: row;
         justify-content: space-between;
-    }
-
-    .q-contents {
-        text-align: left;
-    }
-
-    .q-title {
-        font-weight: bold;
-        font-size: 20px;
     }
 
     .cnts {
@@ -308,5 +305,16 @@ const Question = styled.div`
 
     .cnt {
         margin: 0 5px;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
     }
+
+    .icon {
+        width: 20px;
+        height: 20px;
+        margin: 0 5px;
+        cursor: pointer;
+    }
+
 `
