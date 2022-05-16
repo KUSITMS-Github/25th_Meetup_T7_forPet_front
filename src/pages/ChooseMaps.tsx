@@ -1,22 +1,27 @@
 import styled from '@emotion/styled';
 import { Colors } from '../styles/ui';
 import { Link } from "react-router-dom";
+import { ReactComponent as OfflineMap } from '../assets/Choose-offlinemap.svg';
+import { ReactComponent as OnlineMap } from '../assets/Choose-onlinemap.svg';
 
 const ChooseMaps = () => {
     return (
         <ChooseMapsWrapper>
-            <Link to="/offlinemap" style={{ textDecoration: 'none' }}>
-                <div className='map'>
-                    <div className='map-img'></div>
+
+            <div className='map'>
+                <Link to="/offlinemap" style={{ textDecoration: 'none' }}>
+                    <OfflineMap className='map-img' />
                     <div className='map-text'>오프라인 지도</div>
-                </div>
-            </Link>
-            <Link to="/onlinemap" style={{ textDecoration: 'none' }}>
-                <div className='map'>
-                    <div className='map-img'></div>
+                </Link>
+            </div>
+
+            <div className='map'>
+                <Link to="/onlinemap" style={{ textDecoration: 'none' }}>
+                    <OnlineMap className='map-img' />
                     <div className='map-text'>온라인 지도</div>
-                </div>
-            </Link>
+                </Link>
+            </div>
+
         </ChooseMapsWrapper>
     )
 }
@@ -29,7 +34,6 @@ const ChooseMapsWrapper = styled.div`
     justify-content: center;
     margin: auto;
     background-color: ${Colors.green1};
-    height: calc(100vh - 70px); // header 높이만큼 빼기
 
     .map {
         width: 500px;
@@ -48,7 +52,6 @@ const ChooseMapsWrapper = styled.div`
     .map-img {
         width: 300px;
         height: 300px;
-        background-color: ${Colors.green2};
     }
 
     .map-text {
