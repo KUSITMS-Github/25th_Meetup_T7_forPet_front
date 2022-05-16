@@ -217,16 +217,13 @@ const OnePost = styled.div`
 
     textarea {
         resize: none;
+        width: 90%;
     }
 
     .input-comment {
         display: flex;
         flex-direction: row;
         justify-content: space-between;
-    }
-
-    textarea {
-        width: 90%;
     }
 
     .pencil-img {

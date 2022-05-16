@@ -91,7 +91,7 @@ const initialBoardList = [
         "content": "",
         "date": "",
         "thumbsUpCnt": 0,
-        "imageUrlList": [""], 
+        "imageUrlList": [""],
         "category": ""
     },
 ]
@@ -141,7 +141,7 @@ const BoardCardList = ({ board, search }: propsType) => {
         const getSearchList = async () => {
             await getApi(
                 {},
-                `/community/search/page=${page-1}/size=${10}/keywork=${search}`
+                `/community/search/page=${page - 1}/size=${10}/keywork=${search}`
             )
                 .then(({ status, data }) => {
                     console.log(status, data);
@@ -164,29 +164,29 @@ const BoardCardList = ({ board, search }: propsType) => {
         <Wrapper>
             <ListWrapper>
                 <CardView>
-                {
-                    boardList &&
-                    boardList.map((b, i) => (
-                        <BoardCardOne 
-                            key={b.post_id}
-                            onClick={() => clickHandler(b.post_id)}
+                    {
+                        boardList &&
+                        boardList.map((b, i) => (
+                            <BoardCardOne
+                                key={b.post_id}
+                                onClick={() => clickHandler(b.post_id)}
                             >
-                            <img src={b.image_url_list[0]} />
-                            <div style={{display: 'flex', flexDirection: 'row', alignItems: 'center', justifyContent: 'left', marginTop: '5px'}}>
-                            <img src={b.writer.user_profile_image} 
-                                style={{width: '40px', height: '40px', borderRadius: '40px'}}
-                            />
-                            <div style={{display: 'flex', flexDirection: 'column', textAlign: 'left', marginLeft: '10px'}}>
-                                <div style={{fontWeight: 'bold', fontSize: '18px'}}>{b.title}</div>
-                                <div style={{fontSize: '14px', color: Colors.gray1}}>{b.writer.user_nickname}</div>
-                            </div>
-                            </div>
-                            
-                            {/* <div>좋아요수 {b.thumbsUpCnt}</div>
+                                <img src={b.image_url_list[0]} />
+                                <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', justifyContent: 'left', marginTop: '5px' }}>
+                                    <img src={b.writer.user_profile_image}
+                                        style={{ width: '40px', height: '40px', borderRadius: '40px' }}
+                                    />
+                                    <div style={{ display: 'flex', flexDirection: 'column', textAlign: 'left', marginLeft: '10px' }}>
+                                        <div style={{ fontWeight: 'bold', fontSize: '18px' }}>{b.title}</div>
+                                        <div style={{ fontSize: '14px', color: Colors.gray1 }}>{b.writer.user_nickname}</div>
+                                    </div>
+                                </div>
+
+                                {/* <div>좋아요수 {b.thumbsUpCnt}</div>
                             <div>댓글수</div> */}
-                        </BoardCardOne>
-                    ))
-                }
+                            </BoardCardOne>
+                        ))
+                    }
                 </CardView>
             </ListWrapper>
             <Pagination
