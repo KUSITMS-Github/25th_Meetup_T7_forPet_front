@@ -37,7 +37,7 @@ const BoardBoast = () => {
             </HeaderSection>
             <div className='write'
                 onClick={writeHandler}>
-                새 글을 작성해주세요!
+                귀여운 강아지를 자랑해주세요!
             </div>
             <BoardCardList board={'boast'} search={searchWordRe} />
         </Wrapper>

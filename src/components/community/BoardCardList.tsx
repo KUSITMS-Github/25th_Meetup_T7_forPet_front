@@ -7,85 +7,80 @@ import { useNavigate } from "react-router-dom";
 
 const initialData = [
     {
-        "postId": 3,
-        "userId": 1,
-        "title": "testTitle",
-        "content": "testContent",
-        "date": "2022-05-13T17:09:13.586589",
-        "thumbsUpCnt": 0,
-        "imageUrlList": ["https://kusitms-forpet.s3.ap-northeast-2.amazonaws.com/a561f68a-14a5-445d-aa43-3d435d86e04b.png", "https://kusitms-forpet.s3.ap-northeast-2.amazonaws.com/a7f10556-c8d6-4f6a-8ad1-34e9500daf0c.png"],
-        "category": "meeting"
+        "writer": {
+            "user_id": 3,
+            "user_profile_image": "http://k.kakaocdn.net/dn/dpk9l1/btqmGhA2lKL/Oz0wDuJn1YV2DIn92f6DVK/img_110x110.jpg",
+            "user_nickname": "쩜마이"
+        },
+        "title": "insertTitle",
+        "category": "sharing",
+        "post_id": 10,
+        "thumbs_up_cnt": 0,
+        "image_url_list": [
+            "https://kusitms-forpet.s3.ap-northeast-2.amazonaws.com/d55921df-d60b-4466-93b5-0c547ffdf68d.png"
+        ],
+        "comment_cnt": 2
     },
     {
-        "postId": 2,
-        "userId": 1,
-        "title": "testTitle",
-        "content": "testContent",
-        "date": "2022-05-13T17:04:09.750795",
-        "thumbsUpCnt": 0,
-        "imageUrlList": ["https://kusitms-forpet.s3.ap-northeast-2.amazonaws.com/967e1338-67f0-4f6c-8ed0-ea92c8583124.png", "https://kusitms-forpet.s3.ap-northeast-2.amazonaws.com/d58e980b-1c14-47a0-be5a-de20e157abce.png"],
-        "category": "meeting"
+        "writer": {
+            "user_id": 3,
+            "user_profile_image": "http://k.kakaocdn.net/dn/dpk9l1/btqmGhA2lKL/Oz0wDuJn1YV2DIn92f6DVK/img_110x110.jpg",
+            "user_nickname": "쩜마이"
+        },
+        "title": "insertTitle",
+        "category": "meeting",
+        "post_id": 9,
+        "thumbs_up_cnt": 0,
+        "image_url_list": [
+            "https://kusitms-forpet.s3.ap-northeast-2.amazonaws.com/2a901d25-0ff4-4e43-bb91-e36ef67a89e1.png"
+        ],
+        "comment_cnt": 2
     },
     {
-        "postId": 3,
-        "userId": 1,
-        "title": "testTitle",
-        "content": "testContent",
-        "date": "2022-05-13T17:09:13.586589",
-        "thumbsUpCnt": 0,
-        "imageUrlList": ["https://kusitms-forpet.s3.ap-northeast-2.amazonaws.com/a561f68a-14a5-445d-aa43-3d435d86e04b.png", "https://kusitms-forpet.s3.ap-northeast-2.amazonaws.com/a7f10556-c8d6-4f6a-8ad1-34e9500daf0c.png"],
-        "category": "meeting"
+        "writer": {
+            "user_id": 3,
+            "user_profile_image": "http://k.kakaocdn.net/dn/dpk9l1/btqmGhA2lKL/Oz0wDuJn1YV2DIn92f6DVK/img_110x110.jpg",
+            "user_nickname": "쩜마이"
+        },
+        "title": "insertTitle",
+        "category": "meeting",
+        "post_id": 8,
+        "thumbs_up_cnt": 0,
+        "image_url_list": [
+            "https://kusitms-forpet.s3.ap-northeast-2.amazonaws.com/6ec7081f-5877-4f6b-9459-f5318fd35c37.png"
+        ],
+        "comment_cnt": 2
     },
     {
-        "postId": 2,
-        "userId": 1,
-        "title": "testTitle",
-        "content": "testContent",
-        "date": "2022-05-13T17:04:09.750795",
-        "thumbsUpCnt": 0,
-        "imageUrlList": ["https://kusitms-forpet.s3.ap-northeast-2.amazonaws.com/967e1338-67f0-4f6c-8ed0-ea92c8583124.png", "https://kusitms-forpet.s3.ap-northeast-2.amazonaws.com/d58e980b-1c14-47a0-be5a-de20e157abce.png"],
-        "category": "meeting"
+        "writer": {
+            "user_id": 3,
+            "user_profile_image": "http://k.kakaocdn.net/dn/dpk9l1/btqmGhA2lKL/Oz0wDuJn1YV2DIn92f6DVK/img_110x110.jpg",
+            "user_nickname": "쩜마이"
+        },
+        "title": "insertTitle",
+        "category": "boasting",
+        "post_id": 7,
+        "thumbs_up_cnt": 0,
+        "image_url_list": [
+            "https://kusitms-forpet.s3.ap-northeast-2.amazonaws.com/c351f652-31f6-4d68-9568-8fff1c47ed1e.png"
+        ],
+        "comment_cnt": 2
     },
     {
-        "postId": 3,
-        "userId": 1,
-        "title": "testTitle",
-        "content": "testContent",
-        "date": "2022-05-13T17:09:13.586589",
-        "thumbsUpCnt": 0,
-        "imageUrlList": ["https://kusitms-forpet.s3.ap-northeast-2.amazonaws.com/a561f68a-14a5-445d-aa43-3d435d86e04b.png", "https://kusitms-forpet.s3.ap-northeast-2.amazonaws.com/a7f10556-c8d6-4f6a-8ad1-34e9500daf0c.png"],
-        "category": "meeting"
-    },
-    {
-        "postId": 2,
-        "userId": 1,
-        "title": "testTitle",
-        "content": "testContent",
-        "date": "2022-05-13T17:04:09.750795",
-        "thumbsUpCnt": 0,
-        "imageUrlList": ["https://kusitms-forpet.s3.ap-northeast-2.amazonaws.com/967e1338-67f0-4f6c-8ed0-ea92c8583124.png", "https://kusitms-forpet.s3.ap-northeast-2.amazonaws.com/d58e980b-1c14-47a0-be5a-de20e157abce.png"],
-        "category": "meeting"
-    },
-    {
-        "postId": 3,
-        "userId": 1,
-        "title": "testTitle",
-        "content": "testContent",
-        "date": "2022-05-13T17:09:13.586589",
-        "thumbsUpCnt": 0,
-        "imageUrlList": ["https://kusitms-forpet.s3.ap-northeast-2.amazonaws.com/a561f68a-14a5-445d-aa43-3d435d86e04b.png", "https://kusitms-forpet.s3.ap-northeast-2.amazonaws.com/a7f10556-c8d6-4f6a-8ad1-34e9500daf0c.png"],
-        "category": "meeting"
-    },
-    {
-        "postId": 2,
-        "userId": 1,
-        "title": "testTitle",
-        "content": "testContent",
-        "date": "2022-05-13T17:04:09.750795",
-        "thumbsUpCnt": 0,
-        "imageUrlList": ["https://kusitms-forpet.s3.ap-northeast-2.amazonaws.com/967e1338-67f0-4f6c-8ed0-ea92c8583124.png", "https://kusitms-forpet.s3.ap-northeast-2.amazonaws.com/d58e980b-1c14-47a0-be5a-de20e157abce.png"],
-        "category": "meeting"
-    },
+        "writer": {
+            "user_id": 3,
+            "user_profile_image": "http://k.kakaocdn.net/dn/dpk9l1/btqmGhA2lKL/Oz0wDuJn1YV2DIn92f6DVK/img_110x110.jpg",
+            "user_nickname": "쩜마이"
+        },
+        "title": "insertTitle",
+        "category": "boasting",
+        "post_id": 6,
+        "thumbs_up_cnt": 0,
+        "image_url_list": [
+            "https://kusitms-forpet.s3.ap-northeast-2.amazonaws.com/98a1e436-d006-41eb-bba9-94f5031259e9.png"
+        ],
+        "comment_cnt": 2
+    }
 ];
 
 const initialBoardList = [
@@ -168,24 +163,31 @@ const BoardCardList = ({ board, search }: propsType) => {
     return (
         <Wrapper>
             <ListWrapper>
-            <CardView>
-            {
-                boardList &&
-                boardList.map((b, i) => (
-                    <BoardCardOne 
-                        key={b.postId}
-                        onClick={() => clickHandler(b.postId)}
-                        >
-                        <img src={b.imageUrlList[0]} />
-                        <div>{b.userId}</div>
-                        <div>{b.title}</div>
-                        
-                        {/* <div>좋아요수 {b.thumbsUpCnt}</div>
-                        <div>댓글수</div> */}
-                    </BoardCardOne>
-                ))
-            }
-            </CardView>
+                <CardView>
+                {
+                    boardList &&
+                    boardList.map((b, i) => (
+                        <BoardCardOne 
+                            key={b.post_id}
+                            onClick={() => clickHandler(b.post_id)}
+                            >
+                            <img src={b.image_url_list[0]} />
+                            <div style={{display: 'flex', flexDirection: 'row', alignItems: 'center', justifyContent: 'left', marginTop: '5px'}}>
+                            <img src={b.writer.user_profile_image} 
+                                style={{width: '40px', height: '40px', borderRadius: '40px'}}
+                            />
+                            <div style={{display: 'flex', flexDirection: 'column', textAlign: 'left', marginLeft: '10px'}}>
+                                <div style={{fontWeight: 'bold', fontSize: '18px'}}>{b.title}</div>
+                                <div style={{fontSize: '14px', color: Colors.gray1}}>{b.writer.user_nickname}</div>
+                            </div>
+                            </div>
+                            
+                            {/* <div>좋아요수 {b.thumbsUpCnt}</div>
+                            <div>댓글수</div> */}
+                        </BoardCardOne>
+                    ))
+                }
+                </CardView>
             </ListWrapper>
             <Pagination
                 totalPages={totalPages}
@@ -202,12 +204,13 @@ export default BoardCardList;
 const Wrapper = styled.div`
     display: flex;
     flex-direction: column;
+    margin: 0 80px;
+    justify-content: center;
+    align-items: center;
 `
 
 const ListWrapper = styled.div`
-    margin: 20px 80px;
-    background-color: ${Colors.white};
-    box-shadow: 0px 4px 33px rgba(0, 0, 0, 0.1);
+    margin: 20px auto;
     border-radius: 15px;
 `
 
@@ -215,18 +218,21 @@ const CardView = styled.div`
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
-    justify-content: center;
+    justify-content: space-between;
+    margin: 0 auto;
 `
 
 const BoardCardOne = styled.div`
-    border: 1px solid ${Colors.black};
-    width: 200px;
+    background-color: ${Colors.white};
+    border: none;
+    width: 220px;
     padding: 20px;
     margin: 20px;
 
     img {
-        width: 200px;
-        height: 200px;
+        width: 220px;
+        height: 220px;
     }
+
 
 `

@@ -37,7 +37,7 @@ const BoardShare = () => {
             </HeaderSection>
             <div className='write'
                 onClick={writeHandler}>
-                새 글을 작성해주세요!
+                각종 물품을 나눠주세요!
             </div>
             <BoardCardList board={'share'} search={searchWordRe} />
         </Wrapper>

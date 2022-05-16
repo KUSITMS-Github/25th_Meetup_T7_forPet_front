@@ -54,6 +54,7 @@ const Wrapper = styled.div`
     .comp {
         margin: 0 5px;
         color: ${Colors.black};
+        font-size: 18px;
     }
 
     .location {
