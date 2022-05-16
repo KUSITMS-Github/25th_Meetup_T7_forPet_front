@@ -1,8 +1,8 @@
 import React, { useState, useEffect, useContext } from 'react';
 import styled from '@emotion/styled';
-import Pagination from "../components/Pagination";
-import { PediaOne, CreatePostPedia } from '../components';
-import { getApi, setHeader } from '../api';
+import Pagination from "../../components/Pagination";
+import { PediaOne, CreatePostPedia } from '../../components/forpetPedia';
+import { getApi, setHeader } from '../../api';
 
 
 const ForpetPedia = () => {

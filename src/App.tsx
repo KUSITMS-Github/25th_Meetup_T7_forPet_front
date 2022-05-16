@@ -7,8 +7,6 @@ import {
   ChooseMaps,
   OnlineMap,
   OfflineMap,
-  ForpetPedia,
-  PediaDetail,
   MyPage,
   OauthHandler,
   NotFound,
@@ -22,7 +20,11 @@ import {
   BoardBoast,
   BoardShare,
   PostDetail,
-} from "./pages/Community"
+} from "./pages/community";
+import {
+  ForpetPedia,
+  PediaDetail,
+} from "./pages/forpetPedia";
 import {
   Header,
 } from "./components"

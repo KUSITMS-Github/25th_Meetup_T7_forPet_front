@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import styled from '@emotion/styled';
-import { Colors } from '../styles/ui';
-import { getApi } from '../api';
-import Pagination from "../components/Pagination";
+import { Colors } from '../../styles/ui';
+import { getApi } from '../../api';
+import Pagination from "../Pagination";
 import { useNavigate } from "react-router-dom";
 
 const initialBoardList = [
@@ -77,7 +77,7 @@ const BoardList = ({ board }: any) => {
                         key={b.postId}
                         onClick={() => clickHandler(b.postId)}
                         >
-                        <div>{b.category}</div>
+                        {board === 'all' && <div>{b.category}</div>}
                         <div>{b.userId}</div>
                         <div>{b.title}</div>
                         <div>좋아요수 {b.thumbsUpCnt}</div>

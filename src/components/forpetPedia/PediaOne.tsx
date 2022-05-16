@@ -1,9 +1,9 @@
 import React, { useState, useEffect, useContext } from 'react';
 import styled from '@emotion/styled';
-import { Colors } from '../styles/ui';
-import { postApi, getApi } from '../api';
+import { Colors } from '../../styles/ui';
+import { postApi, getApi } from '../../api';
 import { useNavigate } from "react-router-dom";
-import { PediaOneComment } from '../components';
+import { PediaOneComment } from '../../components/forpetPedia';
 
 
 const PediaOne = (post: any) => {

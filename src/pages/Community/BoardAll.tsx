@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import styled from '@emotion/styled';
 import { Colors } from '../../styles/ui';
 import { Link } from "react-router-dom";
-import { BoardHeader, BoardWrite, BoardList } from '../../components';
+import { BoardHeader, BoardWrite, BoardList } from '../../components/community';
 
 
 

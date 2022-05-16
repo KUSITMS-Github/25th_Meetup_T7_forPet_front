@@ -1,9 +1,9 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { useParams } from "react-router-dom";
 import styled from '@emotion/styled';
-import { Colors } from '../styles/ui';
-import { getApi, postApi } from '../api';
-import { PediaOneComment } from '../components';
+import { Colors } from '../../styles/ui';
+import { getApi, postApi } from '../../api';
+import { PediaOneComment } from '../../components/forpetPedia';
 
 const dumpdata = {
     "qnaBoardId": 2,

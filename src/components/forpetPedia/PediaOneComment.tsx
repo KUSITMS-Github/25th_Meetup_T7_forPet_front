@@ -1,6 +1,6 @@
 import styled from '@emotion/styled';
-import { Colors } from '../styles/ui';
-import { postApi } from '../api';
+import { Colors } from '../../styles/ui';
+import { postApi } from '../../api';
 
 const PediaOneComment = ({ comment }: any) => {
     // 댓글좋아요 Post API

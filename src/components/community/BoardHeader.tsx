@@ -1,5 +1,5 @@
 import styled from '@emotion/styled';
-import { Colors } from '../styles/ui';
+import { Colors } from '../../styles/ui';
 import { Link } from "react-router-dom";
 
 const BoardHeader = () => {
