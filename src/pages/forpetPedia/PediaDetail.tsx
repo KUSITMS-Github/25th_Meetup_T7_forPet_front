@@ -2,7 +2,7 @@ import React, { useState, useEffect, useContext } from 'react';
 import { useParams } from "react-router-dom";
 import styled from '@emotion/styled';
 import { Colors } from '../../styles/ui';
-import { getApi, postApi } from '../../api';
+import { getApi, postApi, setHeader } from '../../api';
 import { PediaOneComment } from '../../components/forpetPedia';
 import { ReactComponent as LikeIcon } from '../../assets/Like-icon.svg';
 import { ReactComponent as BookmarkIcon } from '../../assets/Bookmark-icon.svg';
@@ -85,6 +85,11 @@ const PediaDetail = () => {
     // }
 
     useEffect(() => {
+        const token = 'eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIzIiwiaWF0IjoxNjUyNjg5MDU4LCJleHAiOjE2NTMyOTM4NTh9.Smx6cW-984fGOU5dq5GTnyMnw_Pf_R8UFALXMmzYDTo'
+        setHeader(token);
+    }, [])
+
+    useEffect(() => {
         // 글 불러오기
         const getQuestion = async () => {
             await getApi(
@@ -110,7 +115,11 @@ const PediaDetail = () => {
                     console.log('댓글불러옴', data);
                     if (status === 200) {
                         // console.log(`GET 댓글내용`, status, data);
-                        setComments(data.body.data);
+                        // setComments(data.body.data);
+                        if (data.data) {
+                            setComments(data.data);
+                        }
+
                     }
                 })
                 .catch((e) => {
@@ -155,7 +164,8 @@ const PediaDetail = () => {
                     if (cnt === 'like') {
                         setQuestion({ ...question, likes: data.body.data });
                     } else {
-                        setQuestion({ ...question, bookmark: data.body.data.cnt });
+                        window.location.reload(); // 새로고침
+                        // setQuestion({ ...question, bookmark: data.body.data.cnt });
                     }
                 }
             })

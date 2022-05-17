@@ -4,8 +4,15 @@ import { Colors } from '../../styles/ui';
 import { useNavigate } from "react-router-dom";
 import { BoardHeader, BoardList } from '../../components/community';
 import SearchIcon from '../../assets/search_icon.png';
+import { getApi, setHeader } from '../../api';
 
 const BoardAll = () => {
+
+    useEffect(() => {
+        const token = 'eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIzIiwiaWF0IjoxNjUyNzgxMTA2LCJleHAiOjE2NTI3ODI5MDZ9.CBxc-S9uQzulFatLvj5o2ueWf-4ChH-mz4eHDBkQt0I'
+        setHeader(token);
+    }, [])
+
     const [search, setSearch] = useState<string>('');
     const [searchWordRe, setSearchWordRe] = useState<string>('');
 
