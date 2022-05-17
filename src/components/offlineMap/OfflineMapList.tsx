@@ -1,11 +1,13 @@
 import React, { useEffect, useState } from "react";
 import styled from '@emotion/styled';
 import { Colors } from '../../styles/ui';
+import { getApi } from '../../api';
 import  OfflineMapListItem from './OfflineMapListItem';
+import BtnSearch from "../../assets/offlineMap/btn_search.svg";
 
 const OfflineMapList = () => {
-    const [searchPlace, setsearchPlace] = useState<string>();
-    
+    const [mapList, setMapList] = useState([]);
+    const [searchPlace, setsearchPlace] = useState<string>();  
 
     const offline_list = 
     [
@@ -75,10 +77,24 @@ const OfflineMapList = () => {
         }
     ]
 
-    const enterSearchPlace = async (e: any) => {    //TODO: 검색 기능 구현
-        if (e.key === "Enter"){
-
-        }
+    //주변 반려견 장소 검색
+    const enterSearchPlace = async (e: any) => {
+            console.log(searchPlace);
+            await getApi(
+                {},
+                `/offline-map/search?keyword=${searchPlace}`
+            )
+                .then(({ status, data }) => {
+                    console.log("search 결과", status, data);
+                    if (data) {
+                        setMapList(data.body.data);
+                    } else {
+                        setMapList([]);
+                    }
+                })
+                .catch((e) => {
+                    console.log(e);
+                });
     }
 
     return(
@@ -98,15 +114,14 @@ const OfflineMapList = () => {
                         onChange={(
                             e: React.ChangeEvent<HTMLInputElement>,
                         ): void => setsearchPlace(e.target.value)}
-                        onKeyPress={enterSearchPlace}
                         value={searchPlace}
-                />   
+                ></input>
+                <img className='btn_search' src={BtnSearch} onClick={enterSearchPlace} />   
             </Section>
 
             {/*주변*/}
             <Section>
                 <span className='title'>주변</span>
-
                 {offline_list.map((item, index) => (
                     <OfflineMapListItem key={index} item={item} />
                 ))}
@@ -193,5 +208,13 @@ const Section = styled.div`
         font-family: 'NotoSans';
         font-weight: 400;
         font-size: 17px;
+    }
+
+    .btn_search{
+        position: relative;
+        top: -33px;
+        left: 342px;
+        width: 21px;
+        height: 21px;
     }
 `;
