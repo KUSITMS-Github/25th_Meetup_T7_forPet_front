@@ -11,10 +11,10 @@ import SearchIcon from '../../assets/search_icon.png';
 const ForpetPedia = () => {
 
     // 임시 토큰 넣어줌
-    // useEffect(() => {
-    //     const token = 'eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxIiwiaWF0IjoxNjUyNTY1MzcxLCJleHAiOjE2NTI1NjcxNzF9.3BWqx2knn5QvB5UKAlspL1AP9zMaCWuHaTgOPJLC-7Q'
-    //     setHeader(token);
-    // }, [])
+    useEffect(() => {
+        const token = 'eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIzIiwiaWF0IjoxNjUyNjg5MDU4LCJleHAiOjE2NTMyOTM4NTh9.Smx6cW-984fGOU5dq5GTnyMnw_Pf_R8UFALXMmzYDTo'
+        setHeader(token);
+    }, [])
 
 
     const initialPediaList =  // 임시 데이터
@@ -155,6 +155,11 @@ const ForpetPedia = () => {
         }
     }
 
+    const onClickQBtn = () => {
+        setDoQestion(!doQuestion);
+        setSearchWordRe('');
+    }
+
     return (
         <Wrapper>
             <div style={{ display: 'flex', flexDirection: 'row', margin: '10px 0', paddingTop: '10px' }}>
@@ -173,8 +178,7 @@ const ForpetPedia = () => {
                 />
                 <button
                     className='question-button'
-                    onClick={() => setDoQestion(!doQuestion)}
-
+                    onClick={() => onClickQBtn()}
                 >질문하기</button>
             </div>
             <div className='keywords' style={{ fontSize: '18px', marginLeft: '20px', marginBottom: '10px'}}>
@@ -193,7 +197,10 @@ const ForpetPedia = () => {
             </div>
             {
                 searchWordRe &&
-                <div className='search-result'>'{searchWordRe}' 검색 결과</div>
+                <div className='search-result'>
+                    <div style={{color: Colors.green3}}>'{searchWordRe}' </div>
+                    검색 결과
+                </div>
             }
 
             {doQuestion && <CreatePostPedia />}
@@ -295,6 +302,10 @@ const Wrapper = styled.div`
     .search-result {
         font-size: 24px;
         text-align: left;
+        font-weight: bold;
+        display: flex;
+        flex-direction: row;
+        margin: 30px 0;
     }
 
     .sort {

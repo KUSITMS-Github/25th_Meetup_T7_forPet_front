@@ -4,11 +4,11 @@ import styled from '@emotion/styled';
 import { Colors } from '../../styles/ui';
 import { getApi, postApi } from '../../api';
 import { PediaOneComment } from '../../components/forpetPedia';
-import { ReactComponent as LikeIcon} from '../../assets/Like-icon.svg';
-import { ReactComponent as BookmarkIcon} from '../../assets/Bookmark-icon.svg';
-import { ReactComponent as LikeIconFull} from '../../assets/Like-icon-full.svg';
-import { ReactComponent as BookmarkIconFull} from '../../assets/Bookmark-icon-full.svg';
-import { ReactComponent as CommentIcon} from '../../assets/Comment-icon.svg';
+import { ReactComponent as LikeIcon } from '../../assets/Like-icon.svg';
+import { ReactComponent as BookmarkIcon } from '../../assets/Bookmark-icon.svg';
+import { ReactComponent as LikeIconFull } from '../../assets/Like-icon-full.svg';
+import { ReactComponent as BookmarkIconFull } from '../../assets/Bookmark-icon-full.svg';
+import { ReactComponent as CommentIcon } from '../../assets/Comment-icon.svg';
 
 const dumpdata = {
     "qnaBoardId": 5,
@@ -131,15 +131,15 @@ const PediaDetail = () => {
                 },
                 `/qnaBoard/${postId}/comment`
             )
-            .then(({ status, data }) => {
-                console.log('댓글입력:', status, data);
-                if (status === 200) {
-                    window.location.reload(); // 새로고침
-                }
-            })
-            .catch((e) => {
-                console.log(e);
-            });
+                .then(({ status, data }) => {
+                    console.log('댓글입력:', status, data);
+                    if (status === 200) {
+                        window.location.reload(); // 새로고침
+                    }
+                })
+                .catch((e) => {
+                    console.log(e);
+                });
         }
     }
 
@@ -167,55 +167,52 @@ const PediaDetail = () => {
     return (
         <Wrapper>
             <Question>
-                <div className='q-upper'>
-                    <div className='writer-sec'>
-                        <div style={{display: 'flex', flexDirection: 'row', alignItems: 'center', marginBottom: '10px'}}>
+                <div style={{ display: 'flex', flexDirection: 'row' }}>
+                    <div className='q-upper'>
+                        <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
                             <img src={question.imageUrlList[0]}
-                                style={{width: '30px', height: '30px', borderRadius: '20px'}} />
-                            <div style={{display: 'flex', flexDirection: 'column', textAlign: 'left', marginLeft: '5px'}}>
-                                <div style={{fontSize: '14px', color: Colors.green5}}>{question.tag}</div>
-                                <div style={{display: 'flex', flexDirection: 'row', alignItems: 'end'}}>
-                                    <div style={{fontSize: '18px', fontWeight: 'bold'}} className='writer'>{question.nickName}</div>
-                                    <div style={{fontSize: '12px', color: Colors.gray1, marginLeft: '5px'}}>{question.createDate}</div>
-                                </div>
-                            </div>
+                                style={{ width: '30px', height: '30px', borderRadius: '20px' }} />
+                            <div style={{ fontSize: '12px', color: Colors.green5 }}>{question.tag}</div>
+                            <div style={{ fontSize: '14px', fontWeight: 'bold' }} className='writer'>{question.nickName}</div>
                         </div>
                     </div>
-                    
+                    <div
+                        style={{ textAlign: 'left' }}
+                    >
+                        <div style={{ display: 'flex', flexDirection: 'row', marginLeft: '20px' }}>
+                            <div style={{ fontWeight: 'bold', fontSize: '28px', color: Colors.green5, marginRight: '5px' }}>Q.</div>
+                            <div style={{ display: 'flex', flexDirection: 'column' }}>
+                                <div style={{ fontWeight: 'bold', fontSize: '24px', }}>{question.title}</div>
+                                <div style={{ fontSize: '20px', marginTop: '10px' }}>{question.content}</div>
+
+                            </div>
+                            
+                        </div>
+                    </div>
                 </div>
-                <div
-                    style={{textAlign: 'left'}}
-                >
-                    <div style={{display: 'flex', flexDirection: 'row'}}>
-                        <div style={{fontWeight: 'bold', fontSize: '28px', color: Colors.green5, marginRight: '5px'}}>Q.</div>
-                        <div style={{display: 'flex', flexDirection: 'column'}}>
-                            <div style={{fontWeight: 'bold', fontSize: '24px', }}>{question.title}</div>
-                            <div style={{fontSize: '20px'}}>{question.content}</div>
-                            <div>
-                                {
-                                    question.imageUrlList &&
-                                    question.imageUrlList.map((img: string, i: number) => (
-                                        <img src={img} style={{width: '300px', height: '300px'}}></img>
-                                    ))
-                                }
-                            </div>
-                        </div>
-                    </div>
+                <div style={{textAlign: 'left', margin: '10px 30px'}}>
+                    {
+                        question.imageUrlList &&
+                        question.imageUrlList.map((img: string, i: number) => (
+                            <img src={img} style={{ width: '300px', height: '300px', margin: '10px' }}></img>
+                        ))
+                    }
                 </div>
 
                 <div className='cnts'>
-                    <div className='cnt' 
+                    <div style={{ fontSize: '12px', color: Colors.gray1, marginLeft: '5px' }}>{question.createDate}</div>
+                    <div className='cnt'
                         onClick={() => clickCnt('like')}>
-                        <LikeIcon className='icon'/>
+                        <LikeIcon className='icon' />
                         {question.likes}
                     </div>
-                    <div className='cnt' 
+                    <div className='cnt'
                         onClick={() => clickCnt('bookmark')}>
-                        <BookmarkIcon className='icon'/> 
+                        <BookmarkIcon className='icon' />
                         {question.bookmark}
                     </div>
                     <div className='cnt'>
-                        <CommentIcon className='icon'/>
+                        <CommentIcon className='icon' />
                         {question.comments}
                     </div>
                 </div>
@@ -228,7 +225,7 @@ const PediaDetail = () => {
                 }}
             />
             {
-                comments && 
+                comments &&
                 comments.map((c: any, i: number) => (
                     <PediaOneComment
                         key={i}

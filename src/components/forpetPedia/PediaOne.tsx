@@ -4,21 +4,16 @@ import { Colors } from '../../styles/ui';
 import { postApi, getApi } from '../../api';
 import { useNavigate } from "react-router-dom";
 import { PediaOneComment } from '../../components/forpetPedia';
-import { ReactComponent as LikeIcon} from '../../assets/Like-icon.svg';
-import { ReactComponent as BookmarkIcon} from '../../assets/Bookmark-icon.svg';
-import { ReactComponent as CommentIcon} from '../../assets/Comment-icon.svg';
+import { ReactComponent as LikeIcon } from '../../assets/Like-icon.svg';
+import { ReactComponent as BookmarkIcon } from '../../assets/Bookmark-icon.svg';
+import { ReactComponent as CommentIcon } from '../../assets/Comment-icon.svg';
 
 
 const PediaOne = (post: any) => {
     const navigate = useNavigate();
     const onePost = post.post;
     const [myAnswer, setMyAnswer] = useState<string>();
-    const [count, setCount] = useState({
-        like: 0,
-        bookmark: 0,
-        comment: 0,
-    });
-    
+
     // interface Comment {
     //     imageUrl: string,
     //     nickName: string,
@@ -73,20 +68,20 @@ const PediaOne = (post: any) => {
 
     // 댓글 불러오기 GET API
     useEffect(() => {
-        const getComments = async() => {
+        const getComments = async () => {
             await getApi(
                 {},
                 `/qnaBoard/${onePost.qnaBoardId}/comment`
             )
-            .then(({ status, data }) => {
-                console.log(`GET 댓글 불러오기`, status, data.data);
-                if (status === 200) {
-                    setComments(data.data);
-                }
-            })
-            .catch((e) => {
-                console.log(e);
-            });
+                .then(({ status, data }) => {
+                    console.log(`GET 댓글 불러오기`, status, data.data);
+                    if (status === 200) {
+                        setComments(data.data);
+                    }
+                })
+                .catch((e) => {
+                    console.log(e);
+                });
         }
         getComments();
     }, [])
@@ -101,20 +96,20 @@ const PediaOne = (post: any) => {
                 },
                 `/qnaBoard/${onePost.qnaBoardId}/comment`
             )
-            .then(({ status, data }) => {
-                console.log('댓글입력:', status, data);
-                if (status === 200) {
-                    window.location.reload(); // 새로고침
-                }
-            })
-            .catch((e) => {
-                console.log(e);
-            });
+                .then(({ status, data }) => {
+                    console.log('댓글입력:', status, data);
+                    if (status === 200) {
+                        window.location.reload(); // 새로고침
+                    }
+                })
+                .catch((e) => {
+                    console.log(e);
+                });
         }
     }
 
     // 좋아요, 스크랩 Post API
-    const clickLike = async ( postId: number, cnt: string ) => {
+    const clickLike = async (postId: number, cnt: string) => {
         console.log('좋아요누름', postId);
         await postApi(
             {},
@@ -145,55 +140,56 @@ const PediaOne = (post: any) => {
             <Question>
                 <div className='q-upper'>
                     <div className='writer-sec'>
-                        <div style={{display: 'flex', flexDirection: 'row', alignItems: 'center', marginBottom: '10px'}}>
-                             {/* 프로필사진 */}
-                            <img src={onePost.imageUrlList[0]}
-                                style={{width: '30px', height: '30px', borderRadius: '20px'}} />
-                            <div style={{display: 'flex', flexDirection: 'column', textAlign: 'left', marginLeft: '5px'}}>
-                                <div style={{fontSize: '14px', color: Colors.green5}}>{onePost.tag}</div>
-                                <div style={{display: 'flex', flexDirection: 'row', alignItems: 'end'}}>
-                                    <div style={{fontSize: '18px', fontWeight: 'bold'}} className='writer'>{onePost.nickName}</div>
-                                    <div style={{fontSize: '12px', color: Colors.gray1, marginLeft: '5px'}}>{onePost.createDate}</div>
+                        <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', marginBottom: '10px' }}>
+
+                            <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+                                <img src={onePost.imageUrlList[0]}
+                                    style={{ width: '30px', height: '30px', borderRadius: '20px' }} />
+                                <div style={{ fontSize: '12px', color: Colors.green5 }}>{onePost.tag}</div>
+                                <div style={{ fontSize: '14px', fontWeight: 'bold' }} className='writer'>{onePost.nickName}</div>
+                            </div>
+
+                            <div style={{ display: 'flex', flexDirection: 'column', textAlign: 'left', marginLeft: '5px' }}>
+                                <div
+                                    style={{ textAlign: 'left' }}
+                                    onClick={postClickHandler}
+                                >
+                                    <div style={{ display: 'flex', flexDirection: 'row', marginLeft: '50px' }}>
+                                        <div style={{ fontWeight: 'bold', fontSize: '28px', color: Colors.green5, marginRight: '5px' }}>Q.</div>
+                                        <div style={{ display: 'flex', flexDirection: 'column' }}>
+                                            <div style={{ fontWeight: 'bold', fontSize: '24px', }}>{onePost.title}</div>
+                                            <div style={{ fontSize: '20px' }}>{onePost.content}</div>
+                                            <div>
+                                                {
+                                                    onePost.imageUrlList &&
+                                                    onePost.imageUrlList.map((img: string, i: number) => (
+                                                        <img src={img} className='image-resize'></img>
+                                                    ))
+                                                }
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    
                 </div>
-                <div
-                    style={{textAlign: 'left'}}
-                    onClick={postClickHandler}
-                >
-                    <div style={{display: 'flex', flexDirection: 'row'}}>
-                        <div style={{fontWeight: 'bold', fontSize: '28px', color: Colors.green5, marginRight: '5px'}}>Q.</div>
-                        <div style={{display: 'flex', flexDirection: 'column'}}>
-                            <div style={{fontWeight: 'bold', fontSize: '24px', }}>{onePost.title}</div>
-                            <div style={{fontSize: '20px'}}>{onePost.content}</div>
-                            <div>
-                                {
-                                    onePost.imageUrlList &&
-                                    onePost.imageUrlList.map((img: string, i: number) => (
-                                        <img src={img} className='image-resize'></img>
-                                    ))
-                                }
-                            </div>
-                        </div>
-                    </div>
-                    
-                </div>
+
+
                 <div className='cnts'>
-                    <div className='cnt' 
+                    <div style={{ fontSize: '12px', color: Colors.gray1, marginLeft: '5pxc' }}>{onePost.createDate}</div>
+                    <div className='cnt'
                         onClick={() => clickLike(onePost.qnaBoardId, 'like')}>
-                        <LikeIcon className='icon'/>
+                        <LikeIcon className='icon' />
                         {onePost.likes}
                     </div>
-                    <div className='cnt' 
+                    <div className='cnt'
                         onClick={() => clickLike(onePost.qnaBoardId, 'bookmark')}>
-                        <BookmarkIcon className='icon'/> 
+                        <BookmarkIcon className='icon' />
                         {onePost.bookmark}
                     </div>
                     <div className='cnt'>
-                        <CommentIcon className='icon'/>
+                        <CommentIcon className='icon' />
                         {onePost.comments}
                     </div>
                 </div>
@@ -205,9 +201,9 @@ const PediaOne = (post: any) => {
                     width: '100%'
                 }}
             />
-            
+
             {
-                comments && 
+                comments &&
                 comments.map((c: any, i: number) => (
                     <PediaOneComment
                         key={i}

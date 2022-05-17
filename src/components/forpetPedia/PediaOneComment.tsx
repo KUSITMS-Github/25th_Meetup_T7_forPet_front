@@ -1,12 +1,12 @@
 import styled from '@emotion/styled';
 import { Colors } from '../../styles/ui';
 import { postApi } from '../../api';
-import { ReactComponent as LikeIcon} from '../../assets/Like-icon.svg';
-import { ReactComponent as LikeFullIcon} from '../../assets/Like-icon-full.svg';
+import { ReactComponent as LikeIcon } from '../../assets/Like-icon.svg';
+import { ReactComponent as LikeFullIcon } from '../../assets/Like-icon-full.svg';
 
 
 const PediaOneComment = ({ comment }: any) => {
-    console.log(comment)
+    // console.log(comment)
     // 댓글좋아요 Post API
     const clickCommentCnt = async (commentId: number) => {
         console.log(commentId);
@@ -27,28 +27,31 @@ const PediaOneComment = ({ comment }: any) => {
 
     return (
         <Answer>
-            <div className='writer-sec'>
-                <div style={{display: 'flex', flexDirection: 'row', alignItems: 'center', marginBottom: '10px'}}>
-                        {/* 프로필사진 */}
+            <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', width:'80px', justifyContent: 'center'}}>
+                <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
                     <img src={comment.imageUrl}
-                        style={{width: '30px', height: '30px', borderRadius: '20px'}} />
-                    <div style={{display: 'flex', flexDirection: 'column', textAlign: 'left', marginLeft: '5px'}}>
-                        <div style={{fontSize: '14px', color: Colors.green5}}>{comment.tag}</div>
-                        <div style={{display: 'flex', flexDirection: 'row', alignItems: 'end'}}>
-                            <div style={{fontSize: '18px', fontWeight: 'bold'}} className='writer'>{comment.nickName}</div>
-                        </div>
-                    </div>
+                        style={{ width: '30px', height: '30px', borderRadius: '20px' }} />
+                    <div style={{ fontSize: '12px', color: Colors.green5 }}>{comment.tag}</div>
+                    <div style={{ fontSize: '14px', fontWeight: 'bold' }} className='writer'>{comment.nickName}</div>
                 </div>
             </div>
 
-            <div style={{marginLeft: '30px'}}>{comment.comment}</div>
-            <div style={{display: 'flex', flexDirection: 'row', margin: '5px 0'}}>
-                <div style={{fontSize: '12px', color: Colors.gray1, marginLeft: '30px'}}>{comment.createDate}</div>
-                <div 
-                    style={{marginLeft: '20px'}}
-                    onClick={() => clickCommentCnt(comment.id)}>
-                    <LikeIcon style={{width: '18px', height: '18px', marginRight: '5px'}}/>
-                    {comment.likes}
+            <div style={{ display: 'flex', flexDirection: 'column', textAlign: 'left', marginLeft: '5px', marginRight: 'auto' }}>
+                <div style={{ display: 'flex', flexDirection: 'row', marginLeft: '30px', alignItems: 'center' }}>
+                    <div style={{ fontWeight: 'bold', fontSize: '20px', color: Colors.green5, marginRight: '5px' }}>A.</div>
+                    <div style={{ display: 'flex', flexDirection: 'column' }}>
+                        <div style={{ fontSize: '16px', fontWeight: 'bold' }}>{comment.comment}</div>
+                    </div>
+                </div>
+
+                <div style={{display: 'flex', flexDirection: 'row'}}>
+                    <div style={{ fontSize: '12px', color: Colors.gray1, marginLeft: '30px' }}>{comment.createDate}</div>
+                    <div
+                        style={{ marginLeft: '20px' }}
+                        onClick={() => clickCommentCnt(comment.id)}>
+                        <LikeIcon style={{ width: '18px', height: '18px', marginRight: '5px', cursor: 'pointer' }} />
+                        {comment.likes}
+                    </div>
                 </div>
             </div>
         </Answer>
@@ -58,5 +61,9 @@ const PediaOneComment = ({ comment }: any) => {
 export default PediaOneComment;
 
 const Answer = styled.div`
+    display: flex;
+    flex-direction: row;
     text-align: left;
+    margin: 10px 0;
+    justify-content: left;
 `

@@ -7,6 +7,7 @@ import { Colors } from '../../styles/ui';
 const CreatePostPedia = () => {
 
     const [myQuestion, setMyQuestion] = useState<string>();
+    const [myTitle, setMyTitle] = useState<string>();
 
     const [file, setFile] = useState<File>();
     const onFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -14,10 +15,10 @@ const CreatePostPedia = () => {
         setFile(e.target.files![0]);
     }
 
-    const fileSubmitHandler = async (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
+    const fileSubmitHandler = async (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
         e.preventDefault();
         let contents = {
-            title: 'title',
+            title: myTitle,
             content: myQuestion
         }
         const end_url = '/qnaBoard';
@@ -48,11 +49,27 @@ const CreatePostPedia = () => {
     }
 
     return (
+        <>
         <CreateQustion>
-            <div className='title'>질문하개</div>
+            <div className='title' style={{color: Colors.green5}}>질문하개</div>
             <hr
                 style={{
-                    color: `${Colors.gray1}`,
+                    color: `${Colors.gray2}`,
+                    height: 1,
+                    width: '100%'
+                }}
+            />
+            <input 
+                className='title' 
+                style={{marginBottom: '10px', color: Colors.gray2, border: 'none'}} 
+                placeholder='제목'
+                onChange={(
+                    e: React.ChangeEvent<HTMLInputElement>,
+                ): void => setMyTitle(e.target.value)}
+            />
+            <hr
+                style={{
+                    color: `${Colors.gray2}`,
                     height: 1,
                     width: '100%'
                 }}
@@ -64,31 +81,37 @@ const CreatePostPedia = () => {
                     e: React.ChangeEvent<HTMLTextAreaElement>,
                 ): void => setMyQuestion(e.target.value)}
                 value={myQuestion}
+                style={{ fontSize: '14px', padding: '10px'}}
             >
             </textarea>
             <div className='low-section'>
                 <input type="file" multiple onChange={(e) => onFileChange(e)} />
-                {/* <button type="submit" onClick={(e) => fileSubmitHandler(e)}>파일 업로드</button> */}
-                <div onClick={(e) => fileSubmitHandler(e)}>연필</div>
-            </div>
+            </div>            
         </CreateQustion>
+        <Buttons>
+            <button 
+                onClick={(e) => fileSubmitHandler(e)}
+                style={{backgroundColor: '#B9CDB4', color: '#64805E', fontSize: '20px'}}>등록</button>
+        </Buttons>
+        </>
     )
-
 }
 
 export default CreatePostPedia;
 
 const CreateQustion = styled.div`
-
     display: flex;
     flex-direction: column;
-    width: 900px; // 추후조정
-    margin: 10px auto;
+    margin: 10px 0;
     padding: 20px;
     background-color: ${Colors.white};
+    box-shadow: 0px 4px 33px rgba(0, 0, 0, 0.1);
+    border-radius: 15px;
 
     .title {
         text-align: left;
+        font-size: 18px;
+        font-weight: bold;
     }
 
     .low-section {
@@ -99,5 +122,22 @@ const CreateQustion = styled.div`
 
     textarea {
         resize: none;
+        border: none;
+    }
+`
+
+const Buttons = styled.div`
+    display: flex;
+    flex-direction: row;
+    justify-content: right;
+    margin-bottom: 30px;
+
+    button {
+        width: 10%;
+        height: 50px;
+        box-shadow: 0px 4px 11px rgba(0, 0, 0, 0.25);
+        border: none;
+        border-radius: 3px;
+        cursor: pointer;
     }
 `

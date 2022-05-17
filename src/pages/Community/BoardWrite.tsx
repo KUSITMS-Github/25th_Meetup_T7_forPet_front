@@ -195,5 +195,6 @@ const Buttons = styled.div`
         box-shadow: 0px 4px 11px rgba(0, 0, 0, 0.25);
         border: none;
         border-radius: 3px;
+        cursor: pointer;
     }
 `
