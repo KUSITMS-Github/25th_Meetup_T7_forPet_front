@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useCallback } from 'react';
 import styled from '@emotion/styled';
 import { Colors } from '../../styles/ui';
-import { useParams, Link } from "react-router-dom";
+import { useParams, Link, useNavigate } from "react-router-dom";
 import { getApi, postApi, deleteApi } from '../../api';
 import { ImageModal } from '../../components/community';
 import { ReactComponent as LikeIcon} from '../../assets/Like-icon.svg';
@@ -9,6 +9,7 @@ import { ReactComponent as BookmarkIcon} from '../../assets/Bookmark-icon.svg';
 import { ReactComponent as LikeFullIcon} from '../../assets/Like-icon-full.svg';
 import { ReactComponent as BookmarkFullIcon} from '../../assets/Bookmark-icon-full.svg';
 import { MyComment } from '../../components';
+import { CommentList } from '../../components/community';
 
 
 const dump = {
@@ -34,12 +35,12 @@ const dump = {
 
 const PostDetail = () => {
     const params = useParams();
+    const navigate = useNavigate();
 
     const [postData, setPostData] = useState(dump);
     const [postCategory, setPostCategory] = useState<string>();
-    // const [like, setLike] = useState<boolean>();
-    // const [bookmark, setBookmark] = useState<boolean>();
-
+    const [like, setLike] = useState<boolean>();
+    const [bookmark, setBookmark] = useState<boolean>();
 
     const [modal, setModal] = useState<boolean>(false);
     const [imageSource, setImageSource] = useState<any>();
@@ -57,7 +58,9 @@ const PostDetail = () => {
                     console.log(status, data);
                     if (status === 200) {
                         setPostData(data.body.data.data);
-                        setPostCategory(data.body.data.data.category)
+                        setPostCategory(data.body.data.data.category);
+                        setLike(data.body.data.data.is_like);
+                        setBookmark(data.body.data.data.is_bookmark);
                     }
                 })
                 .catch((e) => {
@@ -101,38 +104,76 @@ const PostDetail = () => {
         setModal(!modal);
     }, [modal]);
 
-    // 좋아요, 북마크 Post API
+    // 좋아요, 북마크 생성/취소 API
     const clickCntHandler = async (what: string) => {
-        if (!postData.is_like) {  // false -> 좋아요/북마크 생성
-            await postApi(
-                {},
-                `/community/${postData.post_id}/${what}`
-            )
-            .then(({ status, data }) => {
-                console.log("POST 누름", status, data);
-                if (status === 200) {
-                    window.location.reload();  // 새로 고침하여 좋아요/북마크 수 갱신
-                }
-            })
-            .catch((e) => {
-                console.log(e);
-            });
-        } else { // true -> 좋아요/북마크 취소
-            await deleteApi(
-                {},
-                `/community/${postData.post_id}/${what}`
-            )
-            .then(({ status, data }) => {
-                console.log("DEL 취소", status, data);
-                if (status === 200) {
-                    window.location.reload();  // 새로 고침하여 좋아요/북마크 수 갱신
-                }
-            })
-            .catch((e) => {
-                console.log(e);
-            });
+        // 아이콘 색깔 바로 변환
+        if (what === 'like') {
+            setLike(!like);
+        } else {
+            setBookmark(!bookmark);
         }
-        
+
+        if (what === 'like') {  // 좋아요일 경우
+            if (!postData.is_like) {  // false -> 좋아요 생성
+                await postApi(
+                    {},
+                    `/community/${postData.post_id}/${what}`
+                )
+                .then(({ status, data }) => {
+                    console.log("POST 누름", status, data);
+                    if (status === 200) {
+                        window.location.reload();  // 새로 고침하여 좋아요 수 갱신
+                    }
+                })
+                .catch((e) => {
+                    console.log(e);
+                });
+            } else { // true -> 좋아요 취소
+                await deleteApi(
+                    {},
+                    `/community/${postData.post_id}/${what}`
+                )
+                .then(({ status, data }) => {
+                    console.log("DEL 취소", status, data);
+                    if (status === 200) {
+                        window.location.reload();  // 새로 고침하여 좋아요 수 갱신
+                    }
+                })
+                .catch((e) => {
+                    console.log(e);
+                });
+            }
+        } else {  // bookmark일 경우
+            if (!postData.is_bookmark) {  // false -> 좋아요/북마크 생성
+                await postApi(
+                    {},
+                    `/community/${postData.post_id}/${what}`
+                )
+                .then(({ status, data }) => {
+                    console.log("POST 누름", status, data);
+                    if (status === 200) {
+                        window.location.reload();  // 새로 고침하여 북마크 수 갱신
+                    }
+                })
+                .catch((e) => {
+                    console.log(e);
+                });
+            } else { // true -> 북마크 취소
+                await deleteApi(
+                    {},
+                    `/community/${postData.post_id}/${what}`
+                )
+                .then(({ status, data }) => {
+                    console.log("DEL 취소", status, data);
+                    if (status === 200) {
+                        window.location.reload();  // 새로 고침하여 북마크 수 갱신
+                    }
+                })
+                .catch((e) => {
+                    console.log(e);
+                });
+            }
+        }
     }
 
     const enterComment = async (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
@@ -155,6 +196,10 @@ const PostDetail = () => {
         }
     }
 
+    const clickProfile = () => {  // 프로필 클릭 시 유저 마이페이지로 이동
+        navigate(`/mypage/${postData.writer.user_id}`);
+    }
+
     return (
         <Wrapper>
             <PostWrapper>
@@ -165,7 +210,10 @@ const PostDetail = () => {
                                 {postCategory}
                             </div>
                             <div style={{ fontWeight: 'bold', fontSize: '28px' }}>{postData.title}</div>
-                            <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', justifyContent: 'left', marginTop: '5px' }}>
+                            <div 
+                                onClick={clickProfile}
+                                style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', justifyContent: 'left', marginTop: '5px' }}
+                                >
                                 <img src={postData.writer.user_profile_image}
                                     style={{ width: '40px', height: '40px', borderRadius: '40px' }}
                                 />
@@ -175,7 +223,6 @@ const PostDetail = () => {
                                 </div>
                             </div>
                         </div>
-                        
                     </UpperSection>
                     <hr
                         style={{
@@ -203,23 +250,22 @@ const PostDetail = () => {
                         }}
                     />
                     <div className='cnts'>
-                        {postData.is_like ? (
-                            <LikeFullIcon />
-                        ) : (
-                            <LikeIcon />
-                        )}
                         <div className='cnt'
-                            onClick={() => clickCntHandler('like')}>
-                            
+                        onClick={() => clickCntHandler('like')}>
+                            {like ? (
+                                <LikeFullIcon className='cnt-icon' />
+                            ) : (
+                                <LikeIcon className='cnt-icon' />
+                            )}
                             {postData.likes}
                         </div>
-                        {postData.is_bookmark ? (
-                            <BookmarkFullIcon />
-                        ) : (
-                            <BookmarkIcon />
-                        )}
                         <div className='cnt'
                             onClick={() => clickCntHandler('bookmark')}>
+                            {bookmark ? (
+                                <BookmarkFullIcon className='cnt-icon' />
+                            ) : (
+                                <BookmarkIcon className='cnt-icon' />
+                            )}
                             {postData.likes}
                         </div>
                     </div>
@@ -232,6 +278,7 @@ const PostDetail = () => {
                                 width: '100%'
                             }}
                         />
+                        <CommentList />
                         {/* <MyComment /> */}
                         <textarea
                             placeholder='댓글을 입력하시개'
@@ -246,7 +293,7 @@ const PostDetail = () => {
                 </Post>
             </PostWrapper>
             <Link to='/all' style={{textDecoration: 'none'}}>
-                <div className='back-list' style={{marginBottom: '20px', fontWeight: 'bold', fontSize: '18px'}}>{postCategory}글 보기</div>
+                <div className='back-list' style={{marginBottom: '20px', fontWeight: 'bold', fontSize: '18px'}}>&lt; {postCategory}글 목록 보기</div>
             </Link>
 
             {modal && <ImageModal imgSrc={imageSource} onClickImageModal={onClickImageModal} />}
@@ -289,10 +336,17 @@ const Post = styled.div`
         display: flex;
         flex-direction: row;
         margin-right: auto;
+        cursor: pointer;
     }
 
     .cnt {
         margin: 0 8px;
+        display: flex;
+        flex-direction: row;
+    }
+
+    .cnt-icon {
+        padding: 0 5px;
     }
 `
 
