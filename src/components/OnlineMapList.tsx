@@ -134,9 +134,9 @@ const OneComp = ({ service }: string | any) => {
             href={'https://cafe.naver.com/kusitms'}  // {service.link}
             target='_blank'
             style={{ textDecoration: 'none' }}>
-            <div>이미지</div>
+            <div className='img'>이미지</div>
             <div className='contents'>
-                <div>{service.name}</div>
+                <div style={{fontWeight: 'bold', fontSize: '18px'}}>{service.name}</div>
                 <div>{service.exp}</div>
             </div>
         </OneWrapper>
@@ -220,6 +220,7 @@ const BoxWrapper = styled.div`
         background-color: ${Colors.white};
         width: 400px;
         margin-left: 50px;
+        padding-bottom: 20px;
         display: flex;
         flex-direction: column;
         align-items: center;
@@ -235,6 +236,7 @@ const BoxWrapper = styled.div`
         background-color: ${Colors.white};
         width: 400px;
         margin-left: 50px;
+        padding-bottom: 20px;
         display: flex;
         flex-direction: column;
         align-items: center;
@@ -271,17 +273,25 @@ const OneWrapper = styled.a`
     display: flex;
     flex-direction: row;
     align-items: center;
-    justify-content: center;
+    justify-content: left;
 
     width: 300px;
     margin: 10px 0;
-    background-color: ${Colors.green1};
-    color: black;
+    color: ${Colors.black};
 
+    .img {
+        width: 80px;
+        height: 80px;
+        background-color: ${Colors.green2};
+        margin-right: 20px;
+        filter: drop-shadow(0px 4px 10px rgba(0, 0, 0, 0.25));
+        border-radius: 13px;
+    }
 
     .contents {
         display: flex;
         flex-direction: column;
+        text-align: left;
     }
 `
 

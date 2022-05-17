@@ -49,7 +49,7 @@ const OnlineMap = () => {
             {town && <OnlineMapList pick={town}/>}
             <AnimatePresence>
                 <div className="map-parents">
-                    {!town && <MapOnlyInitial className='map-only-initial' />}
+                    {!town && <MapOnlyInitial className='map-only-initial' style={{width: '90vw'}} />}
                     {
                         (town === '건강하개') && 
                         <MapMotion
@@ -116,31 +116,36 @@ const OnlineMap = () => {
                     <NameTag id='health'
                         whileHover={{ scale: 1.2 }}
                         animate={{ x: town ? moveUnit : 0}}
-                        onClick={() => clickTown('건강하개')}>
+                        onClick={() => clickTown('건강하개')}
+                        style={{top: '72%', left: '20%'}}>
                         건강하개
                     </NameTag>
                     <NameTag id='young'
                         whileHover={{ scale: 1.2 }}
                         animate={{ x: town ? moveUnit : 0}}
-                        onClick={() => clickTown('영양있개')}>
+                        onClick={() => clickTown('영양있개')}
+                        style={{top: '40%', left: '38%'}}>
                         영양있개
                     </NameTag>
                     <NameTag id='special'
                         whileHover={{ scale: 1.2 }}
                         animate={{ x: town ? moveUnit : 0}}
-                        onClick={() => clickTown('특별하개')}>
+                        onClick={() => clickTown('특별하개')}
+                        style={{top: '85%', left: '53%'}}>
                         특별하개
                     </NameTag>
                     <NameTag id='shop'
                         whileHover={{ scale: 1.2 }}
                         animate={{ x: town ? moveUnit : 0}}
-                        onClick={() => clickTown('쇼핑하개')}>
+                        onClick={() => clickTown('쇼핑하개')}
+                        style={{top: '64%', left: '46%'}}>
                         쇼핑하개
                     </NameTag>
                     <NameTag id='knowledge'
                         whileHover={{ scale: 1.2 }}
                         animate={{ x: town ? moveUnit : 0}}
-                        onClick={() => clickTown('지식쌓개')}>
+                        onClick={() => clickTown('지식쌓개')}
+                        style={{top: '86%', left: '35%'}}>
                         지식쌓개
                     </NameTag>
                     <NameTag id='adopt'
@@ -169,42 +174,13 @@ export default OnlineMap;
 
 const PageWrapper = styled.div`
     background-color: ${Colors.green1};
-    height: 100vh;
+    height: 110vh;
 
     .map-parents {
         position: absolute;
         transform: translate(-50%, -50%);
         top: 70%;
         left: 50%;
-    }
-
-    .map-only-initial {
-        width: 90vw;
-    }
-
-    #health {
-        top: 72%;
-        left: 20%;
-    }
-
-    #young {
-        top: 40%;
-        left: 38%;
-    }
-
-    #special {
-        top: 85%;
-        left: 53%;
-    }
-
-    #shop {
-        top: 64%;
-        left: 46%;
-    }
-
-    #knowledge {
-        top: 86%;
-        left: 35%;
     }
 
     #volunteer {
