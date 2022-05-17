@@ -2,10 +2,11 @@ import React, { useEffect, useState } from "react";
 import styled from '@emotion/styled';
 import { Colors } from '../styles/ui';
 import OfflineList from '../components/OfflineMapList';
+import { getApi, postApi, setHeader } from '../api';
 
 import Marker from "../assets/offlineMap/marker.png";
 
-const OfflineMap = () => {
+  const OfflineMap = () => {
 
     //TODO: API 대체
     const offline_map = 
@@ -55,7 +56,30 @@ const OfflineMap = () => {
     var markers: any [] = [];  // 마커 객체 배열
     var infowindows: any [] = [];  // 정보창 객체 배열
 
+    const [mapList, setMapList] = useState(offline_map);
+    console.log("1");
     const [myLocation, setMyLocation] = useState< { latitude: number; longitude: number } | string >("");
+
+    useEffect(() => {
+      // map 좌표 불러오기
+      const getMapList = async () => {
+          await getApi(
+              {}, `/offline-map`
+          )
+              .then(({ status, data }) => {
+                  console.log(`GET 글 내용`, status, data);
+                  // if (status === 200) {
+                  //     setQuestion(data.body.data);
+                  // }
+                  setMapList(data.body.data.placeInfo);
+              })
+              .catch((e) => {
+                  console.log(e);
+              });
+      }
+      getMapList();
+
+  }, []);
 
     useEffect(() => {
         if (navigator.geolocation) {
@@ -76,7 +100,6 @@ const OfflineMap = () => {
     
           //지도 옵션 지정
           const map = new naver.maps.Map("map", {
-              //TODO: 초기 위치 결정
             center: new naver.maps.LatLng(currentPosition[0], currentPosition[1]),
             // center: new naver.maps.LatLng(37.497928, 127.027583), //초기 위치 강남역
             logoControl: true,
@@ -115,7 +138,8 @@ const OfflineMap = () => {
           });
 
           //위치 정보 마크
-          offline_map.map(function(place: any) {
+          //offline_map.map(function(place: any) {
+            mapList.map(function(place: any) {
               new naver.maps.Marker({
                 position: new naver.maps.LatLng(Number(place.latitude), Number(place.longitude)),
                 map: map,

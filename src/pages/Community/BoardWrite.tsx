@@ -53,7 +53,7 @@ const BoardWrite = () => {
             .then(({ status, data }) => {
                 console.log(status, data);
                 if (status === 200 || status === 201) {
-                    // window.location.reload();
+                    window.location.reload();
                 }
             })
             .catch((e) => {

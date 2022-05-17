@@ -17,7 +17,7 @@ const PediaOneComment = ({ comment }: any) => {
             .then(({ status, data }) => {
                 console.log("POST 댓글좋아요 누름", status, data);
                 if (status === 200) {
-                    // window.location.reload();
+                    window.location.reload();
                 }
             })
             .catch((e) => {

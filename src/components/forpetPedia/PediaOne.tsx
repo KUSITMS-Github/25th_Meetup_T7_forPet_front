@@ -117,6 +117,7 @@ const PediaOne = (post: any) => {
         )
             .then(({ status, data }) => {
                 if (status === 200) {
+                    window.location.reload(); // 새로고침
                     // console.log("POST 좋아요/북마크 누름", status, data);
                 }
             })
@@ -143,8 +144,11 @@ const PediaOne = (post: any) => {
                         <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', marginBottom: '10px' }}>
 
                             <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-                                <img src={onePost.imageUrlList[0]}
+                            {
+                                    onePost.imageUrlList && 
+                                    <img src={onePost.imageUrlList[0]}
                                     style={{ width: '30px', height: '30px', borderRadius: '20px' }} />
+                                }
                                 <div style={{ fontSize: '12px', color: Colors.green5 }}>{onePost.tag}</div>
                                 <div style={{ fontSize: '14px', fontWeight: 'bold' }} className='writer'>{onePost.nickName}</div>
                             </div>
