@@ -13,11 +13,6 @@ const PediaOne = (post: any) => {
     const navigate = useNavigate();
     const onePost = post.post;
     const [myAnswer, setMyAnswer] = useState<string>();
-    const [count, setCount] = useState({
-        like: 0,
-        bookmark: 0,
-        comment: 0,
-    });
 
     // interface Comment {
     //     imageUrl: string,

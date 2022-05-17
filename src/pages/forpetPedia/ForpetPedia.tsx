@@ -11,10 +11,10 @@ import SearchIcon from '../../assets/search_icon.png';
 const ForpetPedia = () => {
 
     // 임시 토큰 넣어줌
-    // useEffect(() => {
-    //     const token = 'eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxIiwiaWF0IjoxNjUyNTY1MzcxLCJleHAiOjE2NTI1NjcxNzF9.3BWqx2knn5QvB5UKAlspL1AP9zMaCWuHaTgOPJLC-7Q'
-    //     setHeader(token);
-    // }, [])
+    useEffect(() => {
+        const token = 'eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIzIiwiaWF0IjoxNjUyNjg5MDU4LCJleHAiOjE2NTMyOTM4NTh9.Smx6cW-984fGOU5dq5GTnyMnw_Pf_R8UFALXMmzYDTo'
+        setHeader(token);
+    }, [])
 
 
     const initialPediaList =  // 임시 데이터

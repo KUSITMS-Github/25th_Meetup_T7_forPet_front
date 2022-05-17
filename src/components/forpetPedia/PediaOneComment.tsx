@@ -6,7 +6,7 @@ import { ReactComponent as LikeFullIcon } from '../../assets/Like-icon-full.svg'
 
 
 const PediaOneComment = ({ comment }: any) => {
-    console.log(comment)
+    // console.log(comment)
     // 댓글좋아요 Post API
     const clickCommentCnt = async (commentId: number) => {
         console.log(commentId);
