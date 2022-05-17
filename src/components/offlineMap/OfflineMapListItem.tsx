@@ -1,12 +1,10 @@
 import { useState, useCallback } from "react";
 import styled from '@emotion/styled';
-import { Colors } from '../styles/ui';
-import  OfflineMapModal from '../components/OfflineMapModal';
-
-import Item1 from "../assets/offlineMap/item_img1.png"
-import { ReactComponent as BookmarkAct } from "../assets/offlineMap/bookmark_act.svg"
-import { ReactComponent as BookmarkDeact } from "../assets/offlineMap/bookmark_deact.svg"
-import { ReactComponent as StarAvg } from "../assets/offlineMap/StarAvg.svg"
+import { Colors } from '../../styles/ui';
+import  OfflineMapModal from './OfflineMapModal';
+import { ReactComponent as BookmarkAct } from "../../assets/offlineMap/bookmark_act.svg"
+import { ReactComponent as BookmarkDeact } from "../../assets/offlineMap/bookmark_deact.svg"
+import { ReactComponent as StarAvg } from "../../assets/offlineMap/StarAvg.svg"
 
 interface Props {
     item: any;
@@ -27,14 +25,12 @@ const OfflineMapListItem = ({ item }: Props) => {
     return(
         <ItemBox>
 
-            {/*장소 이미지*/}
-            <img src={Item1} alt='' onClick={onClickToggleModal}/>
-
             {/*장소 이름, 카테고리*/}
             <Section>
                 <div className="text" onClick={onClickToggleModal}>
                 <span style={{fontSize: '17px'}}>{item.name}</span>
                 <span style={{fontSize: '11px', marginLeft: '8px', color: '${Colors.gray2}'}}>{item.category}</span>
+                <br /><span style={{fontSize: '11px', color: '${Colors.gray2}'}}>{item.address}</span>
                 </div>
                 <div className='bookmark'>
                 {bookmark ? 
@@ -44,7 +40,7 @@ const OfflineMapListItem = ({ item }: Props) => {
             </Section>
 
             {/*장소 리뷰 정보*/}
-            <Section style={{marginLeft:'10px'}} onClick={onClickToggleModal}>
+            <Section onClick={onClickToggleModal}>
                 <StarAvg />
                 <span style={{fontSize: '14px', marginLeft: '8px'}}>{item.starAvg}/</span>
                 <span style={{fontSize: '11px'}}>&nbsp;리뷰 {item.reviewCnt}</span>
@@ -68,7 +64,7 @@ const ItemBox = styled.div`
 const Section = styled.div`
     display: flex;
     flex-direction: row;
-    align-items: baseline;
+    align-items: center;
     justify-content: flex-start;
 
     margin-top: 8px;

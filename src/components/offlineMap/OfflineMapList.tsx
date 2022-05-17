@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import styled from '@emotion/styled';
-import { Colors } from '../styles/ui';
+import { Colors } from '../../styles/ui';
 import  OfflineMapListItem from './OfflineMapListItem';
 
 const OfflineMapList = () => {
@@ -151,14 +151,14 @@ const Title = styled.div`
     .main-title {
         font-family: 'Baloo';
         font-weight: 400;
-        font-size: 40px;
+        font-size: 28px;
         color: ${Colors.black};
     }
 
     .sub-titile {
         font-family: 'NotoSans';
         font-weight: 400;
-        font-size: 24px;
+        font-size: 17px;
         color: ${Colors.gray2};
     }
 
@@ -180,7 +180,6 @@ const Section = styled.div`
     }
 
     .searchbar{
-        width: 82%;
         margin-top: 16px;
         padding: 7px 19px;
         box-sizing: border-box;
