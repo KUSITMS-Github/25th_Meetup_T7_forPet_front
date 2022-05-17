@@ -43,7 +43,7 @@ function App() {
             <Route path="/maps" element={<ChooseMaps />} />
             <Route path="/onlinemap" element={<OnlineMap />} />
             <Route path="/offlinemap" element={<OfflineMap />} />
-            <Route path="/mypage" element={<MyPage />} />
+            <Route path="/mypage/:id" element={<MyPage />} />
             <Route path="/preboard" element={<PreBoard />} />
             <Route path="/share" element={<BoardShare />} />
             <Route path="/meet" element={<BoardMeet />} />

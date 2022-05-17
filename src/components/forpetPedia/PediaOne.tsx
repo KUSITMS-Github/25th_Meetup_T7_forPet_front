@@ -14,15 +14,15 @@ const PediaOne = (post: any) => {
     const onePost = post.post;
     const [myAnswer, setMyAnswer] = useState<string>();
 
-    // interface Comment {
-    //     imageUrl: string,
-    //     nickName: string,
-    //     tag: string,
-    //     comment: string,
-    //     createDate: string,
-    //     likes: number,
-    //     id: number,
-    // }
+    interface Comment {
+        imageUrl: string,
+        nickName: string,
+        tag: string,
+        comment: string,
+        createDate: string,
+        likes: number,
+        id: number,
+    }
 
     const commentInitial = [
         {
@@ -63,8 +63,11 @@ const PediaOne = (post: any) => {
         }
     ];
 
-    // const [comments, setComments] = useState([]);  // 댓글 
-    const [comments, setComments] = useState(commentInitial);
+    // const [comments, setComments] = useState(commentInitial);  // 댓글 임시 데이터
+    const [comments, setComments] = useState<Comment[]>();
+
+    // const [like, setLike] = useState<boolean>();
+    // const [bookmark, setBookmark] = useState<boolean>();
 
     // 댓글 불러오기 GET API
     useEffect(() => {
@@ -130,10 +133,9 @@ const PediaOne = (post: any) => {
         navigate(`/pedia/${onePost.qnaBoardId}`);
     };
 
-    useEffect(() => {
-        console.log('image', onePost.imageUrlList);
-
-    }, [])
+    // useEffect(() => {
+    //     console.log('image', onePost.imageUrlList);
+    // }, [])
 
 
     return (
@@ -144,10 +146,10 @@ const PediaOne = (post: any) => {
                         <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', marginBottom: '10px' }}>
 
                             <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-                            {
-                                    onePost.imageUrlList && 
+                                {
+                                    onePost.imageUrlList &&
                                     <img src={onePost.imageUrlList[0]}
-                                    style={{ width: '30px', height: '30px', borderRadius: '20px' }} />
+                                        style={{ width: '30px', height: '30px', borderRadius: '20px' }} />
                                 }
                                 <div style={{ fontSize: '12px', color: Colors.green5 }}>{onePost.tag}</div>
                                 <div style={{ fontSize: '14px', fontWeight: 'bold' }} className='writer'>{onePost.nickName}</div>
