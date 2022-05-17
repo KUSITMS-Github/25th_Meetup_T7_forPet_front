@@ -5,6 +5,7 @@ import  OfflineMapListItem from './OfflineMapListItem';
 
 const OfflineMapList = () => {
     const [searchPlace, setsearchPlace] = useState<string>();
+    
 
     const offline_list = 
     [
