@@ -13,11 +13,11 @@ const OauthHandler = () => {
     }, [])
 
     useEffect(() => {
+        //받아온 token으로 setHeader
         // axios로 token 보내면 signup 여부 반환
         // signup = true -> 서비스
         // signup = false -> 회원가입(정보등록)
         
-
     }, [token])
 
 

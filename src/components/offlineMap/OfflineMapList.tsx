@@ -1,11 +1,13 @@
 import React, { useEffect, useState } from "react";
 import styled from '@emotion/styled';
-import { Colors } from '../styles/ui';
+import { Colors } from '../../styles/ui';
+import { getApi } from '../../api';
 import  OfflineMapListItem from './OfflineMapListItem';
+import OfflineMapCategory from "./OfflineMapCategory";
+import BtnSearch from "../../assets/offlineMap/btn_search.svg";
 
 const OfflineMapList = () => {
-    const [searchPlace, setsearchPlace] = useState<string>();
-
+    //TODO: API 대체
     const offline_list = 
     [
         {
@@ -74,11 +76,51 @@ const OfflineMapList = () => {
         }
     ]
 
-    const enterSearchPlace = async (e: any) => {    //TODO: 검색 기능 구현
-        if (e.key === "Enter"){
+    const [mapList, setMapList] = useState(offline_list);
+    const [searchPlace, setsearchPlace] = useState<string>();  
+    const [activeCat, setActiveCat] = useState('전체보기');
 
-        }
+    //주변 반려견 장소 검색
+    const enterSearchPlace = async (e: any) => {
+            console.log(searchPlace);
+            await getApi(
+                {},
+                `/offline-map/search?keyword=${searchPlace}`
+            )
+                .then(({ status, data }) => {
+                    console.log("search 결과", status, data);
+                    if (data) {
+                        setMapList(data.body.data);
+                    } else {
+                        setMapList([]);
+                    }
+                })
+                .catch((e) => {
+                    console.log(e);
+                });
     }
+
+    useEffect(() => {
+        activeCat === '전체보기'
+          ? setMapList(offline_list)
+          : 
+            getApi(
+                {},
+                `/offline-map/category?category=${activeCat}`
+            )
+                .then(({ status, data }) => {
+                    console.log("search 결과", status, data);
+                    if (data) {
+                        setMapList(data.body.data);
+                    } else {
+                        setMapList([]);
+                    }
+                })
+                .catch((e) => {
+                    console.log(e);
+                });
+
+      }, [activeCat]);
 
     return(
         <ListBox>
@@ -97,19 +139,28 @@ const OfflineMapList = () => {
                         onChange={(
                             e: React.ChangeEvent<HTMLInputElement>,
                         ): void => setsearchPlace(e.target.value)}
-                        onKeyPress={enterSearchPlace}
                         value={searchPlace}
-                />   
+                ></input>
+                <img className='btn_search' src={BtnSearch} onClick={enterSearchPlace} />   
             </Section>
 
             {/*주변*/}
             <Section>
                 <span className='title'>주변</span>
-
-                {offline_list.map((item, index) => (
+                {mapList.map((item, index) => (
                     <OfflineMapListItem key={index} item={item} />
                 ))}
             </Section>
+
+            <Category>
+                <OfflineMapCategory name='전체보기' activeCat={activeCat === '전체보기' ? true : false} handleSetCat={setActiveCat}/>
+                <OfflineMapCategory name='카페' activeCat={activeCat === '카페' ? true : false} handleSetCat={setActiveCat}/>
+                <OfflineMapCategory name='동물병원' activeCat={activeCat === '동물병원' ? true : false} handleSetCat={setActiveCat}/>
+                <OfflineMapCategory name='동물약국' activeCat={activeCat === '동물약국' ? true : false} handleSetCat={setActiveCat}/>
+                <OfflineMapCategory name='미용실' activeCat={activeCat === '미용실' ? true : false} handleSetCat={setActiveCat}/>
+                <OfflineMapCategory name='보호소' activeCat={activeCat === '보호소' ? true : false} handleSetCat={setActiveCat}/>
+                <OfflineMapCategory name='유치원' activeCat={activeCat === '유치원' ? true : false} handleSetCat={setActiveCat}/>
+            </Category>
         </ListBox>
     );
 
@@ -151,14 +202,14 @@ const Title = styled.div`
     .main-title {
         font-family: 'Baloo';
         font-weight: 400;
-        font-size: 40px;
+        font-size: 28px;
         color: ${Colors.black};
     }
 
     .sub-titile {
         font-family: 'NotoSans';
         font-weight: 400;
-        font-size: 24px;
+        font-size: 17px;
         color: ${Colors.gray2};
     }
 
@@ -180,7 +231,6 @@ const Section = styled.div`
     }
 
     .searchbar{
-        width: 82%;
         margin-top: 16px;
         padding: 7px 19px;
         box-sizing: border-box;
@@ -194,4 +244,24 @@ const Section = styled.div`
         font-weight: 400;
         font-size: 17px;
     }
+
+    .btn_search{
+        position: relative;
+        top: -33px;
+        left: 342px;
+        width: 21px;
+        height: 21px;
+    }
+`;
+
+const Category = styled.div`
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    width: 68%;
+
+    position: absolute;
+    top: 89px;
+    left: 32%;
+    z-index: 1;
 `;
