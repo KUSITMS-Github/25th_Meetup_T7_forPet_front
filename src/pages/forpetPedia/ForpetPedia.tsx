@@ -65,6 +65,19 @@ const ForpetPedia = () => {
             }
         ]
 
+    interface Qna {
+        qnaBoardId: number,
+        nickName: string,
+        tag: string,
+        title: string,
+        content: string,
+        createDate: string,
+        likes: number,
+        bookmark: number,
+        comments: number,
+        imageUrlList: Array<string>,
+    }
+
 
     const initialFaqKeyword = ["임시보호", "필수품", "유기견"];
 
@@ -73,7 +86,9 @@ const ForpetPedia = () => {
     const [searchWordRe, setSearchWordRe] = useState<string>();
 
     const [sortVar, setSortVar] = useState<string>('latest');  // 최신순: latest, 추천순: likes
-    const [pediaList, setPediaList] = useState(initialPediaList);
+    // const [pediaList, setPediaList] = useState(initialPediaList);  // 임시 데이터
+    const [pediaList, setPediaList] = useState<Qna[]>();
+
     const [faqKeyword, setFaqKeyword] = useState(initialFaqKeyword);
 
 
@@ -229,13 +244,16 @@ const ForpetPedia = () => {
             </div>
 
             {
-                pediaList &&
+                pediaList ? (
                 pediaList.map((p, i) => (
                     <PediaOne
                         key={p.qnaBoardId}
                         post={p}
                     />
                 ))
+                ) :(
+                    <p>글이 아직 없어요.</p>
+                )
             }
 
             <Pagination

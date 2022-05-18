@@ -19,7 +19,8 @@ const initialBoardList = [
         "image_url_list": [
             "https://kusitms-forpet.s3.ap-northeast-2.amazonaws.com/d55921df-d60b-4466-93b5-0c547ffdf68d.png"
         ],
-        "comment_cnt": 2
+        "comment_cnt": 2, 
+        "createdDate": "2022-05-17T01:53:58.953616",
     },
     {
         "writer": {
@@ -34,7 +35,8 @@ const initialBoardList = [
         "image_url_list": [
             "https://kusitms-forpet.s3.ap-northeast-2.amazonaws.com/2a901d25-0ff4-4e43-bb91-e36ef67a89e1.png"
         ],
-        "comment_cnt": 2
+        "comment_cnt": 2, 
+        "createdDate": "2022-05-17T01:53:58.953616",
     },
     {
         "writer": {
@@ -49,38 +51,10 @@ const initialBoardList = [
         "image_url_list": [
             "https://kusitms-forpet.s3.ap-northeast-2.amazonaws.com/6ec7081f-5877-4f6b-9459-f5318fd35c37.png"
         ],
-        "comment_cnt": 2
+        "comment_cnt": 2, 
+        "createdDate": "2022-05-17T01:53:58.953616",
     },
-    {
-        "writer": {
-            "user_id": 3,
-            "user_profile_image": "http://k.kakaocdn.net/dn/dpk9l1/btqmGhA2lKL/Oz0wDuJn1YV2DIn92f6DVK/img_110x110.jpg",
-            "user_nickname": "쩜마이"
-        },
-        "title": "insertTitle",
-        "category": "boasting",
-        "post_id": 7,
-        "thumbs_up_cnt": 0,
-        "image_url_list": [
-            "https://kusitms-forpet.s3.ap-northeast-2.amazonaws.com/c351f652-31f6-4d68-9568-8fff1c47ed1e.png"
-        ],
-        "comment_cnt": 2
-    },
-    {
-        "writer": {
-            "user_id": 3,
-            "user_profile_image": "http://k.kakaocdn.net/dn/dpk9l1/btqmGhA2lKL/Oz0wDuJn1YV2DIn92f6DVK/img_110x110.jpg",
-            "user_nickname": "쩜마이"
-        },
-        "title": "insertTitle",
-        "category": "boasting",
-        "post_id": 6,
-        "thumbs_up_cnt": 0,
-        "image_url_list": [
-            "https://kusitms-forpet.s3.ap-northeast-2.amazonaws.com/98a1e436-d006-41eb-bba9-94f5031259e9.png"
-        ],
-        "comment_cnt": 2
-    }
+    
 ];
 
 interface propsType {
@@ -117,7 +91,7 @@ const BoardList = ({ board, search }: propsType) => {
                 .then(({ status, data }) => {
                     console.log(status, data);
                     if (status === 200) {
-                        setBoardList(data.body.data.data);
+                        setBoardList(data.body.data);
                     }
                 })
                 .catch((e) => {
@@ -180,7 +154,10 @@ const BoardList = ({ board, search }: propsType) => {
                                 }
                                 <div style={{textAlign: 'left'}}>
                                     <div style={{fontSize: '20px'}}>{b.title}</div>
-                                    <div style={{fontSize: '16px', color: Colors.gray2}}>{b.writer.user_id}</div>
+                                    <div style={{display: 'flex', flexDirection: 'row', alignItems: 'end'}}>
+                                        <div style={{fontSize: '16px', color: Colors.gray2, marginRight: '5px'}}>{b.writer.user_id}</div>
+                                        <div style={{fontSize: '12px', color: Colors.gray2}}>{b.createdDate}</div>
+                                    </div>
                                 </div>
                             </div>
                             <div className='right-section'>
