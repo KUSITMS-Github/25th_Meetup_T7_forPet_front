@@ -5,9 +5,11 @@ import { useState } from 'react';
 import Background from '../assets/Login-background.svg';
 import ProfileImg from '../assets/Login-profile.svg';
 import Picture from '../assets/Login-picture.svg';
+import { ReactComponent as CancleBtn } from '../assets/Login-cancle.svg';
 
 const LoginForpet = () => {
     const [profile, setProfile] = useState<File>();
+    const [profileSrc, setprofileSrc] = useState<string>();
     const [nickname, setNickname] = useState<string>();
     const [phoneNum, setPhoneNum] = useState<string>();
     
@@ -16,6 +18,7 @@ const LoginForpet = () => {
     const onFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         console.log(e.target.files![0]);
         setProfile(e.target.files![0]);
+        setprofileSrc(URL.createObjectURL(e.target.files![0]));
     }
 
     return (
@@ -27,13 +30,14 @@ const LoginForpet = () => {
                 <span className='title'>&nbsp;&nbsp;회원가입</span>
             </Title>
             <Section>
-                <img src={ProfileImg} width="137" height="137" style={{marginTop: '23px'}}/>
+                {/*프로필 이미지 설정*/}
+                <img src={profileSrc ? profileSrc : ProfileImg} width="137" height="137" style={{marginTop: '23px'}}/>
                 <label htmlFor='input-profile'>
-                    <img src={Picture} width="49" height="49" style={{position: 'absolute', top: '185px', left: '52%'}}/>
+                    <img src={Picture} width="49" height="49" style={{position: 'absolute', top: '190px', left: '53%'}}/>
                 </label>
                 <input type='file' id='input-profile' onChange={(e) => onFileChange(e)} style={{display:'none'}}/>
                 
-
+                {/*닉네임 설정*/}
                 <InputSection>
                     <span className='sub-title'>닉네임(필수)</span>
                     <input
@@ -44,6 +48,7 @@ const LoginForpet = () => {
                         ): void => setNickname(e.target.value)}
                         value={nickname}
                     ></input>
+                    <CancleBtn style={{position: 'absolute', top: '267px', left: '62%'}} onClick={() => setNickname("")}/>
                 </InputSection>
 
                 <Title style={{paddingTop: '20px'}}>
@@ -52,12 +57,13 @@ const LoginForpet = () => {
                     <div className='underline' style={{position: 'absolute', top: '330px', left: '31%'}}/>
                 </Title>
                 
+                {/*휴대폰 인증*/}
                 <InputSection style={{paddingTop: '9px'}}>
-                    <span className='sub-title'>휴대폰 인증(선택)</span>
+                    <span className='sub-title'>휴대폰번호 인증(선택)</span>
                     <div style={{display: 'flex', flexDirection: 'row'}}>
                         <input
                         className='certifyBar'
-                        placeholder='휴대폰 번호 (- 없이)'
+                        placeholder='휴대폰번호 (- 없이)'
                             onChange={(
                                 e: React.ChangeEvent<HTMLInputElement>,
                             ): void => setPhoneNum(e.target.value)}
