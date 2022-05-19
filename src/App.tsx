@@ -2,7 +2,7 @@ import { Routes, Route } from "react-router-dom";
 import {
   Home,
   Login,
-  LoginTerms,
+  LoginForpet,
   Signup,
   ChooseMaps,
   OnlineMap,
@@ -38,7 +38,7 @@ function App() {
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/login" element={<Login />} />
-            <Route path="/loginterms" element={<LoginTerms />} />
+            <Route path="/loginForpet" element={<LoginForpet />} />
             <Route path="/signup" element={<Signup />} />
             <Route path="/maps" element={<ChooseMaps />} />
             <Route path="/onlinemap" element={<OnlineMap />} />

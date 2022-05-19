@@ -38,14 +38,13 @@ const Login = () => {
 
     return (
         <>
-        <img src={LoginBackground} style={{height:'calc(100vh - 72px)', overflow:'hidden'}} />
-            {/* 로그인 */}
-            <Section>
-                <LoginLogo />
-                <span className="notice">로그인하고 퍼펫트를 이용해보세요! <br />필요한 시간은 단, 3초!</span>
-                <button className="btn-login" style={{ marginTop:'45px' }} onClick={(e) => loginHandler(e)} >카카오 로그인</button>
-
-            </Section>
+        <img src={LoginBackground} style={{height:'calc(100vh - 74px)'}} />
+        {/* 로그인 */}
+        <Section>
+            <LoginLogo />
+            <span className="notice">로그인하고 퍼펫트를 이용해보세요! <br />필요한 시간은 단, 3초!</span>
+            <button className="btn-login" style={{ marginTop:'45px' }} onClick={(e) => loginHandler(e)} >카카오 로그인</button>
+        </Section>
         </>
     );
 };
