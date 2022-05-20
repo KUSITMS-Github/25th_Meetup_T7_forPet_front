@@ -1,6 +1,7 @@
 import styled from '@emotion/styled';
 import { Colors } from '../styles/ui';
 import { useState } from 'react';
+import { getApi } from '../api';
 
 import Background from '../assets/Login-background.svg';
 import ProfileImg from '../assets/Login-profile.svg';
@@ -8,17 +9,52 @@ import Picture from '../assets/Login-picture.svg';
 import { ReactComponent as CancleBtn } from '../assets/Login-cancle.svg';
 
 const LoginForpet = () => {
-    const [profile, setProfile] = useState<File>();
-    const [profileSrc, setprofileSrc] = useState<string>();
-    const [nickname, setNickname] = useState<string>();
-    const [phoneNum, setPhoneNum] = useState<string>();
+    const [profile, setProfile] = useState<File>();     //프로필 이미지 file
+    const [profileSrc, setprofileSrc] = useState<string>('');   //프로필이미지 url
+    const [nickname, setNickname] = useState<string>('');       //닉네임
+    const [phoneView, setPhoneView] = useState<number>(1);  //휴대폰 인증 순서
+    const [phoneNum, setPhoneNum] = useState<string>('');       //사용자 휴대폰 번호
+    const [userNum, setUserNum] = useState<string>('');         //사용자가 입력하는 휴대폰 인증번호
+    const [cerNum, setCerNum] = useState<string>('');           //휴대폰 인증번호
     
-    const reader = new FileReader();
+    const reader = new FileReader();        //이미지 file -> url 변환
 
     const onFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         console.log(e.target.files![0]);
         setProfile(e.target.files![0]);
         setprofileSrc(URL.createObjectURL(e.target.files![0]));
+    }
+
+    //휴대폰 인증번호 발송
+    const cerPhoneNum = async () => {
+        setPhoneView(2);
+        await getApi(
+            {},
+            `/signup/check/sendSMS?phone_number=${phoneNum}`
+        )
+            .then(({ status, data }) => {
+                console.log(status, data);
+
+                if (status === 200) {
+                    console.log(data);
+                    setCerNum(data);
+                    console.log(cerNum, typeof cerNum);
+                }
+            })
+            .catch((e) => {
+                console.log(e);
+            });
+    }
+
+    //휴대폰 인증번호 검사
+    const mathingCerNum = () => {
+        if(cerNum == userNum) {
+            setPhoneView(3);
+            alert("인증이 완료되었개");
+        } else {
+            alert("인증번호가 맞지 않아요. 다시 입력해주개");
+            setUserNum("");
+        }
     }
 
     return (
@@ -53,26 +89,51 @@ const LoginForpet = () => {
 
                 <Title style={{paddingTop: '20px'}}>
                     <span className='text-bold'>동물카드, 동네 인증</span>
-                    <span className='regular'>으로 페펫트 커뮤니티를 즐겨보시개 !</span>
+                    <span className='regular'>으로 퍼펫트 커뮤니티를 즐겨보시개 !</span>
                     <div className='underline' style={{position: 'absolute', top: '330px', left: '31%'}}/>
                 </Title>
                 
-                {/*휴대폰 인증*/}
-                <InputSection style={{paddingTop: '9px'}}>
+                { phoneView == 1 ?
+                    //휴대폰 인증 번호 발송
+                    <InputSection style={{paddingTop: '9px'}}>
+                        <span className='sub-title'>휴대폰번호 인증(선택)</span>
+                        <div style={{display: 'flex', flexDirection: 'row'}}>
+                            <input
+                            className='certifyBar'
+                            placeholder='휴대폰번호 (- 없이)'
+                                onChange={(
+                                    e: React.ChangeEvent<HTMLInputElement>,
+                                ): void => setPhoneNum(e.target.value)}
+                                value={phoneNum|| ''}
+                            ></input>
+                            <div className='btn-certify' onClick={cerPhoneNum}>번호 입력</div>
+                        </div>
+                    </InputSection>
+                :
+                    //휴대폰 인증번호 매칭
+                    <InputSection style={{paddingTop: '9px'}}>
                     <span className='sub-title'>휴대폰번호 인증(선택)</span>
-                    <div style={{display: 'flex', flexDirection: 'row'}}>
-                        <input
-                        className='certifyBar'
-                        placeholder='휴대폰번호 (- 없이)'
-                            onChange={(
-                                e: React.ChangeEvent<HTMLInputElement>,
-                            ): void => setPhoneNum(e.target.value)}
-                            value={phoneNum}
-                        ></input>
-                        <div className='btn-certify'>번호 입력</div>
-                    </div>
-                </InputSection>
+                        <div style={{display: 'flex', flexDirection: 'row'}}>
+                            <input
+                            className='certifyBar'
+                            placeholder='인증번호'
+                                onChange={(
+                                    e: React.ChangeEvent<HTMLInputElement>,
+                                ): void => setUserNum(e.target.value)}
+                                value={userNum}
+                            ></input>
+                            { phoneView == 3 ?
+                                <div className='btn-cerComplete'>인증완료</div>
+                            :
+                                <div className='btn-certify' onClick={mathingCerNum}>인증하기</div>
+                            }
+                            
+                        </div>
+                    </InputSection>
+                }
+
                 
+                {/*동물카드 인증*/}
                 <InputSection>
                     <span className='sub-title'>동물카드 인증(선택)</span>
                     <div style={{display: 'flex', flexDirection: 'row'}}>
@@ -237,6 +298,27 @@ const InputSection = styled.div`
         font-weight: 500;
         font-size: 10px;
         color: ${Colors.black};
+    }
+
+    .btn-cerComplete{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        width: 89px;
+        height: 26px;
+
+        margin-left: 14px;
+
+        box-sizing: border-box;
+        background: ${Colors.green3};
+        border-radius: 5px;
+
+        font-family: 'NotoSans';
+        font-weight: 500;
+        font-size: 10px;
+        color: ${Colors.white};
+
     }
 
 `;
