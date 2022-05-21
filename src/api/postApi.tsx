@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const postApi = async (data: any, end_url: string) => {
-    // const token = 'eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxIiwiaWF0IjoxNjUyNTQ1Njc1LCJleHAiOjE2NTI1NDc0NzV9.7rJFsP_8kSrML36lpaDkb7TJbSgTo1wF4aHFkBZ8naU'
+    // const token = 'eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIzIiwiaWF0IjoxNjUzMDYwODc5LCJleHAiOjE2NTMwNjI2Nzl9.eDZRLO522Q0zIL9CUQahcWsjNiLXYizgu_60M00yWeo'
 
     const config = {
         headers: {
