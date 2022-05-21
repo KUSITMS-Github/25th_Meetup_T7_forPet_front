@@ -3,6 +3,7 @@ import { Colors } from '../styles/ui';
 import { useState, useEffect } from 'react';
 import { getApi, postApi, setHeader } from '../api';
 import axios from 'axios';
+import { useNavigate } from "react-router-dom";
 
 import Background from '../assets/Login-background.svg';
 import ProfileImg from '../assets/Login-profile.svg';
@@ -24,22 +25,23 @@ const LoginForpet = () => {
 
     const [profile, setProfile] = useState<File>();     //프로필 이미지 file
     const [profileSrc, setprofileSrc] = useState<string>('');   //프로필이미지 url
-    const [nickname, setNickname] = useState<string>('');       //닉네임
     const [phoneView, setPhoneView] = useState<number>(1);      //휴대폰 인증 순서
-    const [phoneNum, setPhoneNum] = useState<string>('');       //사용자 휴대폰 번호
     const [userNum, setUserNum] = useState<string>('');         //사용자가 입력하는 휴대폰 인증번호
     const [cerNum, setCerNum] = useState<string>('');           //휴대폰 인증번호
     const [animalCard, setAnimalCard] = useState<File>();       //동물카드 이미지 file
     const [cardView, setCardView] = useState<number>(1);        //동물카드 인증 순서
-    const [myTown, setMyTowm] = useState<string>('');
+    const [myTown, setMyTowm] = useState<string>('');           //내 동네 인증
     
     const reader = new FileReader();        //이미지 file -> url 변환
+    let navigate = useNavigate();           //화면 이동
 
-    useEffect(() => {
-        const token = 'eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIzIiwiaWF0IjoxNjUzMDk2MzM5LCJleHAiOjE2NTMwOTgxMzl9.S2_YZO7Ov4bnBTqhLBVdO5qim_nt4NYcJy3y8DCu_kA'
-        setHeader(token);
-    }, [])
+    // //TODO: 로그인 구현, setHeader 후 삭제
+    // useEffect(() => {
+    //     const token = 'eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIzIiwiaWF0IjoxNjUzMTEzOTIyLCJleHAiOjE2NTMxMTU3MjJ9.M7hkCjjE8FQuBOw1CIG1naYfzSIlMYkfwX_9oS-PvrQ'
+    //     setHeader(token);
+    // }, [])
 
+    //프로필 이미지 띄워줌
     const onProfileFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         console.log(e.target.files![0]);
         setProfile(e.target.files![0]);
@@ -89,7 +91,7 @@ const LoginForpet = () => {
 
     //동물카드 인증
     const cerAnimalCard = async () => {
-        const end_url = `/certify/pet-card`;
+        const end_url = `/signup/check/pet-card`;
         const formData = new FormData();
         formData.append('pet_card_image', animalCard!);
         const config = {
@@ -109,6 +111,8 @@ const LoginForpet = () => {
                 setCardView(2);
             } else if (status === 403) {
                 alert("로그인 후에 인증해주개");
+            }else if (status === 404) {
+                alert("사진 업로드 후에 인증해주개");
             }
         })
         .catch((e) => {
@@ -118,8 +122,8 @@ const LoginForpet = () => {
 
     //내 동네 인증
     const cerTown = (e: any) => {
-        // console.log(e.target.value);
-        setSignupForm({...signupForm, address: e.target.value});
+        setMyTowm(e.target.value);
+        setSignupForm({...signupForm, address: e.target.value + '#'});
     }
 
     //회원가입
@@ -146,6 +150,10 @@ const LoginForpet = () => {
             console.log(status, data);
             if (status === 200) {
                 alert("회원가입이 완료되었개");
+                const ACCESS_TOKEN = data.data.body.data.token;
+                localStorage.setItem("token", ACCESS_TOKEN);    //예시로 로컬에 저장함
+                setHeader(ACCESS_TOKEN);
+                navigate("/");
             } 
         })
         .catch((e) => {
@@ -180,7 +188,7 @@ const LoginForpet = () => {
                         ): void => setSignupForm({...signupForm, nickname: e.target.value})}
                         value={signupForm.nickname}
                     ></input>
-                    <CancleBtn style={{position: 'absolute', top: '267px', left: '62%'}} onClick={() => setNickname("")}/>
+                    <CancleBtn style={{position: 'absolute', top: '267px', left: '62%'}} onClick={() => setSignupForm({...signupForm, nickname: ""})}/>
                 </InputSection>
 
                 <Title style={{paddingTop: '20px'}}>
@@ -248,7 +256,7 @@ const LoginForpet = () => {
                 <InputSection>
                     <span className='sub-title'>내 동네 인증(선택)</span>
                     <div style={{display: 'flex', flexDirection: 'row'}}>
-                        <div className='certifyBar'>{signupForm.address}</div>
+                        <div className='certifyBar'>{myTown}</div>
                         <select className='btn-certify' value='default' onChange={cerTown}>
                             <option value='default'>--근처 동네--</option>
                             <option value='불광1동'>불광1동</option>

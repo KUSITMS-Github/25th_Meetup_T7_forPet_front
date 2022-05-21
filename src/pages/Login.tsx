@@ -20,7 +20,7 @@ const Login = () => {
                 Accept: "application/json",
             }
         }
-        const redirectURL = 'http://172.30.1.9:8080/oauth2/redirect'
+        const redirectURL = 'http://localhost:3000/oauth2/redirect'
         await axios.get(
             process.env.REACT_APP_BACK_BASE_URL + `/oauth2/authorize/kakao?redirect_uri=`+ redirectURL,
             config
@@ -36,6 +36,8 @@ const Login = () => {
             })
     }
 
+    const loginUrl: string = process.env.REACT_APP_BACK_BASE_URL + '/oauth2/authorize/kakao?redirect_uri=http://localhost:3000/oauth2/redirect';
+
     return (
         <>
         <img src={LoginBackground} style={{height:'calc(100vh - 74px)'}} />
@@ -43,7 +45,7 @@ const Login = () => {
         <Section>
             <LoginLogo />
             <span className="notice">로그인하고 퍼펫트를 이용해보세요! <br />필요한 시간은 단, 3초!</span>
-            <button className="btn-login" style={{ marginTop:'45px' }} onClick={(e) => loginHandler(e)} >카카오 로그인</button>
+            <a className="btn-login" style={{ marginTop:'45px' }} href={loginUrl}>카카오 로그인</a>
         </Section>
         </>
     );
