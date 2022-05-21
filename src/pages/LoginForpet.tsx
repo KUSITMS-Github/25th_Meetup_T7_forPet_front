@@ -35,11 +35,11 @@ const LoginForpet = () => {
     const reader = new FileReader();        //이미지 file -> url 변환
     let navigate = useNavigate();           //화면 이동
 
-    //TODO: 로그인 구현, setHeader 후 삭제
-    useEffect(() => {
-        const token = 'eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIzIiwiaWF0IjoxNjUzMTEzOTIyLCJleHAiOjE2NTMxMTU3MjJ9.M7hkCjjE8FQuBOw1CIG1naYfzSIlMYkfwX_9oS-PvrQ'
-        setHeader(token);
-    }, [])
+    // //TODO: 로그인 구현, setHeader 후 삭제
+    // useEffect(() => {
+    //     const token = 'eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIzIiwiaWF0IjoxNjUzMTEzOTIyLCJleHAiOjE2NTMxMTU3MjJ9.M7hkCjjE8FQuBOw1CIG1naYfzSIlMYkfwX_9oS-PvrQ'
+    //     setHeader(token);
+    // }, [])
 
     //프로필 이미지 띄워줌
     const onProfileFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -150,6 +150,9 @@ const LoginForpet = () => {
             console.log(status, data);
             if (status === 200) {
                 alert("회원가입이 완료되었개");
+                const ACCESS_TOKEN = data.data.body.data.token;
+                localStorage.setItem("token", ACCESS_TOKEN);    //예시로 로컬에 저장함
+                setHeader(ACCESS_TOKEN);
                 navigate("/");
             } 
         })
