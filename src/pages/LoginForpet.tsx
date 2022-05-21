@@ -1,7 +1,8 @@
 import styled from '@emotion/styled';
 import { Colors } from '../styles/ui';
 import { useState } from 'react';
-import { getApi } from '../api';
+import { getApi, postApi } from '../api';
+import axios from 'axios';
 
 import Background from '../assets/Login-background.svg';
 import ProfileImg from '../assets/Login-profile.svg';
@@ -12,14 +13,16 @@ const LoginForpet = () => {
     const [profile, setProfile] = useState<File>();     //프로필 이미지 file
     const [profileSrc, setprofileSrc] = useState<string>('');   //프로필이미지 url
     const [nickname, setNickname] = useState<string>('');       //닉네임
-    const [phoneView, setPhoneView] = useState<number>(1);  //휴대폰 인증 순서
+    const [phoneView, setPhoneView] = useState<number>(1);      //휴대폰 인증 순서
     const [phoneNum, setPhoneNum] = useState<string>('');       //사용자 휴대폰 번호
     const [userNum, setUserNum] = useState<string>('');         //사용자가 입력하는 휴대폰 인증번호
     const [cerNum, setCerNum] = useState<string>('');           //휴대폰 인증번호
+    const [animalCard, setAnimalCard] = useState<File>();       //동물카드 이미지 file
+    const [cardView, setCardView] = useState<number>(1);        //동물카드 인증 순서
     
     const reader = new FileReader();        //이미지 file -> url 변환
 
-    const onFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const onProfileFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         console.log(e.target.files![0]);
         setProfile(e.target.files![0]);
         setprofileSrc(URL.createObjectURL(e.target.files![0]));
@@ -27,35 +30,104 @@ const LoginForpet = () => {
 
     //휴대폰 인증번호 발송
     const cerPhoneNum = async () => {
-        setPhoneView(2);
-        await getApi(
-            {},
-            `/signup/check/sendSMS?phone_number=${phoneNum}`
-        )
+        if(phoneNum != ''){
+            setPhoneView(2);
+            await getApi(
+                {},
+                `/signup/check/sendSMS?phone_number=${phoneNum}`
+            )
             .then(({ status, data }) => {
                 console.log(status, data);
 
                 if (status === 200) {
                     console.log(data);
                     setCerNum(data);
-                    console.log(cerNum, typeof cerNum);
                 }
             })
             .catch((e) => {
                 console.log(e);
             });
+        } else {
+            alert("휴대폰 번호를 입력해주개");
+        }
     }
 
     //휴대폰 인증번호 검사
     const mathingCerNum = () => {
         if(cerNum == userNum) {
             setPhoneView(3);
-            alert("인증이 완료되었개");
+            alert("휴대폰 인증이 완료되었개");
         } else {
-            alert("인증번호가 맞지 않아요. 다시 입력해주개");
+            alert("인증번호가 맞지 않는다개. 다시 입력해주개");
             setUserNum("");
         }
     }
+
+    //동물카드 사진 등록
+    const onCardFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        console.log(e.target.files![0]);
+        setAnimalCard(e.target.files![0]);
+    }
+
+
+    const cerAnimalCard = async () => {
+        const end_url = `/certify/pet-card`;
+        const formData = new FormData();
+        formData.append('pet_card_image', animalCard!);
+        const config = {
+            headers: {
+                'content-type': 'multipart/form-data'
+            }
+        }
+        await axios.post(
+            process.env.REACT_APP_BACK_BASE_URL + end_url,
+            formData,
+            config
+        )
+        .then(({ status, data }) => {
+            console.log(status, data);
+            if (status === 200) {
+                        alert("동물카드 인증이 완료되었개");
+                        setCardView(2);
+                    } else if (status === 403) {
+                        alert("로그인 후에 인증해주개");
+                    }
+        })
+        .catch((e) => {
+            console.log(e);
+        })
+    }
+
+    // //동물카드 등록 인증
+    // const cerAnimalCard = async () => {
+    //     if(animalCard != null){
+    //         // alert("동물카드 인증이 완료되었개");
+    //         // setCardView(2);
+
+    //         await postApi(
+    //             {
+    //                 'pet_card_image': animalCard
+    //             },
+    //             `/certify/pet-card`
+    //         )
+    //             .then(({ status, data }) => {
+    //                 console.log(status, data);
+    //                 if (status === 200) {
+    //                     alert("동물카드 인증이 완료되었개");
+    //                     setCardView(2);
+    //                 } else if (status === 403) {
+    //                     alert("로그인 후에 인증해주개");
+    //                 }
+    //             })
+    //             .catch((e) => {
+    //                 console.log(e);
+    //             });
+
+            
+    //     } else {
+    //         alert("동물카드 이미지를 업로드해주개");
+    //     }
+    // }
 
     return (
         <>
@@ -71,7 +143,7 @@ const LoginForpet = () => {
                 <label htmlFor='input-profile'>
                     <img src={Picture} width="49" height="49" style={{position: 'absolute', top: '190px', left: '53%'}}/>
                 </label>
-                <input type='file' id='input-profile' onChange={(e) => onFileChange(e)} style={{display:'none'}}/>
+                <input type='file' id='input-profile' onChange={(e) => onProfileFileChange(e)} style={{display:'none'}}/>
                 
                 {/*닉네임 설정*/}
                 <InputSection>
@@ -131,20 +203,26 @@ const LoginForpet = () => {
                         </div>
                     </InputSection>
                 }
-
                 
                 {/*동물카드 인증*/}
                 <InputSection>
                     <span className='sub-title'>동물카드 인증(선택)</span>
                     <div style={{display: 'flex', flexDirection: 'row'}}>
                         <input
+                        type='file' multiple
                         className='certifyBar'
-                        placeholder='동물카드 사진'
-                        ></input>
-                        <div className='btn-certify'>인증하기</div>
+                        onChange={(e) => onCardFileChange(e)} />
+
+                        { cardView == 2 ?
+                            <div className='btn-cerComplete'>인증완료</div>
+                        :
+                            <div className='btn-certify' onClick={() => cerAnimalCard()}>인증하기</div>
+                        }
+                        
                     </div>
                 </InputSection>
 
+                {/*내 동네 인증*/}
                 <InputSection>
                     <span className='sub-title'>내 동네 인증(선택)</span>
                     <div style={{display: 'flex', flexDirection: 'row'}}>
@@ -152,7 +230,13 @@ const LoginForpet = () => {
                         className='certifyBar'
                         placeholder='내 동네'
                         ></input>
-                        <div className='btn-certify'>현재 위치로 찾기</div>
+                        <select name='fruits'>
+                            <option value='' selected>-- 근처 동네 --</option>
+                            <option value='apple'>불광1동</option>
+                            <option value='banana'>불광2동</option>
+                            <option value='lemon'>대조동</option>
+                            <option value='lemon'>녹번동</option>
+                        </select>
                     </div>
                 </InputSection>
 
