@@ -9,18 +9,14 @@ const OauthHandler = () => {
     let navigate = useNavigate();           //화면 이동
     
     useEffect(() => {
-        
         id = new URL(window.location.href).searchParams.get("id");
         console.log('id', id);
         console.log(window.location.href);
-
-        
     }, []) 
     
 
     useEffect(() => {
         const login = async () => {
-
             await getApi(
                 {},
                 `/auth/signup?id=${id}`
@@ -35,7 +31,6 @@ const OauthHandler = () => {
                 } else {
                     navigate("/loginForpet");
                 }
-                
             })
             .catch((e) => {
                 console.log("소셜로그인 에러", e);
@@ -44,12 +39,6 @@ const OauthHandler = () => {
             });
         }
         login();
-        
-        //받아온 token으로 setHeader
-        // axios로 token 보내면 signup 여부 반환
-        // signup = true -> 서비스
-        // signup = false -> 회원가입(정보등록)
-        
     }, [id])
 
     return (
