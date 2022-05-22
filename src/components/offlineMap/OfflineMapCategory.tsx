@@ -3,15 +3,16 @@ import { Colors } from '../../styles/ui';
 
 interface Props {
     name: string;
+    url: string;
     activeCat: boolean;
     handleSetCat:any;
   }
 
-const OfflineMapCategory = ({name, activeCat, handleSetCat}:Props) => {
+const OfflineMapCategory = ({name, url, activeCat, handleSetCat}:Props) => {
     return(
 
         <Category>
-            <div className={activeCat ? "active" : "deactive"} onClick={() => handleSetCat(name)}>
+            <div className={activeCat ? "active" : "deactive"} onClick={() => handleSetCat(url)}>
                 {name}
             </div>
         </Category>
