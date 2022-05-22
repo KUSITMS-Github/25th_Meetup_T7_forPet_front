@@ -76,9 +76,29 @@ const OfflineMapList = () => {
         }
     ]
 
-    const [mapList, setMapList] = useState(offline_list);
+    const [mapList, setMapList] = useState([]);
+    const [mapAllList, setMapAllList] = useState([])
     const [searchPlace, setsearchPlace] = useState<string>();  
     const [activeCat, setActiveCat] = useState('전체보기');
+
+    // map 좌표 불러오기
+    useEffect(() => {
+        const getMapList =  () => {
+             getApi(
+                {}, `/offline-map`)
+                .then(({ status, data }) => {
+                    console.log(`GET 글 내용`, status, data);
+                    if (status === 200) {
+                        setMapList(data.body.data.placeInfo);
+                        setMapAllList(data.body.data.placeInfo);
+                    }
+                })
+                .catch((e) => {
+                    console.log(e);
+                });
+        }
+        getMapList();
+      }, []);
 
     //주변 반려견 장소 검색
     const enterSearchPlace = async (e: any) => {
@@ -102,7 +122,7 @@ const OfflineMapList = () => {
 
     useEffect(() => {
         activeCat === '전체보기'
-          ? setMapList(offline_list)
+          ? setMapList(mapAllList)
           : 
             getApi(
                 {},
@@ -153,13 +173,13 @@ const OfflineMapList = () => {
             </Section>
 
             <Category>
-                <OfflineMapCategory name='전체보기' activeCat={activeCat === '전체보기' ? true : false} handleSetCat={setActiveCat}/>
-                <OfflineMapCategory name='카페' activeCat={activeCat === '카페' ? true : false} handleSetCat={setActiveCat}/>
-                <OfflineMapCategory name='동물병원' activeCat={activeCat === '동물병원' ? true : false} handleSetCat={setActiveCat}/>
-                <OfflineMapCategory name='동물약국' activeCat={activeCat === '동물약국' ? true : false} handleSetCat={setActiveCat}/>
-                <OfflineMapCategory name='미용실' activeCat={activeCat === '미용실' ? true : false} handleSetCat={setActiveCat}/>
-                <OfflineMapCategory name='보호소' activeCat={activeCat === '보호소' ? true : false} handleSetCat={setActiveCat}/>
-                <OfflineMapCategory name='유치원' activeCat={activeCat === '유치원' ? true : false} handleSetCat={setActiveCat}/>
+                <OfflineMapCategory name='전체보기' url='전체보기' activeCat={activeCat === '전체보기' ? true : false} handleSetCat={setActiveCat}/>
+                <OfflineMapCategory name='식당카페' url='식당%26카페' activeCat={activeCat === '식당%26카페' ? true : false} handleSetCat={setActiveCat}/>
+                <OfflineMapCategory name='공원' url='공원' activeCat={activeCat === '공원' ? true : false} handleSetCat={setActiveCat}/>
+                <OfflineMapCategory name='병원약국' url='병원%26약국' activeCat={activeCat === '병원%26약국' ? true : false} handleSetCat={setActiveCat}/>
+                <OfflineMapCategory name='미용' url='미용' activeCat={activeCat === '미용' ? true : false} handleSetCat={setActiveCat}/>
+                <OfflineMapCategory name='보호소' url='보호소' activeCat={activeCat === '보호소' ? true : false} handleSetCat={setActiveCat}/>
+                <OfflineMapCategory name='유치원' url='유치원' activeCat={activeCat === '유치원' ? true : false} handleSetCat={setActiveCat}/>
             </Category>
         </ListBox>
     );
