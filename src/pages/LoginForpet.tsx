@@ -127,6 +127,8 @@ const LoginForpet = () => {
     }
 
     //회원가입
+    //TODO: 닉네임 필수 입력
+    //TODO: 전화번호 필수 입력
     const signUp = async () => {
         console.log(signupForm);
         const end_url = `/signup`;
@@ -150,8 +152,8 @@ const LoginForpet = () => {
             console.log(status, data);
             if (status === 200) {
                 alert("회원가입이 완료되었개");
-                const ACCESS_TOKEN = data.data.body.data.token;
-                localStorage.setItem("token", ACCESS_TOKEN);    //예시로 로컬에 저장함
+                const ACCESS_TOKEN = data.body.token;
+                localStorage.setItem("token", ACCESS_TOKEN);    //토큰 저장
                 setHeader(ACCESS_TOKEN);
                 navigate("/");
             } 
