@@ -181,8 +181,10 @@ const PostDetail = () => {
             // 댓글 입력 Post API
             // e.target.value
             await postApi(
-                {},
-                `/community/comment` // TODO: api url 수정
+                {
+                    'comment': myComment
+                },
+                `/community/${postData.post_id}/comment`
             )
             .then(({ status, data }) => {
                     console.log("댓글 작성 post api", status);
