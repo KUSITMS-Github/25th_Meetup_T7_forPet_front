@@ -9,9 +9,7 @@ const getApi = async (params: any, end_url: string) => {
             "Content-type": "application/json",
             Accept: "application/json",
             // "Authorization": ''
-            "Access-Control-Allow-Origin": "https://kusitms-forpet.herokuapp.com"
         },
-        withCredentials: true,
     };
     // config.headers["Authorization"] = `Bearer ${token}`;
     

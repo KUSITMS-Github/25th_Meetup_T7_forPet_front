@@ -4,7 +4,6 @@ import { Colors } from '../../styles/ui';
 import { useNavigate } from "react-router-dom";
 import { BoardHeader, BoardList } from '../../components/community';
 import SearchIcon from '../../assets/search_icon.png';
-import { getApi, setHeader } from '../../api';
 
 const BoardMeet = () => {
     const [search, setSearch] = useState<string>('');
@@ -21,11 +20,6 @@ const BoardMeet = () => {
     const writeHandler = () => {
         navigate('/board/write');
     }
-
-    useEffect(() => {
-        const token = 'eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIzIiwiaWF0IjoxNjUyNjg5MDU4LCJleHAiOjE2NTMyOTM4NTh9.Smx6cW-984fGOU5dq5GTnyMnw_Pf_R8UFALXMmzYDTo'
-        setHeader(token);
-    }, [])
 
     return (
         <Wrapper>

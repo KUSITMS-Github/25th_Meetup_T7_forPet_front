@@ -7,10 +7,8 @@ const postApi = async (data: any, end_url: string) => {
         headers: {
             "Content-type": "application/json",
             Accept: "application/json",
-            "Access-Control-Allow-Origin": "https://kusitms-forpet.herokuapp.com"
             // "Authorization": ''
         },
-        withCredentials: true,
     };
     // config.headers["Authorization"] = `Bearer ${token}`;
 
