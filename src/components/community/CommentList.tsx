@@ -102,7 +102,7 @@ const CommentList = () => {
                 .then(({ status, data }) => {
                     console.log(status, data);
                     if (status === 200) {
-                        setComments(data.body.comments);
+                        setComments(data.body.data.comments);
                     }
                 })
                 .catch((e) => {
