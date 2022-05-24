@@ -4,14 +4,8 @@ import { Colors } from '../../styles/ui';
 import { useNavigate } from "react-router-dom";
 import { BoardHeader, BoardCardList } from '../../components/community';
 import SearchIcon from '../../assets/search_icon.png';
-import { getApi, setHeader } from '../../api';
 
 const BoardShare = () => {
-    useEffect(() => {
-        const token = 'eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIzIiwiaWF0IjoxNjUyNjg5MDU4LCJleHAiOjE2NTMyOTM4NTh9.Smx6cW-984fGOU5dq5GTnyMnw_Pf_R8UFALXMmzYDTo'
-        setHeader(token);
-    }, [])
-
     const [search, setSearch] = useState<string>('');
     const [searchWordRe, setSearchWordRe] = useState<string>('');
 

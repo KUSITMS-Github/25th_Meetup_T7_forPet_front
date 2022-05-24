@@ -1,16 +1,42 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import styled from '@emotion/styled';
 import { Colors } from '../../styles/ui';
+import { getApi } from '../../api';
 
 interface Props {
     item: any;
 }
 
 const OfflineMapInfo = ({ item }: Props) => {
+    const [placeId, setPlaceId] = useState<Number>(item.id);
+    const [reviewList, setReviewList] = useState<any[]>([]);
+
+    useEffect(() => {
+        const getReview =  async () => {
+            await getApi(
+                {}, `/offline-map/${placeId}/marker/review`)
+                .then(({ status, data }) => {
+                    console.log(`GET 리뷰 내용`, status, data);
+                    if (status === 200) {
+                        setReviewList(data.body.data);
+                    }
+                })
+                .catch((e) => {
+                    console.log(e);
+                });
+        }
+        getReview();
+      }, []);
 
     return(
         <Section>
             <span>{item.name}</span>
+            <span>{item.category}</span>
+            <span>{item.starAvg}/5</span>
+            <span>리뷰 {item.reviewCnt}</span>
+            {reviewList.map((item, index) => (
+                <span>{item.content}</span>
+            ))}
         </Section>
     );
 };
