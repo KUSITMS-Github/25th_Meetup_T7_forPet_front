@@ -2,7 +2,7 @@ import React, { useState, useEffect, useContext } from 'react';
 import { useParams } from "react-router-dom";
 import styled from '@emotion/styled';
 import { Colors } from '../../styles/ui';
-import { getApi, postApi, setHeader } from '../../api';
+import { getApi, postApi } from '../../api';
 import { PediaOneComment } from '../../components/forpetPedia';
 import { ReactComponent as LikeIcon } from '../../assets/Like-icon.svg';
 import { ReactComponent as BookmarkIcon } from '../../assets/Bookmark-icon.svg';
