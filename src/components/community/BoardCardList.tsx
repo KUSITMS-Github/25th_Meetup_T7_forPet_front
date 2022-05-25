@@ -101,9 +101,26 @@ interface propsType {
     search: string;
 }
 
+interface BoardItf {
+    writer: {
+        user_id: number;
+        user_profile_image: string;
+        user_nickname: string;
+    };
+    title: string,
+    category: string,
+    post_id: number,
+    thumbs_up_cnt: number,
+    image_url_list: any,
+    comment_cnt: number,
+    createdDate: string
+}
+
 const BoardCardList = ({ board, search }: propsType) => {
     const navigate = useNavigate();
-    const [boardList, setBoardList] = useState(initialData);
+    // const [boardList, setBoardList] = useState(initialData);
+    const [boardList, setBoardList] = useState<BoardItf[]>();
+
 
     const [page, setPage] = useState(1);
     const [totalPages, setTotalPages] = useState(10);
@@ -121,7 +138,7 @@ const BoardCardList = ({ board, search }: propsType) => {
         const getBoardList = async () => {
             await getApi(
                 {},
-                `/community/list?category=${board}?page=${page - 1}?size=${12}`  // 추후 수정 size는 뭐지. 
+                `/community/list?page=${page-1}&size=${12}&category=${board}`
             )
                 .then(({ status, data }) => {
                     console.log(status, data);

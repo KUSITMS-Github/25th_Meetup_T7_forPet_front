@@ -39,7 +39,7 @@ const BoardShare = () => {
                 onClick={writeHandler}>
                 각종 물품을 나눠주세요!
             </div>
-            <BoardCardList board={'share'} search={searchWordRe} />
+            <BoardCardList board={'sharing'} search={searchWordRe} />
         </Wrapper>
     )
 }

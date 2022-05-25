@@ -40,7 +40,7 @@ const BoardMeet = () => {
                 새 글을 작성해주세요!
             </div>
 
-            <BoardList board={'meet'} search={searchWordRe} />
+            <BoardList board={'meeting'} search={searchWordRe} />
         </Wrapper>
     )
 }

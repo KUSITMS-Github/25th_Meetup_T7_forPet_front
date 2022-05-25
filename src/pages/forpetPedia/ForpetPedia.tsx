@@ -252,7 +252,7 @@ const ForpetPedia = () => {
                     />
                 ))
                 ) :(
-                    <p>글이 아직 없어요.</p>
+                    <p>Loading...</p>
                 )
             }
 
