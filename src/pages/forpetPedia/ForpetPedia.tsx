@@ -2,21 +2,13 @@ import React, { useState, useEffect, useContext } from 'react';
 import styled from '@emotion/styled';
 import Pagination from "../../components/Pagination";
 import { PediaOne, CreatePostPedia } from '../../components/forpetPedia';
-import { getApi, setHeader } from '../../api';
+import { getApi } from '../../api';
 import { ReactComponent as PediaIcon } from '../../assets/Pedia-icon.svg';
 import { Colors } from '../../styles/colors';
 import SearchIcon from '../../assets/search_icon.png';
 
 
 const ForpetPedia = () => {
-
-    // 임시 토큰 넣어줌
-    useEffect(() => {
-        const token = 'eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIzIiwiaWF0IjoxNjUyNjg5MDU4LCJleHAiOjE2NTMyOTM4NTh9.Smx6cW-984fGOU5dq5GTnyMnw_Pf_R8UFALXMmzYDTo'
-        setHeader(token);
-    }, [])
-
-
     const initialPediaList =  // 임시 데이터
         [
             {
@@ -252,7 +244,7 @@ const ForpetPedia = () => {
                     />
                 ))
                 ) :(
-                    <p>글이 아직 없어요.</p>
+                    <p>Loading...</p>
                 )
             }
 

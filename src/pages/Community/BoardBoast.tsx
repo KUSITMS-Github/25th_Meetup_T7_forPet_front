@@ -39,7 +39,7 @@ const BoardBoast = () => {
                 onClick={writeHandler}>
                 귀여운 강아지를 자랑해주세요!
             </div>
-            <BoardCardList board={'boast'} search={searchWordRe} />
+            <BoardCardList board={'boasting'} search={searchWordRe} />
         </Wrapper>
     )
 }

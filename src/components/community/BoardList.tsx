@@ -62,10 +62,26 @@ interface propsType {
     search: string;
 }
 
+interface BoardItf {
+    writer: {
+        user_id: number;
+        user_profile_image: string;
+        user_nickname: string;
+    };
+    title: string,
+    category: string,
+    post_id: number,
+    thumbs_up_cnt: number,
+    image_url_list: any,
+    comment_cnt: number,
+    createdDate: string
+}
+
 const BoardList = ({ board, search }: propsType) => {
 
     const navigate = useNavigate();
-    const [boardList, setBoardList] = useState(initialBoardList);
+    // const [boardList, setBoardList] = useState(initialBoardList);
+    const [boardList, setBoardList] = useState<BoardItf[]>();
 
     const [korCategory, setKorCategory] = useState<string>('');
 
@@ -86,7 +102,7 @@ const BoardList = ({ board, search }: propsType) => {
         const getBoardList = async () => {
             await getApi(
                 {},
-                `/community/list?page=${page-1}&size=${10}&category=meeting`
+                `/community/list?page=${page-1}&size=${10}&category=${board}`
             )
                 .then(({ status, data }) => {
                     console.log(status, data);
