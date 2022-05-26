@@ -10,6 +10,7 @@ import {
   MyPage,
   OauthHandler,
   NotFound,
+  ReviewWrite,
 } from "./pages";
 import {
   PreBoard,
@@ -54,6 +55,7 @@ function App() {
             <Route path="/pedia/:id" element={<PediaDetail />} />
             <Route path="/post/:id" element={<PostDetail />} />
             <Route path="/oauth2/redirect" element={<OauthHandler />} />
+            <Route path="/reviewWrite" element={<ReviewWrite />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
     </div>
