@@ -2,8 +2,10 @@ import React, { useState, useEffect, useContext } from 'react';
 import { useParams } from "react-router-dom";
 import styled from '@emotion/styled';
 import { Colors } from '../../styles/ui';
-import { getApi, postApi } from '../../api';
 import { PediaOneComment } from '../../components/forpetPedia';
+import { getApi, postApi, setHeader } from "../../api";
+import { Header } from "../../components";
+
 import { ReactComponent as LikeIcon } from '../../assets/Like-icon.svg';
 import { ReactComponent as BookmarkIcon } from '../../assets/Bookmark-icon.svg';
 import { ReactComponent as LikeIconFull } from '../../assets/Like-icon-full.svg';
@@ -168,6 +170,8 @@ const PediaDetail = () => {
     }
 
     return (
+        <>
+        <Header />
         <Wrapper>
             <Question>
                 <div style={{ display: 'flex', flexDirection: 'row' }}>
@@ -252,6 +256,7 @@ const PediaDetail = () => {
                 onKeyPress={(e) => writeAnswer(e)}
             ></textarea>
         </Wrapper>
+        </>
     )
 }
 

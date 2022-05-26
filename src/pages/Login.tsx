@@ -3,7 +3,8 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import styled from '@emotion/styled';
 import { Colors } from '../styles/ui';
-import { setHeader } from "../api";
+import { getApi, postApi, setHeader } from "../api";
+import { Header } from "../components";
 
 import LoginBackground from '../assets/Login-background.svg';
 import { ReactComponent as LoginLogo } from '../assets/Login-logo.svg';
@@ -40,6 +41,7 @@ const Login = () => {
 
     return (
         <>
+        <Header />
         <img src={LoginBackground} style={{height:'calc(100vh - 74px)'}} />
         {/* 로그인 */}
         <Section>

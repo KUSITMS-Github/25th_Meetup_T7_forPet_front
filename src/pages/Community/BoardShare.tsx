@@ -3,6 +3,8 @@ import styled from '@emotion/styled';
 import { Colors } from '../../styles/ui';
 import { useNavigate } from "react-router-dom";
 import { BoardHeader, BoardCardList } from '../../components/community';
+import { getApi, postApi, setHeader } from "../../api";
+import { Header } from "../../components";
 import SearchIcon from '../../assets/search_icon.png';
 
 const BoardShare = () => {
@@ -22,6 +24,8 @@ const BoardShare = () => {
     }
 
     return (
+        <>
+        <Header />
         <Wrapper>
             <HeaderSection>
                 <BoardHeader />
@@ -41,6 +45,7 @@ const BoardShare = () => {
             </div>
             <BoardCardList board={'sharing'} search={searchWordRe} />
         </Wrapper>
+        </>
     )
 }
 

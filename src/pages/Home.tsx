@@ -1,5 +1,7 @@
 import styled from '@emotion/styled';
 import { Colors } from '../styles/ui';
+import { getApi, postApi, setHeader } from "../api";
+import { Header } from "../components";
 import { ReactComponent as OfflineMap } from '../assets/Home-offlinemap.svg';
 import { ReactComponent as OnlineMap } from '../assets/Home-onlinemap.svg';
 import OnlineMapImg from '../assets/Home-onlinemap.png';
@@ -11,6 +13,8 @@ import { ReactComponent as SectionBg } from '../assets/Home-section.svg';
 
 const Home = () => {
     return (
+        <>
+        <Header />
         <Wrapper>
             <HomeBanner>
                 <p className='subtitle'
@@ -70,6 +74,7 @@ const Home = () => {
                 </LowComment>
             </div>
         </Wrapper>
+        </>
     );
 };
 

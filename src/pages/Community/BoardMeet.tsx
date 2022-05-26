@@ -3,6 +3,8 @@ import styled from '@emotion/styled';
 import { Colors } from '../../styles/ui';
 import { useNavigate } from "react-router-dom";
 import { BoardHeader, BoardList } from '../../components/community';
+import { getApi, postApi, setHeader } from "../../api";
+import { Header } from "../../components";
 import SearchIcon from '../../assets/search_icon.png';
 
 const BoardMeet = () => {
@@ -22,6 +24,8 @@ const BoardMeet = () => {
     }
 
     return (
+        <>
+        <Header />
         <Wrapper>
             <HeaderSection>
                 <BoardHeader />
@@ -42,6 +46,7 @@ const BoardMeet = () => {
 
             <BoardList board={'meeting'} search={searchWordRe} />
         </Wrapper>
+        </>
     )
 }
 

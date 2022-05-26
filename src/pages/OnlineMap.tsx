@@ -3,6 +3,8 @@ import styled from '@emotion/styled';
 import { Colors } from '../styles/ui';
 import { motion, AnimatePresence } from "framer-motion";
 import { OnlineMapList } from '../components';
+import { getApi, postApi, setHeader } from "../api";
+import { Header } from "../components";
 
 import { ReactComponent as Tree1 } from '../assets/onlineMap/Map-tree1.svg';
 import { ReactComponent as Tree2 } from '../assets/onlineMap/Map-tree2.svg';
@@ -40,6 +42,8 @@ const OnlineMap = () => {
     }
 
     return (
+        <>
+        <Header />
         <PageWrapper>
             <MapUpper>
                 <div style={{ fontSize: '30px' }}>forPet map</div>
@@ -167,6 +171,7 @@ const OnlineMap = () => {
                 </Trees>
             </AnimatePresence>
         </PageWrapper>
+        </>
     );
 };
 

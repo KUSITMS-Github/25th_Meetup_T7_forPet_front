@@ -2,9 +2,11 @@ import React, { useState, useEffect, useContext } from 'react';
 import styled from '@emotion/styled';
 import Pagination from "../../components/Pagination";
 import { PediaOne, CreatePostPedia } from '../../components/forpetPedia';
-import { getApi } from '../../api';
 import { ReactComponent as PediaIcon } from '../../assets/Pedia-icon.svg';
 import { Colors } from '../../styles/colors';
+import { getApi, postApi, setHeader } from "../../api";
+import { Header } from "../../components";
+
 import SearchIcon from '../../assets/search_icon.png';
 
 
@@ -168,6 +170,8 @@ const ForpetPedia = () => {
     }
 
     return (
+        <>
+        <Header />
         <Wrapper>
             <div style={{ display: 'flex', flexDirection: 'row', margin: '10px 0', paddingTop: '10px' }}>
                 <PediaIcon />
@@ -255,6 +259,7 @@ const ForpetPedia = () => {
                 handleNextPage={handleNextPage}
             />
         </Wrapper>
+        </>
     );
 };
 

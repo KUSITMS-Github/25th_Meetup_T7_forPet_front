@@ -3,7 +3,9 @@ import { Colors } from '../../styles/ui';
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from 'react';
-import { getApi } from '../../api';
+import { getApi, postApi, setHeader } from "../../api";
+import { Header } from "../../components";
+
 import { ReactComponent as Logo } from '../../assets/Logo.svg';
 
 const PreBoard = () => {  // 인증 확인
@@ -45,6 +47,8 @@ const PreBoard = () => {  // 인증 확인
     }
 
     return(
+        <>
+        <Header />
         <Wrapper>
             <div className='upper'>
                 <div style={{fontSize: '28px', fontWeight: 'bold'}}>인증이 필요합니다</div>
@@ -53,6 +57,7 @@ const PreBoard = () => {  // 인증 확인
             <div className='btn' onClick={authClickHandler}>동물 카드 인증</div>
             <div className='btn' onClick={authClickHandler}>동네 인증</div>
         </Wrapper>
+        </>
     )
 }
 

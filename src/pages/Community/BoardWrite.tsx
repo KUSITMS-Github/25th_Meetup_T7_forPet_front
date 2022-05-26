@@ -5,6 +5,9 @@ import { Colors } from '../../styles/ui';
 import { stringify } from 'querystring';
 import { BoardHeader } from '../../components/community';
 import { useNavigate } from 'react-router-dom';
+import { getApi, postApi, setHeader } from "../../api";
+import { Header } from "../../components";
+
 
 
 const BoardWrite = () => {
@@ -64,6 +67,7 @@ const BoardWrite = () => {
 
     return (
         <>
+        <Header />
         <BoardHeader />
         <Wrapper>
             <Upper>

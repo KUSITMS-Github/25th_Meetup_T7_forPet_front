@@ -1,11 +1,16 @@
 import styled from '@emotion/styled';
 import { Colors } from '../styles/ui';
 import { Link } from "react-router-dom";
+import { getApi, postApi, setHeader } from "../api";
+import { Header } from "../components";
+
 import { ReactComponent as OfflineMap } from '../assets/Choose-offlinemap.svg';
 import { ReactComponent as OnlineMap } from '../assets/Choose-onlinemap.svg';
 
 const ChooseMaps = () => {
     return (
+        <>
+        <Header />
         <ChooseMapsWrapper>
 
             <div className='map'>
@@ -23,6 +28,7 @@ const ChooseMaps = () => {
             </div>
 
         </ChooseMapsWrapper>
+        </>
     )
 }
 

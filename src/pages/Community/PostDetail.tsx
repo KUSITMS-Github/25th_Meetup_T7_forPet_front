@@ -2,7 +2,9 @@ import React, { useEffect, useState, useCallback } from 'react';
 import styled from '@emotion/styled';
 import { Colors } from '../../styles/ui';
 import { useParams, Link, useNavigate } from "react-router-dom";
-import { getApi, postApi, deleteApi } from '../../api';
+import { getApi, postApi, deleteApi, setHeader } from '../../api';
+import { Header } from "../../components";
+
 import { ImageModal } from '../../components/community';
 import { ReactComponent as LikeIcon} from '../../assets/Like-icon.svg';
 import { ReactComponent as BookmarkIcon} from '../../assets/Bookmark-icon.svg';
@@ -203,6 +205,8 @@ const PostDetail = () => {
     }
 
     return (
+        <>
+        <Header />
         <Wrapper>
             <PostWrapper>
                 <Post>
@@ -300,6 +304,7 @@ const PostDetail = () => {
 
             {modal && <ImageModal imgSrc={imageSource} onClickImageModal={onClickImageModal} />}
         </Wrapper>
+        </>
     );
 };
 

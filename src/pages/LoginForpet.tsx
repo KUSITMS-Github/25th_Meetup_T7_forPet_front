@@ -1,9 +1,10 @@
 import styled from '@emotion/styled';
 import { Colors } from '../styles/ui';
 import { useState, useEffect } from 'react';
-import { getApi, postApi, setHeader } from '../api';
 import axios from 'axios';
 import { useNavigate } from "react-router-dom";
+import { getApi, postApi, setHeader } from "../api";
+import { Header } from "../components";
 
 import Background from '../assets/Login-background.svg';
 import ProfileImg from '../assets/Login-profile.svg';
@@ -165,6 +166,7 @@ const LoginForpet = () => {
 
     return (
         <>
+        <Header />
         <img src={Background} style={{height:'calc(100vh - 74px)'}} />
         <Box>
             <Title style={{padding: '11px 0px 0px 30px'}}>

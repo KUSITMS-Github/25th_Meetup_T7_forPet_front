@@ -3,6 +3,9 @@ import styled from '@emotion/styled';
 import { Colors } from '../../styles/ui';
 import { useNavigate } from "react-router-dom";
 import { BoardHeader, BoardList } from '../../components/community';
+import { getApi, postApi, setHeader } from "../../api";
+import { Header } from "../../components";
+
 import SearchIcon from '../../assets/search_icon.png';
 
 const BoardAll = () => {
@@ -23,6 +26,8 @@ const BoardAll = () => {
     }
 
     return (
+        <>
+        <Header />
         <Wrapper>
             <HeaderSection>
                 <BoardHeader />
@@ -43,6 +48,7 @@ const BoardAll = () => {
 
             <BoardList board={'all'} search={searchWordRe} />
         </Wrapper>
+        </>
     )
 }
 

@@ -1,7 +1,8 @@
 import { useEffect, useState } from "react";
 import styled from '@emotion/styled';
 import OfflineList from '../components/offlineMap/OfflineMapList';
-import { getApi } from '../api';
+import { getApi, postApi, setHeader } from "../api";
+import { Header } from "../components";
 
 import Marker from "../assets/offlineMap/marker.png";
 
@@ -116,10 +117,13 @@ import Marker from "../assets/offlineMap/marker.png";
     };
 
     return (
+      <>
+        <Header />
         <Offline>
             <OfflineList  />
             <div id="map" style={mapStyle}></div>
         </Offline>
+        </>
     );
 };
 

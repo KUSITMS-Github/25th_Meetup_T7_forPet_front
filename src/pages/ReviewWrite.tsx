@@ -2,6 +2,8 @@ import { useLocation } from "react-router-dom";
 import { useState, useEffect } from "react";
 import styled from '@emotion/styled';
 import { Colors } from '../styles/ui';
+import { getApi, postApi, setHeader } from "../api";
+import { Header } from "../components";
 
 import { ReactComponent as StarAvg } from "../assets/offlineMap/StarAvg.svg"
 
@@ -24,6 +26,8 @@ const ReviewWrite = () => {
     console.log('리뷰: '+ location.state );
     
     return (
+        <>
+        <Header />
         <div style={{height: 'calc(100vh - 70px)', display: 'flex', alignItems: 'flex-end', justifyContent: 'center'}}>
             <Section>
             <Store>
@@ -43,6 +47,7 @@ const ReviewWrite = () => {
             
             </Section>
         </div>
+        </>
     );
 };
 

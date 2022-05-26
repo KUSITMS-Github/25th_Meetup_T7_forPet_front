@@ -3,7 +3,10 @@ import styled from '@emotion/styled';
 import { Colors } from '../../styles/ui';
 import { useNavigate } from "react-router-dom";
 import { BoardHeader, BoardCardList } from '../../components/community';
+import { getApi, postApi, setHeader } from "../../api";
+import { Header } from "../../components";
 import SearchIcon from '../../assets/search_icon.png';
+
 
 const BoardBoast = () => {
     const [search, setSearch] = useState<string>('');
@@ -22,6 +25,8 @@ const BoardBoast = () => {
     }
 
     return (
+        <>
+        <Header />
         <Wrapper>
             <HeaderSection>
                 <BoardHeader />
@@ -41,6 +46,7 @@ const BoardBoast = () => {
             </div>
             <BoardCardList board={'boasting'} search={searchWordRe} />
         </Wrapper>
+        </>
     )
 }
 

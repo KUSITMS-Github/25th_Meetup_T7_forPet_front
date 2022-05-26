@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from "react-router-dom";
 import axios from 'axios';
-import { getApi, postApi, setHeader } from '../api';
+import { getApi, postApi, setHeader } from "../api";
+import { Header } from "../components";
 import { useNavigate } from "react-router-dom";
 
 const OauthHandler = () => {
@@ -43,6 +44,7 @@ const OauthHandler = () => {
 
     return (
         <>
+        <Header />
             {/*spinner */}
         </>
     )
