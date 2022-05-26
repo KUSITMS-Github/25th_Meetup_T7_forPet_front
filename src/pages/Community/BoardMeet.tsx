@@ -3,6 +3,8 @@ import styled from '@emotion/styled';
 import { Colors } from '../../styles/ui';
 import { useNavigate } from "react-router-dom";
 import { BoardHeader, BoardList } from '../../components/community';
+import { getApi, postApi, setHeader } from "../../api";
+import { Header } from "../../components";
 import SearchIcon from '../../assets/search_icon.png';
 
 const BoardMeet = () => {
@@ -10,6 +12,12 @@ const BoardMeet = () => {
     const [searchWordRe, setSearchWordRe] = useState<string>('');
 
     const navigate = useNavigate();
+
+    if(localStorage.getItem("token") != ""){
+        const ACCESS_TOKEN = localStorage.getItem("token");
+        setHeader(ACCESS_TOKEN);
+        console.log("토큰 저장");
+    }
 
     const enterSearch = (e: any) => {
         if (e.key === "Enter") {
@@ -22,6 +30,8 @@ const BoardMeet = () => {
     }
 
     return (
+        <>
+        <Header />
         <Wrapper>
             <HeaderSection>
                 <BoardHeader />
@@ -42,6 +52,7 @@ const BoardMeet = () => {
 
             <BoardList board={'meeting'} search={searchWordRe} />
         </Wrapper>
+        </>
     )
 }
 

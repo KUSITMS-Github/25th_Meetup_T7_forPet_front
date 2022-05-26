@@ -3,13 +3,20 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import styled from '@emotion/styled';
 import { Colors } from '../styles/ui';
-import { setHeader } from "../api";
+import { getApi, postApi, setHeader } from "../api";
+import { Header } from "../components";
 
 import LoginBackground from '../assets/Login-background.svg';
 import { ReactComponent as LoginLogo } from '../assets/Login-logo.svg';
 
 
 const Login = () => {
+
+    if(localStorage.getItem("token") != ""){
+        const ACCESS_TOKEN = localStorage.getItem("token");
+        setHeader(ACCESS_TOKEN);
+        console.log("토큰 저장");
+    }
     
     //카카오 로그인
     const loginHandler = async (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
@@ -40,6 +47,7 @@ const Login = () => {
 
     return (
         <>
+        <Header />
         <img src={LoginBackground} style={{height:'calc(100vh - 74px)'}} />
         {/* 로그인 */}
         <Section>

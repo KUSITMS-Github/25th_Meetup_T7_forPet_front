@@ -37,7 +37,8 @@ const Header = () => {
                 <Link to="/maps">
                     <HeaderButton className="header-btn">Forpet MAP</HeaderButton>
                 </Link>
-                <Link to="/all">    {/*TODO: 사용자 인증 검사로 교체 */}
+                {/*TODO: 사용자 인증 검사로 변경*/}
+                <Link to="/all">
                     <HeaderButton className="header-btn">우리동네 커뮤니티</HeaderButton>
                 </Link>
                 <Link to="/forpetPedia">
@@ -51,7 +52,7 @@ const Header = () => {
                 </HeaderButton>
                 </Link>
                 :
-                <Link to="/mypage/:10">
+                <Link to="/mypage/:${userObject.id}">
                 <img src={userObject.profile_image_url} width={37} height={37} style={{ borderRadius: '18px'}}/>
                 </Link>
                 }

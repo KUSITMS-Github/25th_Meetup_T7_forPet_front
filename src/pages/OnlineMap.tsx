@@ -3,6 +3,8 @@ import styled from '@emotion/styled';
 import { Colors } from '../styles/ui';
 import { motion, AnimatePresence } from "framer-motion";
 import { OnlineMapList } from '../components';
+import { getApi, postApi, setHeader } from "../api";
+import { Header } from "../components";
 
 import { ReactComponent as Tree1 } from '../assets/onlineMap/Map-tree1.svg';
 import { ReactComponent as Tree2 } from '../assets/onlineMap/Map-tree2.svg';
@@ -20,6 +22,13 @@ import MapVolunteer from '../assets/onlineMap/Map-volunteer.svg';
 const OnlineMap = () => {
     const [moveUnit, setMoveUnit] = useState(0);
     const [town, setTown] = useState(''); // 반려인 마을, 예비 반려인 마을
+
+    if(localStorage.getItem("token") != ""){
+        const ACCESS_TOKEN = localStorage.getItem("token");
+        setHeader(ACCESS_TOKEN);
+        console.log("토큰 저장");
+    }
+
 
     const clickTown = (t: string) => {
         setTown(t);
@@ -40,6 +49,8 @@ const OnlineMap = () => {
     }
 
     return (
+        <>
+        <Header />
         <PageWrapper>
             <MapUpper>
                 <div style={{ fontSize: '30px' }}>forPet map</div>
@@ -167,6 +178,7 @@ const OnlineMap = () => {
                 </Trees>
             </AnimatePresence>
         </PageWrapper>
+        </>
     );
 };
 

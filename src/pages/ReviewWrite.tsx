@@ -2,6 +2,8 @@ import { useLocation } from "react-router-dom";
 import { useState, useEffect } from "react";
 import styled from '@emotion/styled';
 import { Colors } from '../styles/ui';
+import { getApi, postApi, setHeader } from "../api";
+import { Header } from "../components";
 
 import { ReactComponent as StarAvg } from "../assets/offlineMap/StarAvg.svg"
 
@@ -20,10 +22,18 @@ interface Props {
 
 const ReviewWrite = () => {
 
+    if(localStorage.getItem("token") != ""){
+        const ACCESS_TOKEN = localStorage.getItem("token");
+        setHeader(ACCESS_TOKEN);
+        console.log("토큰 저장");
+    }
+
     const location = useLocation() as Props;
     console.log('리뷰: '+ location.state );
     
     return (
+        <>
+        <Header />
         <div style={{height: 'calc(100vh - 70px)', display: 'flex', alignItems: 'flex-end', justifyContent: 'center'}}>
             <Section>
             <Store>
@@ -43,6 +53,7 @@ const ReviewWrite = () => {
             
             </Section>
         </div>
+        </>
     );
 };
 

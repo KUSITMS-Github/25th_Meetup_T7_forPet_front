@@ -2,7 +2,9 @@ import React, { useEffect, useState, useCallback } from 'react';
 import styled from '@emotion/styled';
 import { Colors } from '../../styles/ui';
 import { useParams, Link, useNavigate } from "react-router-dom";
-import { getApi, postApi, deleteApi } from '../../api';
+import { getApi, postApi, deleteApi, setHeader } from '../../api';
+import { Header } from "../../components";
+
 import { ImageModal } from '../../components/community';
 import { ReactComponent as LikeIcon} from '../../assets/Like-icon.svg';
 import { ReactComponent as BookmarkIcon} from '../../assets/Bookmark-icon.svg';
@@ -46,6 +48,12 @@ const PostDetail = () => {
     const [imageSource, setImageSource] = useState<any>();
 
     const [myComment, setMyComment] = useState<string>('');
+
+    if(localStorage.getItem("token") != ""){
+        const ACCESS_TOKEN = localStorage.getItem("token");
+        setHeader(ACCESS_TOKEN);
+        console.log("토큰 저장");
+    }
 
     useEffect(() => {
         // 커뮤니티 글 상세 get API
@@ -203,6 +211,8 @@ const PostDetail = () => {
     }
 
     return (
+        <>
+        <Header />
         <Wrapper>
             <PostWrapper>
                 <Post>
@@ -300,6 +310,7 @@ const PostDetail = () => {
 
             {modal && <ImageModal imgSrc={imageSource} onClickImageModal={onClickImageModal} />}
         </Wrapper>
+        </>
     );
 };
 

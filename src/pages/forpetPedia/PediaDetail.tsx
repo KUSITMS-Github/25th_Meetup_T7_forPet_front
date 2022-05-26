@@ -2,8 +2,10 @@ import React, { useState, useEffect, useContext } from 'react';
 import { useParams } from "react-router-dom";
 import styled from '@emotion/styled';
 import { Colors } from '../../styles/ui';
-import { getApi, postApi } from '../../api';
 import { PediaOneComment } from '../../components/forpetPedia';
+import { getApi, postApi, setHeader } from "../../api";
+import { Header } from "../../components";
+
 import { ReactComponent as LikeIcon } from '../../assets/Like-icon.svg';
 import { ReactComponent as BookmarkIcon } from '../../assets/Bookmark-icon.svg';
 import { ReactComponent as LikeIconFull } from '../../assets/Like-icon-full.svg';
@@ -83,6 +85,12 @@ const PediaDetail = () => {
     //     likes: number,
     //     id: number,
     // }
+
+    if(localStorage.getItem("token") != ""){
+        const ACCESS_TOKEN = localStorage.getItem("token");
+        setHeader(ACCESS_TOKEN);
+        console.log("토큰 저장");
+    }
 
     useEffect(() => {
         // 글 불러오기
@@ -168,13 +176,15 @@ const PediaDetail = () => {
     }
 
     return (
+        <>
+        <Header />
         <Wrapper>
             <Question>
                 <div style={{ display: 'flex', flexDirection: 'row' }}>
                     <div className='q-upper'>
                         <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-                            <img src={question.imageUrlList[0]}
-                                style={{ width: '30px', height: '30px', borderRadius: '20px' }} />
+                            {/* <img src={question.imageUrlList[0]}
+                                style={{ width: '30px', height: '30px', borderRadius: '20px' }} /> */}
                             <div style={{ fontSize: '12px', color: Colors.green5 }}>{question.tag}</div>
                             <div style={{ fontSize: '14px', fontWeight: 'bold' }} className='writer'>{question.nickName}</div>
                         </div>
@@ -252,6 +262,7 @@ const PediaDetail = () => {
                 onKeyPress={(e) => writeAnswer(e)}
             ></textarea>
         </Wrapper>
+        </>
     )
 }
 

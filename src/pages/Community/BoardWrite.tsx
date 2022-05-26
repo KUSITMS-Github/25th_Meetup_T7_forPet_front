@@ -5,6 +5,9 @@ import { Colors } from '../../styles/ui';
 import { stringify } from 'querystring';
 import { BoardHeader } from '../../components/community';
 import { useNavigate } from 'react-router-dom';
+import { getApi, postApi, setHeader } from "../../api";
+import { Header } from "../../components";
+
 
 
 const BoardWrite = () => {
@@ -18,6 +21,12 @@ const BoardWrite = () => {
     interface Contents {
         title: string,
         content: string,
+    }
+
+    if(localStorage.getItem("token") != ""){
+        const ACCESS_TOKEN = localStorage.getItem("token");
+        setHeader(ACCESS_TOKEN);
+        console.log("토큰 저장");
     }
 
     const handleRadioButton = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -53,7 +62,7 @@ const BoardWrite = () => {
             .then(({ status, data }) => {
                 console.log(status, data);
                 if (status === 200 || status === 201) {
-                    window.location.reload();
+                    navigate('/all');
                 }
             })
             .catch((e) => {
@@ -64,6 +73,7 @@ const BoardWrite = () => {
 
     return (
         <>
+        <Header />
         <BoardHeader />
         <Wrapper>
             <Upper>
