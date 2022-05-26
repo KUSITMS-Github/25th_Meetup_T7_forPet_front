@@ -1,9 +1,30 @@
 import styled from '@emotion/styled';
 import { Colors } from '../styles/ui';
 import { Link } from "react-router-dom";
+import React, { useState, useEffect } from 'react';
+import { getApi, postApi, setHeader } from '../api';
 import { ReactComponent as HeaderLogo } from "../assets/HeaderLogo.svg";
 
 const Header = () => {
+
+    const [userObject, setUserObject] = useState<any>([]);
+
+    useEffect(() => {
+        const login = async () => {
+            await getApi(
+                {},
+                `/mypage`
+            )
+            .then(({ status, data }) => {
+                console.log(data);
+                setUserObject(data.body.data);
+            })
+            .catch((e) => {
+                console.log("user 정보 오류", e);
+            });
+        }
+        login();
+    }, [])
 
     return (
         <HeaderStyle>
@@ -22,17 +43,18 @@ const Header = () => {
                 <Link to="/forpetPedia">
                     <HeaderButton className="header-btn">퍼펫트 백과</HeaderButton>
                 </Link>
+                {/*로그인 여부에 따라 렌더링*/}
+                {userObject == null ?
                 <Link to="/login">
-                    <HeaderButton className="header-btn">
-                        로그인
-                    </HeaderButton>
+                <HeaderButton className="header-btn">
+                    로그인
+                </HeaderButton>
                 </Link>
-{/*             로그인 여부에 따라 렌더링
-                <Link to="/mypage">
-                    <button className="header-btn">
-                        마이페이지
-                    </button>
-                </Link> */}
+                :
+                <Link to="/mypage/:10">
+                <img src={userObject.profile_image_url} width={37} height={37} style={{ borderRadius: '18px'}}/>
+                </Link>
+                }
             </div>
         </HeaderStyle>
     );
