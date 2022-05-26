@@ -8,7 +8,13 @@ import { useNavigate } from "react-router-dom";
 const OauthHandler = () => {
     let id: any;
     let navigate = useNavigate();           //화면 이동
-    
+
+    if(localStorage.getItem("token") != ""){
+        const ACCESS_TOKEN = localStorage.getItem("token");
+        setHeader(ACCESS_TOKEN);
+        console.log("토큰 저장");
+    }
+
     useEffect(() => {
         id = new URL(window.location.href).searchParams.get("id");
         console.log('id', id);

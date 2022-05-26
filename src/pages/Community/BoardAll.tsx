@@ -15,6 +15,12 @@ const BoardAll = () => {
 
     const navigate = useNavigate();
 
+    if(localStorage.getItem("token") != ""){
+        const ACCESS_TOKEN = localStorage.getItem("token");
+        setHeader(ACCESS_TOKEN);
+        console.log("토큰 저장");
+    }
+
     const enterSearch = (e: any) => {
         if (e.key === "Enter") {
             setSearchWordRe(e.target.value);

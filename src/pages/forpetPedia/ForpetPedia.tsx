@@ -89,6 +89,12 @@ const ForpetPedia = () => {
     const [page, setPage] = useState(1);
     const [totalPages, setTotalPages] = useState(10);
 
+    if(localStorage.getItem("token") != ""){
+        const ACCESS_TOKEN = localStorage.getItem("token");
+        setHeader(ACCESS_TOKEN);
+        console.log("토큰 저장");
+    }
+
     const handlePrevPage = (prevPage: number) => {
         setPage((prevPage) => prevPage - 1);
     };

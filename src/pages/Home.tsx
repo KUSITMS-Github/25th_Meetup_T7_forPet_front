@@ -12,12 +12,25 @@ import { ReactComponent as SectionBg } from '../assets/Home-section.svg';
 
 
 const Home = () => {
+
+    if(localStorage.getItem("token") != ""){
+        const ACCESS_TOKEN = localStorage.getItem("token");
+        setHeader(ACCESS_TOKEN);
+        console.log("토큰 저장");
+    }
+
+    const logout = () => {
+        localStorage.setItem("token", "");
+        console.log("토큰 삭제");
+        window.location.reload();
+    }
+
     return (
         <>
         <Header />
         <Wrapper>
             <HomeBanner>
-                <p className='subtitle'
+                <p className='subtitle' onClick={logout}
                     style={{ fontSize: '36px', textAlign: 'left', marginLeft: '70px' }}>
                     당신의 반려견을 위한 <br />완벽한 지도
                 </p>

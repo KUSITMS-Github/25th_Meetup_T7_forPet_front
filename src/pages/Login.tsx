@@ -11,6 +11,12 @@ import { ReactComponent as LoginLogo } from '../assets/Login-logo.svg';
 
 
 const Login = () => {
+
+    if(localStorage.getItem("token") != ""){
+        const ACCESS_TOKEN = localStorage.getItem("token");
+        setHeader(ACCESS_TOKEN);
+        console.log("토큰 저장");
+    }
     
     //카카오 로그인
     const loginHandler = async (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {

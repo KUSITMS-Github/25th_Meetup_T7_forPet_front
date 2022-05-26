@@ -86,6 +86,12 @@ const PediaDetail = () => {
     //     id: number,
     // }
 
+    if(localStorage.getItem("token") != ""){
+        const ACCESS_TOKEN = localStorage.getItem("token");
+        setHeader(ACCESS_TOKEN);
+        console.log("토큰 저장");
+    }
+
     useEffect(() => {
         // 글 불러오기
         const getQuestion = async () => {
@@ -177,8 +183,8 @@ const PediaDetail = () => {
                 <div style={{ display: 'flex', flexDirection: 'row' }}>
                     <div className='q-upper'>
                         <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-                            <img src={question.imageUrlList[0]}
-                                style={{ width: '30px', height: '30px', borderRadius: '20px' }} />
+                            {/* <img src={question.imageUrlList[0]}
+                                style={{ width: '30px', height: '30px', borderRadius: '20px' }} /> */}
                             <div style={{ fontSize: '12px', color: Colors.green5 }}>{question.tag}</div>
                             <div style={{ fontSize: '14px', fontWeight: 'bold' }} className='writer'>{question.nickName}</div>
                         </div>

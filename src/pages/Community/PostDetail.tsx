@@ -49,6 +49,12 @@ const PostDetail = () => {
 
     const [myComment, setMyComment] = useState<string>('');
 
+    if(localStorage.getItem("token") != ""){
+        const ACCESS_TOKEN = localStorage.getItem("token");
+        setHeader(ACCESS_TOKEN);
+        console.log("토큰 저장");
+    }
+
     useEffect(() => {
         // 커뮤니티 글 상세 get API
         const getPost = async () => {

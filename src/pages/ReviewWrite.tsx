@@ -22,6 +22,12 @@ interface Props {
 
 const ReviewWrite = () => {
 
+    if(localStorage.getItem("token") != ""){
+        const ACCESS_TOKEN = localStorage.getItem("token");
+        setHeader(ACCESS_TOKEN);
+        console.log("토큰 저장");
+    }
+
     const location = useLocation() as Props;
     console.log('리뷰: '+ location.state );
     

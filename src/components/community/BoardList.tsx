@@ -122,7 +122,7 @@ const BoardList = ({ board, search }: propsType) => {
         const getSearchList = async () => {
             await getApi(
                 {},
-                `/community/search/page=${page - 1}/size=${10}/keywork=${search}`
+                `/community/search/page=${page - 1}/size=${10}/keyword=${search}`
             )
                 .then(({ status, data }) => {
                     console.log(status, data);

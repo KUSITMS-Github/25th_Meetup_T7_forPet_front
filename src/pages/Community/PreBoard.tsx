@@ -15,6 +15,12 @@ const PreBoard = () => {  // 인증 확인
     const [address, setAddress] = useState<Boolean>();
     const [petcard, setPetcard] = useState<Boolean>();
 
+    if(localStorage.getItem("token") != ""){
+        const ACCESS_TOKEN = localStorage.getItem("token");
+        setHeader(ACCESS_TOKEN);
+        console.log("토큰 저장");
+    }
+
     useEffect(() => {
         const checkAuths = async () => {
             await getApi(

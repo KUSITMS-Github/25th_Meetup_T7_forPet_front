@@ -14,6 +14,13 @@ import Marker from "../assets/offlineMap/marker.png";
     const [mapList, setMapList] = useState([]);
     const [myLocation, setMyLocation] = useState< { latitude: number; longitude: number } | string >("");
 
+    if(localStorage.getItem("token") != ""){
+      const ACCESS_TOKEN = localStorage.getItem("token");
+      setHeader(ACCESS_TOKEN);
+      console.log("토큰 저장");
+  }
+
+
     // map 좌표 불러오기
     useEffect(() => {
       const getMapList =  () => {

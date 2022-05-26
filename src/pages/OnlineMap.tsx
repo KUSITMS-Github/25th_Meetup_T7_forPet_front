@@ -23,6 +23,13 @@ const OnlineMap = () => {
     const [moveUnit, setMoveUnit] = useState(0);
     const [town, setTown] = useState(''); // 반려인 마을, 예비 반려인 마을
 
+    if(localStorage.getItem("token") != ""){
+        const ACCESS_TOKEN = localStorage.getItem("token");
+        setHeader(ACCESS_TOKEN);
+        console.log("토큰 저장");
+    }
+
+
     const clickTown = (t: string) => {
         setTown(t);
         if (t === '봉사하개' || t === '입양하개') {
