@@ -2,6 +2,8 @@ import { useState, useEffect } from "react";
 import styled from '@emotion/styled';
 import { Colors } from '../../styles/ui';
 import { getApi } from '../../api';
+import { Link } from "react-router-dom";
+import { useNavigate } from 'react-router-dom';
 
 import { ReactComponent as StarAvg } from "../../assets/offlineMap/StarAvg.svg"
 
@@ -12,6 +14,8 @@ interface Props {
 const OfflineMapInfo = ({ item }: Props) => {
     const [placeId, setPlaceId] = useState<Number>(item.id);
     const [reviewList, setReviewList] = useState<any[]>([]);
+
+    const navigate = useNavigate();
 
     //리뷰 정보 불러오기
     useEffect(() => {
@@ -30,6 +34,10 @@ const OfflineMapInfo = ({ item }: Props) => {
         }
         getReview();
       }, []);
+
+      const reviewWrite = () => {
+        navigate('/reviewWrite', { state: item });
+      }
 
     return(
         <Section>
@@ -58,7 +66,7 @@ const OfflineMapInfo = ({ item }: Props) => {
                         <span className='reviewNickName' style={{marginLeft: '6px'}}>{reviewItem.nickName}</span>
                     </div>
                     {index == 0 ? 
-                    <div className='reviewBtn' style={{float: 'right', width: '18%'}}>리뷰 등록</div>
+                    <div className='reviewBtn' onClick={reviewWrite} style={{float: 'right', width: '18%'}}> 리뷰 등록</div>
                     : 
                     <></> }
                     </div>
