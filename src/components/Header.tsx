@@ -37,8 +37,7 @@ const Header = () => {
                 <Link to="/maps">
                     <HeaderButton className="header-btn">Forpet MAP</HeaderButton>
                 </Link>
-                {/*TODO: 사용자 인증 검사로 변경*/}
-                <Link to="/all">
+                <Link to="/preboard">
                     <HeaderButton className="header-btn">우리동네 커뮤니티</HeaderButton>
                 </Link>
                 <Link to="/forpetPedia">
