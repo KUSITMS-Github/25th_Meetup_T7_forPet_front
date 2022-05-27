@@ -15,32 +15,14 @@ import Marker from "../assets/offlineMap/marker.png";
     const [myLocation, setMyLocation] = useState< { latitude: number; longitude: number } | string >("");
 
     if(localStorage.getItem("token") != ""){
-      const ACCESS_TOKEN = localStorage.getItem("token");
-      setHeader(ACCESS_TOKEN);
-      console.log("토큰 저장");
-  }
+        const ACCESS_TOKEN = localStorage.getItem("token");
+        setHeader(ACCESS_TOKEN);
+        console.log("토큰 저장");
+    }
 
-
-    // map 좌표 불러오기
+    // 현재 사용자 위치 추척, map 좌표 불러오기
     useEffect(() => {
-      const getMapList =  () => {
-           getApi(
-              {}, `/offline-map`)
-              .then(({ status, data }) => {
-                  console.log(`GET 글 내용`, status, data);
-                  if (status === 200) {
-                      setMapList(data.body.data.placeInfo);
-                  }
-              })
-              .catch((e) => {
-                  console.log(e);
-              });
-      }
-      getMapList();
-    }, []);
-
-    // 현재 사용자 위치 추척
-    useEffect(() => {
+      const getMyLocation = async () => {
         if (navigator.geolocation) {
           navigator.geolocation.getCurrentPosition((position) => {
             setMyLocation({
@@ -51,6 +33,22 @@ import Marker from "../assets/offlineMap/marker.png";
         } else {
           window.alert("현재 위치를 알수 없습니다.");
         }
+      }
+      const getMapList = async () => {
+        await getApi(
+           {}, `/offline-map`)
+           .then(({ status, data }) => {
+               console.log(`GET 글 내용`, status, data);
+               if (status === 200) {
+                   setMapList(data.body.data.placeInfo);
+               }
+           })
+           .catch((e) => {
+               console.log(e);
+           });
+          }
+          getMyLocation();
+          getMapList();
       }, []);
 
       //지도 위 마커 표시
