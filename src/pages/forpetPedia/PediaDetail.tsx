@@ -155,12 +155,10 @@ const PediaDetail = () => {
                     <div className='q-upper'>
                         <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
                             {
-                                question.imageUrlList &&
-                                question.imageUrlList.map((img: string, i: number) => (
-                                    <img src={img} key={i}
-                                    style={{ width: '30px', height: '30px', borderRadius: '20px' }}
-                                    />
-                                ))
+                                question.profileImage &&
+                                <img src={question.profileImage}
+                                    style={{ width: '30px', height: '30px', borderRadius: '20px' }}/>
+                                
                             }
                             
                             <div style={{ fontSize: '12px', color: Colors.green5 }}>{question.tag}</div>

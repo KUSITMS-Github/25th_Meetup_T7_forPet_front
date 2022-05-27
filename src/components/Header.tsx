@@ -80,6 +80,7 @@ const HeaderStyle = styled.header`
     .header-right {
         display: flex;
         align-items: center;
+        justify-content: center;
     }
 `;
 

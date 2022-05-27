@@ -49,7 +49,7 @@ const OfflineMapInfo = ({ item }: Props) => {
                 </div>
                 <div className='storeReview' style={{flexDirection: 'row', marginTop: '5px'}}>
                     <StarAvg />
-                    <span>&nbsp;{item.starAvg}/5</span>
+                    <span>&nbsp;{item.star}/5</span>
                     <span>&nbsp;&nbsp;•&nbsp;&nbsp;</span>
                     <span>리뷰 {item.reviewCnt}</span>
                 </div>
