@@ -16,7 +16,7 @@ interface Props {
         longitude: number,
         name: string,
         reviewCnt: number,
-        starAvg: number
+        star: number
     };
 }
 
@@ -43,7 +43,7 @@ const ReviewWrite = () => {
                 </div>
                 <div className='storeReview' style={{float: 'right', width: '10%'}}>
                     <StarAvg style={{float: 'left'}}/>
-                    <span style={{float: 'left'}}>&nbsp;{location.state.starAvg}/5</span>
+                    <span style={{float: 'left'}}>&nbsp;{location.state.star}/5</span>
                     <span style={{float: 'left'}}>&nbsp;&nbsp;•&nbsp;&nbsp;</span>
                     <span style={{float: 'left'}}>리뷰 {location.state.reviewCnt}</span>
                 </div>

@@ -147,8 +147,8 @@ const PediaOne = (post: any) => {
 
                             <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
                                 {
-                                    onePost.imageUrlList &&
-                                    <img src={onePost.imageUrlList[0]}
+                                    onePost.profileImage &&
+                                    <img src={onePost.profileImage}
                                         style={{ width: '30px', height: '30px', borderRadius: '20px' }} />
                                 }
                                 <div style={{ fontSize: '12px', color: Colors.green5 }}>{onePost.tag}</div>

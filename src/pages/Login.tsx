@@ -53,7 +53,7 @@ const Login = () => {
         <Section>
             <LoginLogo />
             <span className="notice">로그인하고 퍼펫트를 이용해보세요! <br />필요한 시간은 단, 3초!</span>
-            <a className="btn-login" style={{ marginTop:'45px' }} href={loginUrl}>카카오 로그인</a>
+            <a className="btn-login" style={{ marginTop:'45px', textDecoration:'none' }} href={loginUrl}>카카오 로그인</a>
         </Section>
         </>
     );

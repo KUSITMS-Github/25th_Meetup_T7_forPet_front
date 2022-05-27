@@ -38,7 +38,7 @@ const OfflineMapListItem = ({ item }: Props) => {
             {/*장소 리뷰 정보*/}
             <Section onClick={()=>{setInfoView(true)}}>
                 <StarAvg />
-                <span style={{fontSize: '14px', marginLeft: '8px'}}>{item.starAvg}/</span>
+                <span style={{fontSize: '14px', marginLeft: '8px'}}>{item.star}/5</span>
                 <span style={{fontSize: '11px'}}>&nbsp;리뷰 {item.reviewCnt}</span>
             </Section>
 
