@@ -29,8 +29,8 @@ const PreBoard = () => {  // 인증 확인
                     // console.log(status, data);
                     // console.log(data.body.result.certifiedAddress);
                     if (status === 200) {
-                        setAddress(data.body.result.certifiedAddress);
-                        setPetcard(data.body.result.certifiedPetCard);
+                        setAddress(data.body.data.certifiedAddress);
+                        setPetcard(data.body.data.certifiedPetCard);
                     }
                 })
                 .catch((e) => {

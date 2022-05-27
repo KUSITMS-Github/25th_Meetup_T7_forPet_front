@@ -37,8 +37,8 @@ const LoginForpet = () => {
     let navigate = useNavigate();           //화면 이동
 
     if(localStorage.getItem("token") != ""){
-        localStorage.setItem("token", "");
-        setHeader(null);
+        const ACCESS_TOKEN = localStorage.getItem("token");
+        setHeader(ACCESS_TOKEN);
     }
 
     //프로필 이미지 띄워줌
