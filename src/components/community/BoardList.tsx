@@ -65,7 +65,6 @@ const BoardList = ({ board, search }: propsType) => {
 
     useEffect(() => {
         // 검색 api
-        console.log('keyword', search)
         const getSearchList = async () => {
             await getApi(
                 {},
