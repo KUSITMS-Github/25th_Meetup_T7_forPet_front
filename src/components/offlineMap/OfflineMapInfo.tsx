@@ -2,7 +2,6 @@ import { useState, useEffect } from "react";
 import styled from '@emotion/styled';
 import { Colors } from '../../styles/ui';
 import { getApi } from '../../api';
-import { Link } from "react-router-dom";
 import { useNavigate } from 'react-router-dom';
 
 import { ReactComponent as StarAvg } from "../../assets/offlineMap/StarAvg.svg"
@@ -23,7 +22,7 @@ const OfflineMapInfo = ({ item }: Props) => {
             await getApi(
                 {}, `/offline-map/${placeId}/marker/review`)
                 .then(({ status, data }) => {
-                    console.log(`GET 리뷰 내용`, status, data);
+                    // console.log(`GET 리뷰 내용`, status, data);
                     if (status === 200) {
                         setReviewList(data.body.data);
                     }

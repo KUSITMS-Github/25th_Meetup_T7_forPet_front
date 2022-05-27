@@ -1,9 +1,9 @@
-import react, { useEffect, useState } from 'react';
+import { useState } from 'react';
 import styled from '@emotion/styled';
 import { Colors } from '../styles/ui';
 import { motion, AnimatePresence } from "framer-motion";
 import { OnlineMapList } from '../components';
-import { getApi, postApi, setHeader } from "../api";
+import { setHeader } from "../api";
 import { Header } from "../components";
 
 import { ReactComponent as Tree1 } from '../assets/onlineMap/Map-tree1.svg';
@@ -26,7 +26,6 @@ const OnlineMap = () => {
     if(localStorage.getItem("token") != ""){
         const ACCESS_TOKEN = localStorage.getItem("token");
         setHeader(ACCESS_TOKEN);
-        console.log("토큰 저장");
     }
 
 

@@ -1,4 +1,4 @@
-import React, { useState, useEffect, PropsWithChildren } from 'react';
+import { useState, useEffect } from 'react';
 import styled from '@emotion/styled';
 import { Colors } from '../../styles/ui';
 import { getApi } from '../../api';
@@ -51,7 +51,7 @@ const BoardList = ({ board, search }: propsType) => {
                 `/community/list?page=${page-1}&size=${10}&category=${board}`
             )
                 .then(({ status, data }) => {
-                    console.log(status, data);
+                    // console.log(status, data);
                     if (status === 200) {
                         setBoardList(data.body.data);
                     }
@@ -71,7 +71,7 @@ const BoardList = ({ board, search }: propsType) => {
                 `/community/search?page=${page - 1}&size=${10}&keyword=${search}`
             )
                 .then(({ status, data }) => {
-                    console.log('검색결과', status, data);
+                    // console.log('검색결과', status, data);
                     if (status === 200) {
                         setBoardList(data.body.data);
                     }

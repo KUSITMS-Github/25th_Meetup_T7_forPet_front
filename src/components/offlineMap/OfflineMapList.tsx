@@ -7,75 +7,6 @@ import OfflineMapCategory from "./OfflineMapCategory";
 import BtnSearch from "../../assets/offlineMap/btn_search.svg";
 
 const OfflineMapList = () => {
-    //TODO: API 대체
-    const offline_list = 
-    [
-        {
-            "id": 394,
-            "name": "머멍펫살롱(MuMung)",
-            "category": "미용실",
-            "address": "서울특별시 강남구 논현동 272-26",
-            "starAvg": 0.0,
-            "reviewCnt": 0
-        },
-        {
-            "id": 395,
-            "name": "별애견샵",
-            "category": "미용실",
-            "address": "서울특별시 강남구 일원동 718",
-            "starAvg": 0.0,
-            "reviewCnt": 0
-        },
-        {
-            "id": 403,
-            "name": "오드리펫샵",
-            "category": "미용실",
-            "address": "논현동 162-13번지 1층 강남구 서울특별시 KR",
-            "starAvg": 0.0,
-            "reviewCnt": 0
-        },
-        {
-            "id": 404,
-            "name": "달이네애견미용실",
-            "category": "미용실",
-            "address": "논현동 125-17번지 1층 강남구 서울특별시 KR",
-            "starAvg": 0.0,
-            "reviewCnt": 0
-        },
-        {
-            "id": 409,
-            "name": "더왈츠",
-            "category": "카페",
-            "address": "서울특별시 강남구 역삼로 134",
-            "starAvg": 0.0,
-            "reviewCnt": 0
-        },
-        {
-            "id": 410,
-            "name": "두젠틀",
-            "category": "카페",
-            "address": "서울특별시 강남구 역삼동 667-10번지 하1층 별관",
-            "starAvg": 0.0,
-            "reviewCnt": 0
-        },
-        {
-            "id": 417,
-            "name": "히히냥냥",
-            "category": "카페",
-            "address": "서울특별시 강남구 강남대로102길 14 장연빌딩 5층 501호",
-            "starAvg": 0.0,
-            "reviewCnt": 0
-        },
-        {
-            "id": 418,
-            "name": "페스츄리",
-            "category": "카페",
-            "address": "서울특별시 강남구 역삼동 789-7",
-            "starAvg": 0.0,
-            "reviewCnt": 0
-        }
-    ]
-
     const [mapList, setMapList] = useState([]);
     const [mapAllList, setMapAllList] = useState([])
     const [searchPlace, setsearchPlace] = useState<string>();  
@@ -87,7 +18,7 @@ const OfflineMapList = () => {
              getApi(
                 {}, `/offline-map`)
                 .then(({ status, data }) => {
-                    console.log(`GET 글 내용`, status, data);
+                    // console.log(`GET 글 내용`, status, data);
                     if (status === 200) {
                         setMapList(data.body.data.placeInfo);
                         setMapAllList(data.body.data.placeInfo);
@@ -102,13 +33,12 @@ const OfflineMapList = () => {
 
     //주변 반려견 장소 검색
     const enterSearchPlace = async (e: any) => {
-            console.log(searchPlace);
             await getApi(
                 {},
                 `/offline-map/search?keyword=${searchPlace}`
             )
                 .then(({ status, data }) => {
-                    console.log("search 결과", status, data);
+                    // console.log("search 결과", status, data);
                     if (data) {
                         setMapList(data.body.data);
                     } else {
@@ -129,7 +59,7 @@ const OfflineMapList = () => {
                 `/offline-map/category?category=${activeCat}`
             )
                 .then(({ status, data }) => {
-                    console.log("search 결과", status, data);
+                    // console.log("search 결과", status, data);
                     if (data) {
                         setMapList(data.body.data);
                     } else {

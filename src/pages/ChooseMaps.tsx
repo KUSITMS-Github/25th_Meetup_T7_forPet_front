@@ -1,7 +1,7 @@
 import styled from '@emotion/styled';
 import { Colors } from '../styles/ui';
 import { Link } from "react-router-dom";
-import { getApi, postApi, setHeader } from "../api";
+import { setHeader } from "../api";
 import { Header } from "../components";
 
 import { ReactComponent as OfflineMap } from '../assets/Choose-offlinemap.svg';
@@ -12,7 +12,6 @@ const ChooseMaps = () => {
     if(localStorage.getItem("token") != ""){
         const ACCESS_TOKEN = localStorage.getItem("token");
         setHeader(ACCESS_TOKEN);
-        console.log("토큰 저장");
     }
 
 

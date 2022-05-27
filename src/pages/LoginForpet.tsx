@@ -1,9 +1,9 @@
 import styled from '@emotion/styled';
 import { Colors } from '../styles/ui';
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from "react-router-dom";
-import { getApi, postApi, setHeader } from "../api";
+import { getApi, setHeader } from "../api";
 import { Header } from "../components";
 
 import Background from '../assets/Login-background.svg';
@@ -39,12 +39,11 @@ const LoginForpet = () => {
     if(localStorage.getItem("token") != ""){
         const ACCESS_TOKEN = localStorage.getItem("token");
         setHeader(ACCESS_TOKEN);
-        console.log("토큰 저장");
     }
 
     //프로필 이미지 띄워줌
     const onProfileFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        console.log(e.target.files![0]);
+        // console.log(e.target.files![0]);
         setProfile(e.target.files![0]);
         setprofileSrc(URL.createObjectURL(e.target.files![0]));
     }
@@ -58,10 +57,8 @@ const LoginForpet = () => {
                 `/signup/check/sendSMS?phone_number=${signupForm.phone_number}`
             )
             .then(({ status, data }) => {
-                console.log(status, data);
-
                 if (status === 200) {
-                    console.log(data);
+                    // console.log(data);
                     setCerNum(data);
                 }
             })
@@ -86,7 +83,7 @@ const LoginForpet = () => {
 
     //동물카드 사진 등록
     const onCardFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        console.log(e.target.files![0]);
+        // console.log(e.target.files![0]);
         setAnimalCard(e.target.files![0]);
     }
 
@@ -106,7 +103,7 @@ const LoginForpet = () => {
             config
         )
         .then(({ status, data }) => {
-            console.log(status, data);
+            // console.log(status, data);
             if (status === 200) {
                 alert("동물카드 인증이 완료되었개");
                 setCardView(2);
@@ -131,7 +128,6 @@ const LoginForpet = () => {
     //TODO: 닉네임 필수 입력
     //TODO: 전화번호 필수 입력
     const signUp = async () => {
-        console.log(signupForm);
         const end_url = `/signup`;
         const formData = new FormData();
         formData.append('signup_dto',
@@ -150,7 +146,7 @@ const LoginForpet = () => {
             config
         )
         .then(({ status, data }) => {
-            console.log(status, data);
+            // console.log(status, data);
             if (status === 200) {
                 alert("회원가입이 완료되었개");
                 const ACCESS_TOKEN = data.body.token;

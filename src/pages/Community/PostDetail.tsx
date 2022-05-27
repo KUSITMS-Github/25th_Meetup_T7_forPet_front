@@ -9,7 +9,6 @@ import { ReactComponent as LikeIcon} from '../../assets/Like-icon.svg';
 import { ReactComponent as BookmarkIcon} from '../../assets/Bookmark-icon.svg';
 import { ReactComponent as LikeFullIcon} from '../../assets/Like-icon-full.svg';
 import { ReactComponent as BookmarkFullIcon} from '../../assets/Bookmark-icon-full.svg';
-import { MyComment } from '../../components';
 import { CommentList } from '../../components/community';
 
 
@@ -70,7 +69,6 @@ const PostDetail = () => {
     if(localStorage.getItem("token") != ""){
         const ACCESS_TOKEN = localStorage.getItem("token");
         setHeader(ACCESS_TOKEN);
-        console.log("토큰 저장");
     }
 
     useEffect(() => {
@@ -81,7 +79,7 @@ const PostDetail = () => {
                 `/community/${params.id}`
             )
                 .then(({ status, data }) => {
-                    console.log('detaile왜안돼', status, data.body.data);
+                    // console.log(status, data.body.data);
                     if (status === 200) {
                         setPostData(data.body.data);
                         setPostCategory(data.body.data.category);
@@ -146,7 +144,7 @@ const PostDetail = () => {
                     `/community/${params.id}/${what}`
                 )
                 .then(({ status, data }) => {
-                    console.log("POST 누름", status, data);
+                    // console.log("POST 누름", status, data);
                     if (status === 200) {
                         window.location.reload();  // 새로 고침하여 좋아요 수 갱신
                     }
@@ -155,13 +153,13 @@ const PostDetail = () => {
                     console.log(e);
                 });
             } else { // true -> 좋아요 취소
-                console.log('좋아요 취소');
+                // console.log('좋아요 취소');
                 await deleteApi(
                     {},
                     `/community/${params.id}/${what}`
                 )
                 .then(({ status, data }) => {
-                    console.log("DEL 취소", status, data);
+                    // console.log("DEL 취소", status, data);
                     if (status === 200) {
                         window.location.reload();  // 새로 고침하여 좋아요 수 갱신
                     }
@@ -177,7 +175,7 @@ const PostDetail = () => {
                     `/community/${params.id}/${what}`
                 )
                 .then(({ status, data }) => {
-                    console.log("POST 누름", status, data);
+                    // console.log("POST 누름", status, data);
                     if (status === 200) {
                         window.location.reload();  // 새로 고침하여 북마크 수 갱신
                     }
@@ -191,7 +189,7 @@ const PostDetail = () => {
                     `/community/${params.id}/${what}`
                 )
                 .then(({ status, data }) => {
-                    console.log("DEL 취소", status, data);
+                    // console.log("DEL 취소", status, data);
                     if (status === 200) {
                         window.location.reload();  // 새로 고침하여 북마크 수 갱신
                     }
@@ -214,7 +212,7 @@ const PostDetail = () => {
                 `/community/${postData.post_id}/comment`
             )
             .then(({ status, data }) => {
-                    console.log("댓글 작성 post api", status);
+                    // console.log("댓글 작성 post api", status);
                 if (status === 200) {
                     window.location.reload(); // 새로고침
                 }

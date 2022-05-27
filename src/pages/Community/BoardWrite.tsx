@@ -2,10 +2,9 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import styled from '@emotion/styled';
 import { Colors } from '../../styles/ui';
-import { stringify } from 'querystring';
 import { BoardHeader } from '../../components/community';
 import { useNavigate } from 'react-router-dom';
-import { getApi, postApi, setHeader } from "../../api";
+import { setHeader } from "../../api";
 import { Header } from "../../components";
 
 
@@ -28,11 +27,10 @@ const BoardWrite = () => {
     if(localStorage.getItem("token") != ""){
         const ACCESS_TOKEN = localStorage.getItem("token");
         setHeader(ACCESS_TOKEN);
-        console.log("토큰 저장");
     }
 
     const handleRadioButton = (e: React.ChangeEvent<HTMLInputElement>) => {
-        console.log(e.target.value);
+        // console.log(e.target.value);
         setRadio(e.target.value);
         setContents({...contents, category: e.target.value});
     }
@@ -40,7 +38,7 @@ const BoardWrite = () => {
     const [file, setFile] = useState<File>();
 
     const onFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        console.log(e.target.files![0]);
+        // console.log(e.target.files![0]);
         setFile(e.target.files![0]);
     }
 
@@ -63,7 +61,7 @@ const BoardWrite = () => {
             config
         )
             .then(({ status, data }) => {
-                console.log(status, data);
+                // console.log(status, data);
                 if (status === 200 || status === 201) {
                     navigate('/all');
                 }

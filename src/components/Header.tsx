@@ -1,8 +1,8 @@
 import styled from '@emotion/styled';
 import { Colors } from '../styles/ui';
 import { Link } from "react-router-dom";
-import React, { useState, useEffect } from 'react';
-import { getApi, postApi, setHeader } from '../api';
+import { useState, useEffect } from 'react';
+import { getApi } from '../api';
 import { ReactComponent as HeaderLogo } from "../assets/HeaderLogo.svg";
 
 const Header = () => {
@@ -16,7 +16,7 @@ const Header = () => {
                 `/mypage`
             )
                 .then(({ status, data }) => {
-                    console.log(data);
+                    // console.log(data);
                     setUserObject(data.body.data);
                 })
                 .catch((e) => {

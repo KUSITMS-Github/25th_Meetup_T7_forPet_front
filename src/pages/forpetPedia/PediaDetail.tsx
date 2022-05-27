@@ -8,8 +8,6 @@ import { Header } from "../../components";
 
 import { ReactComponent as LikeIcon } from '../../assets/Like-icon.svg';
 import { ReactComponent as BookmarkIcon } from '../../assets/Bookmark-icon.svg';
-import { ReactComponent as LikeIconFull } from '../../assets/Like-icon-full.svg';
-import { ReactComponent as BookmarkIconFull } from '../../assets/Bookmark-icon-full.svg';
 import { ReactComponent as CommentIcon } from '../../assets/Comment-icon.svg';
 
 const dumpdata = {
@@ -61,7 +59,6 @@ const PediaDetail = () => {
     if(localStorage.getItem("token") != ""){
         const ACCESS_TOKEN = localStorage.getItem("token");
         setHeader(ACCESS_TOKEN);
-        console.log("토큰 저장");
     }
 
     useEffect(() => {
@@ -114,7 +111,7 @@ const PediaDetail = () => {
                 `/qnaBoard/${postId}/comment`
             )
                 .then(({ status, data }) => {
-                    console.log('댓글입력:', status, data);
+                    // console.log('댓글입력:', status, data);
                     if (status === 200) {
                         window.location.reload(); // 새로고침
                     }
@@ -132,7 +129,7 @@ const PediaDetail = () => {
             `/qnaBoard/${postId}/${cnt}`
         )
             .then(({ status, data }) => {
-                console.log("POST 좋아요/북마크 누름", status, data);
+                // console.log("POST 좋아요/북마크 누름", status, data);
                 if (status === 200) {
                     if (cnt === 'like') {
                         setQuestion({ ...question, likes: data.body.data });

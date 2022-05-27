@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext } from 'react';
+import React, { useState, useEffect } from 'react';
 import styled from '@emotion/styled';
 import { Colors } from '../../styles/ui';
 import { postApi, getApi } from '../../api';
@@ -77,7 +77,7 @@ const PediaOne = (post: any) => {
                 `/qnaBoard/${onePost.qnaBoardId}/comment`
             )
                 .then(({ status, data }) => {
-                    console.log(`GET 댓글 불러오기`, status, data.data);
+                    // console.log(`GET 댓글 불러오기`, status, data.data);
                     if (status === 200) {
                         setComments(data.data);
                     }
@@ -91,7 +91,6 @@ const PediaOne = (post: any) => {
 
     // 댓글 입력
     const writeAnswer = async (e: React.KeyboardEvent<HTMLTextAreaElement>) => {  // 연필 클릭 시 답변 입력 - postapi
-        console.log(myAnswer);
         if (e.key === 'Enter') {
             await postApi(
                 {
@@ -100,7 +99,7 @@ const PediaOne = (post: any) => {
                 `/qnaBoard/${onePost.qnaBoardId}/comment`
             )
                 .then(({ status, data }) => {
-                    console.log('댓글입력:', status, data);
+                    // console.log('댓글입력:', status, data);
                     if (status === 200) {
                         window.location.reload(); // 새로고침
                     }
@@ -113,7 +112,7 @@ const PediaOne = (post: any) => {
 
     // 좋아요, 스크랩 Post API
     const clickLike = async (postId: number, cnt: string) => {
-        console.log('좋아요누름', postId);
+        // console.log('좋아요누름', postId);
         await postApi(
             {},
             `/qnaBoard/${postId}/${cnt}`

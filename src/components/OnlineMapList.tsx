@@ -217,7 +217,6 @@ const OnlineMapList = ({ pick }: any | string) => {
                 break;
             case '봉사하개':
                 setPickService(serviceList['volunteer']);
-                console.log(pickService)
                 break;
             case '입양하개':
                 setPickService(serviceList['adopt']);

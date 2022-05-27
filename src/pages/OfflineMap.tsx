@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import styled from '@emotion/styled';
 import OfflineList from '../components/offlineMap/OfflineMapList';
-import { getApi, postApi, setHeader } from "../api";
+import { getApi, setHeader } from "../api";
 import { Header } from "../components";
 
 import Marker from "../assets/offlineMap/marker.png";
@@ -17,7 +17,6 @@ import Marker from "../assets/offlineMap/marker.png";
     if(localStorage.getItem("token") != ""){
         const ACCESS_TOKEN = localStorage.getItem("token");
         setHeader(ACCESS_TOKEN);
-        console.log("토큰 저장");
     }
 
     // 현재 사용자 위치 추척, map 좌표 불러오기
@@ -38,7 +37,7 @@ import Marker from "../assets/offlineMap/marker.png";
         await getApi(
            {}, `/offline-map`)
            .then(({ status, data }) => {
-               console.log(`GET 글 내용`, status, data);
+              //  console.log(`GET 글 내용`, status, data);
                if (status === 200) {
                    setMapList(data.body.data.placeInfo);
                }
@@ -107,7 +106,7 @@ import Marker from "../assets/offlineMap/marker.png";
               position: new naver.maps.LatLng(Number(place.latitude), Number(place.longitude)),
               map: map,
               icon: {
-                content: [`<span>${place.name}</span>`].join(""),
+                // content: [`<span>${place.name}</span>`].join(""),
                 anchor: new naver.maps.Point(50, 60)
               },
             });
