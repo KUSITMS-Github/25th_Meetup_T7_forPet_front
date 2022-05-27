@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import axios from 'axios';
 import styled from '@emotion/styled';
 import { Colors } from '../../styles/ui';
@@ -11,7 +11,7 @@ const CreatePostPedia = () => {
 
     const [file, setFile] = useState<File>();
     const onFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        console.log(e.target.files![0]);
+        // console.log(e.target.files![0]);
         setFile(e.target.files![0]);
     }
 
@@ -38,7 +38,7 @@ const CreatePostPedia = () => {
             config
         )
             .then(({ status, data }) => {
-                console.log(status, data);
+                // console.log(status, data);
                 if (status === 200 || status === 201) {
                     window.location.reload();
                 }

@@ -1,8 +1,8 @@
 import styled from '@emotion/styled';
 import { Colors } from '../styles/ui';
 import { Link } from "react-router-dom";
-import React, { useState, useEffect } from 'react';
-import { getApi, postApi, setHeader } from '../api';
+import { useState, useEffect } from 'react';
+import { getApi } from '../api';
 import { ReactComponent as HeaderLogo } from "../assets/HeaderLogo.svg";
 
 const Header = () => {
@@ -16,7 +16,7 @@ const Header = () => {
                 `/mypage`
             )
                 .then(({ status, data }) => {
-                    console.log(data);
+                    // console.log(data);
                     setUserObject(data.body.data);
                 })
                 .catch((e) => {
@@ -37,8 +37,7 @@ const Header = () => {
                 <Link to="/maps">
                     <HeaderButton className="header-btn">Forpet MAP</HeaderButton>
                 </Link>
-                {/*TODO: 사용자 인증 검사로 변경*/}
-                <Link to="/all">
+                <Link to="/preboard">
                     <HeaderButton className="header-btn">우리동네 커뮤니티</HeaderButton>
                 </Link>
                 <Link to="/forpetPedia">

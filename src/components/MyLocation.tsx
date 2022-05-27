@@ -38,7 +38,7 @@ const MyLocation = () => {
 
     useEffect(() => {
         // Reverse Geocoding Open Api 호출 시도 -> proxy 우회도 해봤지만 실패. 백단에서 시도하기
-        console.log('geoURL:::', geoUrl);
+        // console.log('geoURL:::', geoUrl);
         const getAddress = async () => {
             axios.request({
                 url: geoUrl,

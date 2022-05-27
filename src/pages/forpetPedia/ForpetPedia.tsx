@@ -1,10 +1,10 @@
-import React, { useState, useEffect, useContext } from 'react';
+import React, { useState, useEffect } from 'react';
 import styled from '@emotion/styled';
 import Pagination from "../../components/Pagination";
 import { PediaOne, CreatePostPedia } from '../../components/forpetPedia';
 import { ReactComponent as PediaIcon } from '../../assets/Pedia-icon.svg';
 import { Colors } from '../../styles/colors';
-import { getApi, postApi, setHeader } from "../../api";
+import { getApi, setHeader } from "../../api";
 import { Header } from "../../components";
 
 import SearchIcon from '../../assets/search_icon.png';
@@ -92,7 +92,6 @@ const ForpetPedia = () => {
     if(localStorage.getItem("token") != ""){
         const ACCESS_TOKEN = localStorage.getItem("token");
         setHeader(ACCESS_TOKEN);
-        console.log("토큰 저장");
     }
 
     const handlePrevPage = (prevPage: number) => {
@@ -112,10 +111,10 @@ const ForpetPedia = () => {
                     `/qnaBoard/orderByLatest?page=${page - 1}`
                 )
                     .then(({ status, data }) => {
-                        console.log(status, data);
+                        // console.log(status, data);
 
                         if (status === 200) {
-                            console.log(`GET /orderByLatest?page=${page}`, data.body.data.data);
+                            // console.log(`GET /orderByLatest?page=${page}`, data.body.data.data);
                             setPediaList(data.body.data.data);
                         }
                     })
@@ -129,7 +128,7 @@ const ForpetPedia = () => {
                 )
                     .then(({ status, data }) => {
                         if (status === 200) {
-                            console.log(`GET /orderByLikes?page=${page}`, data.body.data.data);
+                            // console.log(`GET /orderByLikes?page=${page}`, data.body.data.data);
                             setPediaList(data.body.data.data);
                         }
                     })
@@ -150,14 +149,14 @@ const ForpetPedia = () => {
     // 검색 API
     const enterSearchInput = async (e: any) => {
         if (e.key === "Enter") {  // 엔터키 클릭 시 검색 api 호출
-            console.log(e.target.value);
+            // console.log(e.target.value);
             setSearchWordRe(e.target.value);
             await getApi(
                 {},
                 `/qnaBoard/search?keyword=${e.target.value}&orderBy=${sortVar}&page=${page - 1}`
             )
                 .then(({ status, data }) => {
-                    console.log("search 결과", status, data);
+                    // console.log("search 결과", status, data);
                     if (data) {
                         setPediaList(data.body.data.data);
                     } else {
@@ -196,6 +195,7 @@ const ForpetPedia = () => {
                 <button
                     className='question-button'
                     onClick={() => onClickQBtn()}
+                    style={{cursor: 'pointer'}}
                 >질문하기</button>
             </div>
             <div className='keywords' style={{ fontSize: '18px', marginLeft: '20px', marginBottom: '10px'}}>

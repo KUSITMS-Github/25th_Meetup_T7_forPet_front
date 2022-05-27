@@ -2,20 +2,16 @@ import styled from '@emotion/styled';
 import { Colors } from '../../styles/ui';
 import { postApi } from '../../api';
 import { ReactComponent as LikeIcon } from '../../assets/Like-icon.svg';
-import { ReactComponent as LikeFullIcon } from '../../assets/Like-icon-full.svg';
-
 
 const PediaOneComment = ({ comment }: any) => {
-    // console.log(comment)
     // 댓글좋아요 Post API
     const clickCommentCnt = async (commentId: number) => {
-        console.log(commentId);
         await postApi(
             {},
             `/qnaBoard/comment/${commentId}/like`
         )
             .then(({ status, data }) => {
-                console.log("POST 댓글좋아요 누름", status, data);
+                // console.log("POST 댓글좋아요 누름", status, data);
                 if (status === 200) {
                     window.location.reload();
                 }

@@ -3,7 +3,6 @@ import {
   Home,
   Login,
   LoginForpet,
-  Signup,
   ChooseMaps,
   OnlineMap,
   OfflineMap,
@@ -40,7 +39,6 @@ function App() {
             <Route path="/" element={<Home />} />
             <Route path="/login" element={<Login />} />
             <Route path="/loginForpet" element={<LoginForpet />} />
-            <Route path="/signup" element={<Signup />} />
             <Route path="/maps" element={<ChooseMaps />} />
             <Route path="/onlinemap" element={<OnlineMap />} />
             <Route path="/offlinemap" element={<OfflineMap />} />

@@ -1,7 +1,5 @@
-import React, { useState, useEffect } from 'react';
-import { useParams } from "react-router-dom";
-import axios from 'axios';
-import { getApi, postApi, setHeader } from "../api";
+import { useEffect } from 'react';
+import { getApi, setHeader } from "../api";
 import { Header } from "../components";
 import { useNavigate } from "react-router-dom";
 
@@ -12,13 +10,10 @@ const OauthHandler = () => {
     if(localStorage.getItem("token") != ""){
         const ACCESS_TOKEN = localStorage.getItem("token");
         setHeader(ACCESS_TOKEN);
-        console.log("토큰 저장");
     }
 
     useEffect(() => {
         id = new URL(window.location.href).searchParams.get("id");
-        console.log('id', id);
-        console.log(window.location.href);
     }, []) 
     
 
@@ -29,7 +24,7 @@ const OauthHandler = () => {
                 `/auth/signup?id=${id}`
             )
             .then((res) => {
-                console.log(res); // 토큰이 넘어올 것임
+                // console.log(res); // 토큰이 넘어올 것임
                 const ACCESS_TOKEN = res.data.body.data.token;
                 localStorage.setItem("token", ACCESS_TOKEN);    //예시로 로컬에 저장함 
                 setHeader(ACCESS_TOKEN);   
@@ -41,8 +36,8 @@ const OauthHandler = () => {
             })
             .catch((e) => {
                 console.log("소셜로그인 에러", e);
-              window.alert("로그인에 실패하였습니다.");
-              navigate("/login"); // 로그인 실패하면 로그인화면으로 돌려보냄
+                window.alert("로그인에 실패하였습니다.");
+                navigate("/login"); // 로그인 실패하면 로그인화면으로 돌려보냄
             });
         }
         login();

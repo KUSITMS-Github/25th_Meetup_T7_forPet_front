@@ -1,4 +1,3 @@
-import React, { useState, useEffect } from 'react';
 import styled from '@emotion/styled';
 import { Colors } from '../../styles/ui';
 import { NavLink } from "react-router-dom";

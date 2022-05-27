@@ -1,9 +1,8 @@
 import styled from '@emotion/styled';
 import { Colors } from '../../styles/ui';
-import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from 'react';
-import { getApi, postApi, setHeader } from "../../api";
+import { getApi, setHeader } from "../../api";
 import { Header } from "../../components";
 
 import { ReactComponent as Logo } from '../../assets/Logo.svg';
@@ -18,7 +17,6 @@ const PreBoard = () => {  // 인증 확인
     if(localStorage.getItem("token") != ""){
         const ACCESS_TOKEN = localStorage.getItem("token");
         setHeader(ACCESS_TOKEN);
-        console.log("토큰 저장");
     }
 
     useEffect(() => {
@@ -28,8 +26,8 @@ const PreBoard = () => {  // 인증 확인
                 `/certify`
             )
                 .then(({ status, data }) => {
-                    console.log(status, data);
-                    console.log(data.body.result.certifiedAddress);
+                    // console.log(status, data);
+                    // console.log(data.body.result.certifiedAddress);
                     if (status === 200) {
                         setAddress(data.body.result.certifiedAddress);
                         setPetcard(data.body.result.certifiedPetCard);

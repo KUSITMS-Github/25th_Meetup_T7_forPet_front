@@ -22,13 +22,13 @@ const OfflineMapListItem = ({ item }: Props) => {
         <ItemBox>
 
             {/*장소 이름, 카테고리*/}
-            <Section>
-                <div className="text" onClick={()=>{setInfoView(true)}}>
+            <Section >
+                <div className="text" onClick={()=>{setInfoView(true)}} style={{cursor: 'pointer'}}>
                 <span style={{fontSize: '17px'}}>{item.name}</span>
                 <span style={{fontSize: '11px', marginLeft: '8px', color: '${Colors.gray2}'}}>{item.category}</span>
                 <br /><span style={{fontSize: '11px', color: '${Colors.gray2}'}}>{item.address}</span>
                 </div>
-                <div className='bookmark'>
+                <div className='bookmark' style={{cursor: 'pointer'}}>
                 {bookmark ? 
                     <BookmarkAct onClick={toggleBookmark}/> 
                     : <BookmarkDeact onClick={toggleBookmark}/> }
@@ -46,7 +46,7 @@ const OfflineMapListItem = ({ item }: Props) => {
             {infoView 
                 && ( <>
                 <OfflineMapInfo item={item} />
-                <Close onClick={()=>{setInfoView(false)}}> <img src={BtnClose}/> </Close>
+                <Close onClick={()=>{setInfoView(false)}} style={{cursor: 'pointer'}}> <img src={BtnClose}/> </Close>
                 </> )}
         </ItemBox>
     );

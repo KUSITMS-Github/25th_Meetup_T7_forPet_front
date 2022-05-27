@@ -1,9 +1,8 @@
-import { Link } from "react-router-dom";
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import axios from 'axios';
 import styled from '@emotion/styled';
 import { Colors } from '../styles/ui';
-import { getApi, postApi, setHeader } from "../api";
+import { setHeader } from "../api";
 import { Header } from "../components";
 
 import LoginBackground from '../assets/Login-background.svg';
@@ -15,7 +14,6 @@ const Login = () => {
     if(localStorage.getItem("token") != ""){
         const ACCESS_TOKEN = localStorage.getItem("token");
         setHeader(ACCESS_TOKEN);
-        console.log("토큰 저장");
     }
     
     //카카오 로그인
@@ -33,7 +31,7 @@ const Login = () => {
             config
         )
             .then(({ status, data }) => {
-                console.log(status, data);
+                // console.log(status, data);
                 if (status === 200 || status === 201) {
                     setHeader(data.body.data.token);
                 }
