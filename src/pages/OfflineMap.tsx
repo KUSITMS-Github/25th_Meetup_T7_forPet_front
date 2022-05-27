@@ -22,8 +22,8 @@ import Marker from "../assets/offlineMap/marker.png";
     // 현재 사용자 위치 추척, map 좌표 불러오기
     useEffect(() => {
       const getMyLocation = async () => {
-        if (navigator.geolocation) {
-          navigator.geolocation.getCurrentPosition((position) => {
+         if (navigator.geolocation) {
+          await navigator.geolocation.getCurrentPosition((position) => {
             setMyLocation({
               latitude: position.coords.latitude,
               longitude: position.coords.longitude,
