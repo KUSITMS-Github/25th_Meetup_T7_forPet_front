@@ -106,7 +106,7 @@ import Marker from "../assets/offlineMap/marker.png";
               position: new naver.maps.LatLng(Number(place.latitude), Number(place.longitude)),
               map: map,
               icon: {
-                // content: [`<span>${place.name}</span>`].join(""),
+                content: [`<span></span>`].join(""),
                 anchor: new naver.maps.Point(50, 60)
               },
             });
