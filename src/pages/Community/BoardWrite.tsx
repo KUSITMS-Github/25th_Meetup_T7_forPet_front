@@ -15,12 +15,14 @@ const BoardWrite = () => {
     const [contents, setContents] = useState<Contents>({
         title: '',
         content: '',
+        category: '',
     });
     const navigate = useNavigate();
 
     interface Contents {
         title: string,
         content: string,
+        category: string,
     }
 
     if(localStorage.getItem("token") != ""){
@@ -32,6 +34,7 @@ const BoardWrite = () => {
     const handleRadioButton = (e: React.ChangeEvent<HTMLInputElement>) => {
         console.log(e.target.value);
         setRadio(e.target.value);
+        setContents({...contents, category: e.target.value});
     }
 
     const [file, setFile] = useState<File>();
@@ -81,24 +84,24 @@ const BoardWrite = () => {
                 <label>
                     <input
                         type='radio'
-                        value='meet'
-                        checked={radio === 'meet'}
+                        value='meeting'
+                        checked={radio === 'meeting'}
                         onChange={(e) => handleRadioButton(e)}
                     />모임
                 </label>
                 <label>
                     <input
                         type='radio'
-                        value='share'
-                        checked={radio === 'share'}
+                        value='sharing'
+                        checked={radio === 'sharing'}
                         onChange={(e) => handleRadioButton(e)}
                     />나눔
                 </label>
                 <label>
                     <input
                         type='radio'
-                        value='boast'
-                        checked={radio === 'boast'}
+                        value='boasting'
+                        checked={radio === 'boasting'}
                         onChange={(e) => handleRadioButton(e)}
                     />자랑
                 </label>

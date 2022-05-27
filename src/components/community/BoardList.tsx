@@ -5,58 +5,6 @@ import { getApi } from '../../api';
 import Pagination from "../Pagination";
 import { useNavigate } from "react-router-dom";
 
-const initialBoardList = [
-    {
-        "writer": {
-            "user_id": 3,
-            "user_profile_image": "http://k.kakaocdn.net/dn/dpk9l1/btqmGhA2lKL/Oz0wDuJn1YV2DIn92f6DVK/img_110x110.jpg",
-            "user_nickname": "쩜마이"
-        },
-        "title": "insertTitle",
-        "category": "sharing",
-        "post_id": 10,
-        "thumbs_up_cnt": 0,
-        "image_url_list": [
-            "https://kusitms-forpet.s3.ap-northeast-2.amazonaws.com/d55921df-d60b-4466-93b5-0c547ffdf68d.png"
-        ],
-        "comment_cnt": 2, 
-        "createdDate": "2022-05-17T01:53:58.953616",
-    },
-    {
-        "writer": {
-            "user_id": 3,
-            "user_profile_image": "http://k.kakaocdn.net/dn/dpk9l1/btqmGhA2lKL/Oz0wDuJn1YV2DIn92f6DVK/img_110x110.jpg",
-            "user_nickname": "쩜마이"
-        },
-        "title": "insertTitle",
-        "category": "meeting",
-        "post_id": 9,
-        "thumbs_up_cnt": 0,
-        "image_url_list": [
-            "https://kusitms-forpet.s3.ap-northeast-2.amazonaws.com/2a901d25-0ff4-4e43-bb91-e36ef67a89e1.png"
-        ],
-        "comment_cnt": 2, 
-        "createdDate": "2022-05-17T01:53:58.953616",
-    },
-    {
-        "writer": {
-            "user_id": 3,
-            "user_profile_image": "http://k.kakaocdn.net/dn/dpk9l1/btqmGhA2lKL/Oz0wDuJn1YV2DIn92f6DVK/img_110x110.jpg",
-            "user_nickname": "쩜마이"
-        },
-        "title": "insertTitle",
-        "category": "meeting",
-        "post_id": 8,
-        "thumbs_up_cnt": 0,
-        "image_url_list": [
-            "https://kusitms-forpet.s3.ap-northeast-2.amazonaws.com/6ec7081f-5877-4f6b-9459-f5318fd35c37.png"
-        ],
-        "comment_cnt": 2, 
-        "createdDate": "2022-05-17T01:53:58.953616",
-    },
-    
-];
-
 interface propsType {
     board: string;
     search: string;
@@ -71,16 +19,15 @@ interface BoardItf {
     title: string,
     category: string,
     post_id: number,
-    thumbs_up_cnt: number,
+    likes: number,
+    bookmarks: number,
     image_url_list: any,
     comment_cnt: number,
     createdDate: string
 }
 
 const BoardList = ({ board, search }: propsType) => {
-
     const navigate = useNavigate();
-    // const [boardList, setBoardList] = useState(initialBoardList);
     const [boardList, setBoardList] = useState<BoardItf[]>();
 
     const [korCategory, setKorCategory] = useState<string>('');
@@ -97,7 +44,6 @@ const BoardList = ({ board, search }: propsType) => {
     };
 
     useEffect(() => {
-        console.log(search);
         // 커뮤니티 글 불러오기 게시판 - all, meet
         const getBoardList = async () => {
             await getApi(
@@ -122,17 +68,19 @@ const BoardList = ({ board, search }: propsType) => {
         const getSearchList = async () => {
             await getApi(
                 {},
-                `/community/search/page=${page - 1}/size=${10}/keyword=${search}`
+                `/community/search?page=${page - 1}&size=${10}&keyword=${search}`
             )
                 .then(({ status, data }) => {
-                    console.log(status, data);
+                    console.log('검색결과', status, data);
                     if (status === 200) {
-                        setBoardList(data.body.data.data);
+                        setBoardList(data.body.data);
                     }
                 })
                 .catch((e) => {
                     console.log(e);
                 });
+        }
+        if (search) {
             getSearchList();
         }
     }, [search])
@@ -145,58 +93,62 @@ const BoardList = ({ board, search }: propsType) => {
         <Wrapper>
             <ListWrapper>
                 {
-                    boardList &&
-                    boardList.map((b, i) => (
-                        <BoardListOne
-                            key={b.post_id}
-                            onClick={() => clickHandler(b.post_id)}
-                        >
-                            <div className='left-section'>
-                                {
-                                    board === 'all' &&
-                                    <div className='category'>{b.category === 'popular' ? (
-                                        '인기'
-                                    ) : (
-                                        b.category === 'sharing' ? (
-                                            '나눔'
+                    boardList ? (
+                        boardList.map((b, i) => (
+                            <BoardListOne
+                                key={b.post_id}
+                                onClick={() => clickHandler(b.post_id)}
+                            >
+                                <div className='left-section'>
+                                    {
+                                        board === 'all' &&
+                                        <div className='category'>{b.category === 'popular' ? (
+                                            '인기'
                                         ) : (
-                                            b.category === 'meeting' ? (
-                                                '모임'
+                                            b.category === 'sharing' ? (
+                                                '나눔'
                                             ) : (
-                                                '자랑'
+                                                b.category === 'meeting' ? (
+                                                    '모임'
+                                                ) : (
+                                                    '자랑'
+                                                )
                                             )
-                                        )
-                                    )}</div>
-                                }
-                                <div style={{textAlign: 'left'}}>
-                                    <div style={{fontSize: '20px'}}>{b.title}</div>
-                                    <div style={{display: 'flex', flexDirection: 'row', alignItems: 'end'}}>
-                                        <div style={{fontSize: '16px', color: Colors.gray2, marginRight: '5px'}}>{b.writer.user_id}</div>
-                                        <div style={{fontSize: '12px', color: Colors.gray2}}>{b.createdDate}</div>
+                                        )}</div>
+                                    }
+                                    <div style={{textAlign: 'left'}}>
+                                        <div style={{fontSize: '20px'}}>{b.title}</div>
+                                        <div style={{display: 'flex', flexDirection: 'row', alignItems: 'end'}}>
+                                            <div style={{fontSize: '16px', color: Colors.gray2, marginRight: '5px'}}>{b.writer.user_nickname}</div>
+                                            <div style={{fontSize: '12px', color: Colors.gray2}}>{b.createdDate}</div>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                            <div className='right-section'>
-                                {
-                                    b.image_url_list && 
-                                    <img
-                                        style={{width: '80px', height: '60px'}}
-                                        src={b.image_url_list[0]}
-                                    />
-                                }
-                                <div className='cnt'
-                                    style={{backgroundColor: '#F5F5F5'}}>
-                                    <div>좋아요</div>
-                                    <div>{b.thumbs_up_cnt}</div>
+                                <div className='right-section'>
+                                    {
+                                        b.image_url_list && 
+                                        <img
+                                            style={{width: '80px', height: '60px'}}
+                                            src={b.image_url_list[0]}
+                                        />
+                                    }
+                                    <div className='cnt'
+                                        style={{backgroundColor: '#F5F5F5'}}>
+                                        <div>좋아요</div>
+                                        <div>{b.likes}</div>
+                                    </div>
+                                    <div className='cnt'
+                                    style={{backgroundColor: '#E2E2E2'}}>
+                                        <div>댓글</div>
+                                        <div>{b.comment_cnt}</div>
+                                    </div>
                                 </div>
-                                <div className='cnt'
-                                style={{backgroundColor: '#E2E2E2'}}>
-                                    <div>댓글</div>
-                                    <div>{b.comment_cnt}</div>
-                                </div>
-                            </div>
-                        </BoardListOne>
-                    ))
+                            </BoardListOne>
+                        ))
+                    ) : (
+                        <div style={{backgroundColor: Colors.green1}}>Loading...</div>
+                    )
+                    
                 }
             </ListWrapper>
             <Pagination

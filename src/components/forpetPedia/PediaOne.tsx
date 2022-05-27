@@ -169,7 +169,7 @@ const PediaOne = (post: any) => {
                                                 {
                                                     onePost.imageUrlList &&
                                                     onePost.imageUrlList.map((img: string, i: number) => (
-                                                        <img src={img} className='image-resize'></img>
+                                                        <img src={img} key={i} className='image-resize'></img>
                                                     ))
                                                 }
                                             </div>

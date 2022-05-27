@@ -85,13 +85,24 @@ const dump = [
     }
 ];
 
+interface Comment {
+    parentId: any,
+    commentId: number,
+    content: string,
+    username: string, 
+    userId: number,
+    profileImage: string,
+    createDate: string,
+    children: any
+}
+
 const CommentList = () => {
     const params = useParams();
     let postId = params.id;
     const navigate = useNavigate();
 
-    const [comments, setComments] = useState(dump);
-    // const [comments, setComments] = useState();
+    // const [comments, setComments] = useState<Comment[]>(dump);
+    const [comments, setComments] = useState<Comment[]>();
 
     useEffect(() => {
         const getComments = async () => {
@@ -117,7 +128,6 @@ const CommentList = () => {
     }
 
     const Comment = ({ comment, pp }: any) => {
-        console.log(pp)
         return (
             <div className={pp}
                 style={{ display: 'flex', flexDirection: 'row', marginBottom: '10px' }}>
@@ -142,12 +152,11 @@ const CommentList = () => {
                 comments &&
                 comments.map((comment, i) => (
                     <Wrapper>
-
-                        <Comment comment={comment} pp='parent' className='parent' />
+                        <Comment comment={comment} key={i} pp='parent' className='parent' />
                         {
                             comment.children &&
-                            comment.children.map((child, i) => (
-                                <Comment comment={child} pp='child' className='child' />
+                            comment.children.map((child: any, i: number) => (
+                                <Comment comment={child} key={i} pp='child' className='child' />
                             ))
                         }
                         <></>
