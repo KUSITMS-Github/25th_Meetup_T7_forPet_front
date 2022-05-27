@@ -15,13 +15,13 @@ const Header = () => {
                 {},
                 `/mypage`
             )
-            .then(({ status, data }) => {
-                console.log(data);
-                setUserObject(data.body.data);
-            })
-            .catch((e) => {
-                console.log("user 정보 오류", e);
-            });
+                .then(({ status, data }) => {
+                    console.log(data);
+                    setUserObject(data.body.data);
+                })
+                .catch((e) => {
+                    console.log("user 정보 오류", e);
+                });
         }
         login();
     }, [])
@@ -45,16 +45,17 @@ const Header = () => {
                     <HeaderButton className="header-btn">퍼펫트 백과</HeaderButton>
                 </Link>
                 {/*로그인 여부에 따라 렌더링*/}
-                {userObject == null ?
-                <Link to="/login">
-                <HeaderButton className="header-btn">
-                    로그인
-                </HeaderButton>
-                </Link>
-                :
-                <Link to="/mypage/:${userObject.id}">
-                <img src={userObject.profile_image_url} width={37} height={37} style={{ borderRadius: '18px'}}/>
-                </Link>
+                {
+                    userObject === null ?
+                    <Link to="/login">
+                        <HeaderButton className="header-btn">
+                            로그인
+                        </HeaderButton>
+                    </Link>
+                    :
+                    <Link to="/mypage/:${userObject.id}">
+                        <img src={userObject.profile_image_url} width={37} height={37} style={{ borderRadius: '18px' }} />
+                    </Link>
                 }
             </div>
         </HeaderStyle>
@@ -72,6 +73,11 @@ const HeaderStyle = styled.header`
     background-color: ${Colors.white};
 
     .header-left {
+        display: flex;
+        align-items: center;
+    }
+
+    .header-right {
         display: flex;
         align-items: center;
     }

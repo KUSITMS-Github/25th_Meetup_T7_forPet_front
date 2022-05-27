@@ -143,7 +143,9 @@ const BoardCardList = ({ board, search }: propsType) => {
                 .then(({ status, data }) => {
                     console.log(status, data);
                     if (status === 200) {
-                        setBoardList(data.body.data.data);
+                        if (data.body.data) {
+                            setBoardList(data.body.data);
+                        }
                     }
                 })
                 .catch((e) => {
@@ -182,27 +184,31 @@ const BoardCardList = ({ board, search }: propsType) => {
             <ListWrapper>
                 <CardView>
                     {
-                        boardList &&
-                        boardList.map((b, i) => (
-                            <BoardCardOne
-                                key={b.post_id}
-                                onClick={() => clickHandler(b.post_id)}
-                            >
-                                <img src={b.image_url_list[0]} />
-                                <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', justifyContent: 'left', marginTop: '5px' }}>
-                                    <img src={b.writer.user_profile_image}
-                                        style={{ width: '40px', height: '40px', borderRadius: '40px' }}
-                                    />
-                                    <div style={{ display: 'flex', flexDirection: 'column', textAlign: 'left', marginLeft: '10px' }}>
-                                        <div style={{ fontWeight: 'bold', fontSize: '18px' }}>{b.title}</div>
-                                        <div style={{ fontSize: '14px', color: Colors.gray1 }}>{b.writer.user_nickname}</div>
+                        boardList ? (
+                            boardList.map((b, i) => (
+                                <BoardCardOne
+                                    key={b.post_id}
+                                    onClick={() => clickHandler(b.post_id)}
+                                >
+                                    <img src={b.image_url_list[0]} />
+                                    <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', justifyContent: 'left', marginTop: '5px' }}>
+                                        <img src={b.writer.user_profile_image}
+                                            style={{ width: '40px', height: '40px', borderRadius: '40px' }}
+                                        />
+                                        <div style={{ display: 'flex', flexDirection: 'column', textAlign: 'left', marginLeft: '10px' }}>
+                                            <div style={{ fontWeight: 'bold', fontSize: '18px' }}>{b.title}</div>
+                                            <div style={{ fontSize: '14px', color: Colors.gray1 }}>{b.writer.user_nickname}</div>
+                                        </div>
                                     </div>
-                                </div>
 
-                                {/* <div>좋아요수 {b.thumbsUpCnt}</div>
-                            <div>댓글수</div> */}
-                            </BoardCardOne>
-                        ))
+                                    {/* <div>좋아요수 {b.thumbsUpCnt}</div>
+                                <div>댓글수</div> */}
+                                </BoardCardOne>
+                            )) 
+                        ) :
+                        (
+                            <div>Loading...</div>
+                        )
                     }
                 </CardView>
             </ListWrapper>
