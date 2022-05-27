@@ -127,47 +127,49 @@ const OnlineMap = () => {
                         whileHover={{ scale: 1.2 }}
                         animate={{ x: town ? moveUnit : 0}}
                         onClick={() => clickTown('건강하개')}
-                        style={{top: '72%', left: '20%'}}>
+                        style={{top: '72%', left: '20%', cursor: 'pointer'}}>
                         건강하개
                     </NameTag>
                     <NameTag id='young'
                         whileHover={{ scale: 1.2 }}
                         animate={{ x: town ? moveUnit : 0}}
                         onClick={() => clickTown('영양있개')}
-                        style={{top: '40%', left: '38%'}}>
+                        style={{top: '40%', left: '38%', cursor: 'pointer'}}>
                         영양있개
                     </NameTag>
                     <NameTag id='special'
                         whileHover={{ scale: 1.2 }}
                         animate={{ x: town ? moveUnit : 0}}
                         onClick={() => clickTown('특별하개')}
-                        style={{top: '85%', left: '53%'}}>
+                        style={{top: '85%', left: '53%', cursor: 'pointer'}}>
                         특별하개
                     </NameTag>
                     <NameTag id='shop'
                         whileHover={{ scale: 1.2 }}
                         animate={{ x: town ? moveUnit : 0}}
                         onClick={() => clickTown('쇼핑하개')}
-                        style={{top: '64%', left: '46%'}}>
+                        style={{top: '64%', left: '46%', cursor: 'pointer'}}>
                         쇼핑하개
                     </NameTag>
                     <NameTag id='knowledge'
                         whileHover={{ scale: 1.2 }}
                         animate={{ x: town ? moveUnit : 0}}
                         onClick={() => clickTown('지식쌓개')}
-                        style={{top: '86%', left: '35%'}}>
+                        style={{top: '86%', left: '35%', cursor: 'pointer'}}>
                         지식쌓개
                     </NameTag>
                     <NameTag id='adopt'
                         whileHover={{ scale: 1.2 }}
                         animate={{ x: town ? moveUnit : 0}}
-                        onClick={() => clickTown('입양하개')}>
+                        onClick={() => clickTown('입양하개')}
+                        style={{cursor: 'pointer'}}>
                         입양하개
                     </NameTag>
                     <NameTag id='volunteer'
                         whileHover={{ scale: 1.2 }}
                         animate={{ x: town ? moveUnit : 0}}
-                        onClick={() => clickTown('봉사하개')}>
+                        onClick={() => clickTown('봉사하개')}
+                        style={{cursor: 'pointer'}}>
                         봉사하개
                     </NameTag>
                 </div>

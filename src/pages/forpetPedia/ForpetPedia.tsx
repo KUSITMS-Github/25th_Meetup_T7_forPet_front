@@ -195,6 +195,7 @@ const ForpetPedia = () => {
                 <button
                     className='question-button'
                     onClick={() => onClickQBtn()}
+                    style={{cursor: 'pointer'}}
                 >질문하기</button>
             </div>
             <div className='keywords' style={{ fontSize: '18px', marginLeft: '20px', marginBottom: '10px'}}>

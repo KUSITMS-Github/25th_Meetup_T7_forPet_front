@@ -201,6 +201,8 @@ const Section = styled.div`
         left: 342px;
         width: 21px;
         height: 21px;
+
+        cursor:pointer; 
     }
 `;
 
@@ -214,4 +216,6 @@ const Category = styled.div`
     top: 89px;
     left: 32%;
     z-index: 1;
+
+    cursor:pointer; 
 `;

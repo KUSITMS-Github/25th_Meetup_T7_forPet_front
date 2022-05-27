@@ -22,6 +22,7 @@ const Pagination: React.FC<Props> = ({
                 className="pagination-button"
                 onClick={() => handlePrevPage(currentPage)}
                 disabled={currentPage === 1}
+                style={{cursor: 'pointer'}}
             >
                 &lt;
             </button>
@@ -35,6 +36,7 @@ const Pagination: React.FC<Props> = ({
                 className="pagination-button"
                 onClick={() => handleNextPage(currentPage)}
                 disabled={currentPage === totalPages}
+                style={{cursor: 'pointer'}}
             >
             &gt;
             </button>

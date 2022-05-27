@@ -139,7 +139,7 @@ const PediaOne = (post: any) => {
 
     return (
         <OnePost>
-            <Question>
+            <Question style={{cursor: 'pointer'}}>
                 <div className='q-upper'>
                     <div className='writer-sec'>
                         <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', marginBottom: '10px' }}>

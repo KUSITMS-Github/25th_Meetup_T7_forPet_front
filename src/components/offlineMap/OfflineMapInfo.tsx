@@ -65,7 +65,7 @@ const OfflineMapInfo = ({ item }: Props) => {
                         <span className='reviewNickName' style={{marginLeft: '6px'}}>{reviewItem.nickName}</span>
                     </div>
                     {index == 0 ? 
-                    <div className='reviewBtn' onClick={reviewWrite} style={{float: 'right', width: '18%'}}> 리뷰 등록</div>
+                    <div className='reviewBtn' onClick={reviewWrite} style={{float: 'right', width: '18%', cursor: 'pointer'}}> 리뷰 등록</div>
                     : 
                     <></> }
                     </div>

@@ -37,8 +37,8 @@ const LoginForpet = () => {
     let navigate = useNavigate();           //화면 이동
 
     if(localStorage.getItem("token") != ""){
-        const ACCESS_TOKEN = localStorage.getItem("token");
-        setHeader(ACCESS_TOKEN);
+        localStorage.setItem("token", "");
+        setHeader(null);
     }
 
     //프로필 이미지 띄워줌
@@ -58,7 +58,7 @@ const LoginForpet = () => {
             )
             .then(({ status, data }) => {
                 if (status === 200) {
-                    // console.log(data);
+                    console.log(data);
                     setCerNum(data);
                 }
             })
@@ -125,8 +125,6 @@ const LoginForpet = () => {
     }
 
     //회원가입
-    //TODO: 닉네임 필수 입력
-    //TODO: 전화번호 필수 입력
     const signUp = async () => {
         const end_url = `/signup`;
         const formData = new FormData();
@@ -173,7 +171,7 @@ const LoginForpet = () => {
                 {/*프로필 이미지 설정*/}
                 <img src={profileSrc ? profileSrc : ProfileImg} width="137" height="137" style={{marginTop: '23px'}}/>
                 <label htmlFor='input-profile'>
-                    <img src={Picture} width="49" height="49" style={{position: 'absolute', top: '190px', left: '53%'}}/>
+                    <img src={Picture} width="49" height="49" style={{position: 'absolute', top: '190px', left: '53%', cursor: 'pointer'}}/>
                 </label>
                 <input type='file' id='input-profile' onChange={(e) => onProfileFileChange(e)} style={{display:'none'}}/>
                 
@@ -188,7 +186,7 @@ const LoginForpet = () => {
                         ): void => setSignupForm({...signupForm, nickname: e.target.value})}
                         value={signupForm.nickname}
                     ></input>
-                    <CancleBtn style={{position: 'absolute', top: '267px', left: '62%'}} onClick={() => setSignupForm({...signupForm, nickname: ""})}/>
+                    <CancleBtn style={{position: 'absolute', top: '267px', left: '62%', cursor: 'pointer'}} onClick={() => setSignupForm({...signupForm, nickname: ""})}/>
                 </InputSection>
 
                 <Title style={{paddingTop: '20px'}}>
@@ -210,7 +208,7 @@ const LoginForpet = () => {
                                 ): void => setSignupForm({...signupForm, phone_number: e.target.value})}
                                 value={signupForm.phone_number||''}
                             ></input>
-                            <div className='btn-certify' onClick={cerPhoneNum}>번호 입력</div>
+                            <div className='btn-certify' onClick={cerPhoneNum} style={{cursor: 'pointer'}}>번호 입력</div>
                         </div>
                     </InputSection>
                 :
@@ -229,7 +227,7 @@ const LoginForpet = () => {
                             { phoneView == 3 ?
                                 <div className='btn-cerComplete'>인증완료</div>
                             :
-                                <div className='btn-certify' onClick={mathingCerNum}>인증하기</div>
+                                <div className='btn-certify' onClick={mathingCerNum} style={{cursor: 'pointer'}}>인증하기</div>
                             }  
                         </div>
                     </InputSection>
@@ -246,7 +244,7 @@ const LoginForpet = () => {
                         { cardView == 2 ?
                             <div className='btn-cerComplete'>인증완료</div>
                         :
-                            <div className='btn-certify' onClick={cerAnimalCard}>인증하기</div>
+                            <div className='btn-certify' onClick={cerAnimalCard} style={{cursor: 'pointer'}}>인증하기</div>
                         }
                         
                     </div>
@@ -257,7 +255,7 @@ const LoginForpet = () => {
                     <span className='sub-title'>내 동네 인증(선택)</span>
                     <div style={{display: 'flex', flexDirection: 'row'}}>
                         <div className='certifyBar'>{myTown}</div>
-                        <select className='btn-certify' value='default' onChange={cerTown}>
+                        <select className='btn-certify' value='default' onChange={cerTown} style={{cursor: 'pointer'}}>
                             <option value='default'>--근처 동네--</option>
                             <option value='불광1동'>불광1동</option>
                             <option value='불광2동'>불광2동</option>
@@ -269,7 +267,7 @@ const LoginForpet = () => {
                 </InputSection>
                 
                 {/*회원가입*/}
-                <div className='btn-complete' onClick={signUp}>회원가입 완료</div>
+                <div className='btn-complete' onClick={signUp} style={{cursor: 'pointer'}}>회원가입 완료</div>
             </Section>
         </Box>
         </>
