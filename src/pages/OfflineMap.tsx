@@ -21,18 +21,23 @@ import Marker from "../assets/offlineMap/marker.png";
 
     // 현재 사용자 위치 추척, map 좌표 불러오기
     useEffect(() => {
-      const getMyLocation = async () => {
-         if (navigator.geolocation) {
-          await navigator.geolocation.getCurrentPosition((position) => {
-            setMyLocation({
-              latitude: position.coords.latitude,
-              longitude: position.coords.longitude,
-            });
-          });
-        } else {
-          window.alert("현재 위치를 알수 없습니다.");
-        }
-      }
+      const getMyLocation =  () => {
+        if (navigator.geolocation) {
+          navigator.geolocation.getCurrentPosition((position) => {
+           setMyLocation({
+             latitude: position.coords.latitude,
+             longitude: position.coords.longitude,
+           });
+         });
+       } else {
+         window.alert("현재 위치를 알수 없습니다.");
+       }
+     }
+      getMyLocation();
+    }, []);
+
+    // 현재 사용자 위치 추척, map 좌표 불러오기
+    useEffect(() => {
       const getMapList = async () => {
         await getApi(
            {}, `/offline-map`)
@@ -46,9 +51,8 @@ import Marker from "../assets/offlineMap/marker.png";
                console.log(e);
            });
           }
-          getMyLocation();
           getMapList();
-      }, []);
+      }, [myLocation]);
 
       //지도 위 마커 표시
       useEffect(() => {
